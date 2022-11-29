@@ -1,0 +1,151 @@
+<!--First Box Tracking Box-->
+<div class="box box-danger">
+  <div class="box-header with-border">
+    <h3 class="box-title">TIME TRACKING</h3>
+  </div>
+  <div class="box-body">
+    <div class="row">
+      
+      <!-- harita-->
+      <div class="form-group box-body" data-select2-id="26">
+        <select style="width: 90%; height:34px" aria-hidden="true">
+          <option >Select Project</option>
+          <option >Alabama</option>
+          <option >Alaska</option>
+          <option >California</option>
+          <option >Delaware</option>
+          <option >Tennessee</option>
+          <option >Texas</option>
+          <option >Add New Project</option>
+        </select>
+        <button type="button" class="btn btn-flat" Style="vertical-align: initial;"> hh:mm </button>
+        <button type="button" class="btn btn-info btn-flat  " Style="vertical-align: initial;">Go!</button>
+        
+      </div>
+
+
+      <!-- /.harita-->
+    </div>
+  </div>
+  <!-- /.box-body -->
+</div>
+
+
+<!--Secoond Box Timesheet Box-->
+<div class="box">
+  <div class="box-header">
+    <h1 class="box-title " Style="font-size:30px">TIME SHEET</h1>
+
+    <button type="button" class="btn btn-default pull-right" style="margin-right:5px"><i
+        class="fa  fa-chevron-right"></i></button>
+    <button type="button" class="btn btn-default pull-right" style="margin-left:5px"><i
+        class="fa  fa-chevron-left"></i></button>
+
+    <ins class="pull-right">Week 1</ins>
+
+    <button type="button" class="btn btn-default pull-right" style="margin-right: 5px">month</button>
+    <button type="button" class="btn btn-default pull-right">Year</button>
+
+    <button class="btn btn-default, pull-right " style="margin-right: 20px" type="submit">Filter</button>
+    <div class="input-group input-group-sm hidden-xs" style="width: 150px;">
+      <input class="form-control pull-right" name="table_search" placeholder="Search" type="text">
+      <div class="input-group-btn"><button _ngcontent-fha-c1="" class="btn btn-default" type="submit">
+          <i class="fa fa-search"></i>
+        </button>
+      </div>
+    </div>
+
+  </div>
+  <!-- /.box-header -->
+  <div class="box-body">
+    <div id="example2_wrapper" class="dataTables_wrapper form-inline dt-bootstrap">
+      <div class="row">
+        <div class="col-sm-9"></div>
+        <div class="col-sm-9"></div>
+      </div>
+      <div class="row">
+        <div class="col-sm-12">
+          <table id="example2" class="table table-bordered table-hover dataTable" role="grid"
+            aria-describedby="example2_info">
+            <thead>
+              <tr role="row">
+                <th class="cursor-pointer " (click)="sort();">Project Name
+                  <i class="pull-right fa "
+                    [ngClass]="{'fa-sort-amount-asc':sortAsc,'fa-sort-amount-desc':!sortAsc}"></i> </th>
+                <th Style="width:75px">Mon, 01 </th>
+                <th Style="width: 75px">Tue, 02 </th>
+                <th Style="width: 75px">Wed, 03 </th>
+                <th Style="width: 75px">Thr, 04 </th>
+                <th Style="width: 75px">Fri, 05 </th>
+                <th Style="width: 75px">Sat, 06 </th>
+                <th Style="width: 75px">Sun, 07 </th>
+              </tr>
+            </thead>
+            <tbody>
+
+              <tr role="row" class="odd">
+                <td class="sorting_1">ABCD Project</td>
+                <td>hh:mm</td>
+                <td>hh:mm</td>
+                <td>hh:mm</td>
+                <td>hh:mm</td>
+                <td>hh:mm</td>
+                <td>hh:mm</td>
+                <td>hh:mm</td>
+              </tr>
+              <tr role="row" class="even">
+                <td class="sorting_1">Project 2</td>
+                <td>hh:mm</td>
+                <td>hh:mm</td>
+                <td>hh:mm</td>
+                <td>hh:mm</td>
+                <td>hh:mm</td>
+                <td>hh:mm</td>
+                <td>hh:mm</td>
+              </tr>
+            </tbody>
+          </table>
+
+
+          <div class="row">
+            <div style="margin-left:20px">
+              <div class="dataTables_info" role="status" aria-live="polite">Showing 1 to 10 of 57
+                entries
+
+                <ul class="pagination " style="vertical-align: middle; margin-bottom: 0px; margin-top: 0px;">
+                  <li class="paginate_button previous disabled">
+                    <a href="#" aria-controls="example2">Previous</a>
+                  </li>
+                  <li class="paginate_button active">
+                    <a href="#">1</a>
+                  </li>
+                  <li class="paginate_button "><a href="#">2</a>
+                  </li>
+                  <li class="paginate_button "><a href="#">3</a>
+                  </li>
+                  <li class="paginate_button "><a href="#">4</a>
+                  </li>
+                  <li class="paginate_button "><a href="#">5</a>
+                  </li>
+                  <li class="paginate_button "><a href="#">6</a>
+                  </li>
+                  <li class="paginate_button next" id="example2_next">
+                    <a href="#" aria-controls="example2" data-dt-idx="7" tabindex="0">Next</a>
+                  </li>
+                  <label>Show <select name="example1_length" aria-controls="example1" class="form-control input-sm">
+                      <option value="10">10</option>
+                      <option value="25">25</option>
+                      <option value="50">50</option>
+                      <option value="100">100</option>
+                    </select> entries</label>
+                </ul>
+
+              </div>
+            </div>
+            <!-- /.box-body -->
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

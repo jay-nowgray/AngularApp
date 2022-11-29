@@ -1,0 +1,72 @@
+<div class="p-3 doNotPrint b-b">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="row">
+                    <div class="col-md-2">
+            <small>Year</small>
+            <ng-select [(ngModel)]="fy">
+                <ng-option *ngFor="let obj of financialYear" [value]="obj.fy">
+                    {{ obj.fy }}</ng-option>
+            </ng-select>
+            
+        </div>
+        <div class="col-md-2">
+            <small>Type</small>
+            <ng-select  [(ngModel)]="type">
+                <ng-option *ngFor="let obj of reportGroupByTypes" [value]="obj.type">
+                    {{ obj.type }}</ng-option>
+            </ng-select>
+            <!-- <ng-select [(ngModel)]="userId">
+                <ng-option *ngFor="let obj of user" [value]="obj.user_Id">{{obj.full_Name}}</ng-option>
+             </ng-select> -->
+        </div>
+        <div class="col-md-2">
+            <button class="btn btn-sm btn-success mt-4" (click)="getReport()">Get Report</button>
+        </div>
+        <div class="col-md-2">
+            <button class="btn btn-sm btn-secondary mt-4" (click)="resetData()">Reset</button>
+        </div>
+        <div class="col-md-2 ">
+            <input class="form-control mt-4" placeholder="Filter Data" type="text"
+                (keyup)="applyFilter($event.target.value)">
+        </div>
+        <div class="col-md-2 ">
+            <input type="button"  class="btn btn-sm btn-primary mt-4"   value="Export" style="
+            width: 102px;margin-top: 2px;"
+            (click)="export()"> 
+             </div>
+     </div>
+    </div>
+</div>
+</div>
+<div class="card m-3">
+    <div class="print-css">
+        <div class="mat-elevation-z888">
+                  <table class="w-100"  mat-table matSort [dataSource]="dataSource">
+                       
+                        <ng-container matColumnDef="name">
+                            <th mat-header-cell *matHeaderCellDef mat-sort-header> Name</th>
+                            <td mat-cell *matCellDef="let element">{{element.name}}</td>
+                            <td mat-footer-cell *matFooterCellDef>Total </td>
+                            
+                        </ng-container>
+                        <ng-container matColumnDef="total">
+                            <th mat-header-cell *matHeaderCellDef mat-sort-header> Total </th>
+                            <td mat-cell *matCellDef="let element">{{element.total | number}}</td>
+                            <td mat-footer-cell *matFooterCellDef>{{totalcount | number}}</td>
+                        </ng-container>
+                     
+                      
+                      
+                        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                        <tr mat-footer-row *matFooterRowDef="columnsToDisplay"></tr>
+                        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+                    </table>
+                    <mat-paginator class="doNotPrint" showFirstLastButtons [pageSizeOptions]="[50,100,150]"></mat-paginator>
+                </div>
+         
+        
+    
+
+</div>
+<!-- </div> -->

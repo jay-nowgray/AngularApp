@@ -1,0 +1,88 @@
+<div class="p-3 doNotPrint b-b">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="row">
+
+    <div class="col-sm-3 ">
+        <input class="form-control" placeholder="Filter Data" type="text"
+            (keyup)="applyFilter($event.target.value)">
+    </div>
+    <div class="col-sm-3 ">
+        <input type="button" class="btn btn-sm btn-primary"  value="Export" style="
+        width: 102px;margin-top: 2px;"
+        (click)="export()"> 
+         
+    </div>
+</div>
+</div>
+</div>
+</div>
+<div class="card m-3 ">
+                    <div class="mat-elevation-z888">
+                           <table class="table" mat-table matSort [dataSource]="dataSource">
+                            <ng-container matColumnDef="name">
+                                <th mat-header-cell *matHeaderCellDef mat-sort-header> Name </th>
+                                <td mat-cell *matCellDef="let element">{{element.name}}
+                                </td>
+                            </ng-container>
+                            <ng-container matColumnDef="to_Email">
+                                <th mat-header-cell *matHeaderCellDef mat-sort-header> To Email </th>
+                                <td mat-cell *matCellDef="let element">{{element.to_Email}}</td>
+                               
+                            </ng-container>
+                            <ng-container matColumnDef="to_Mobile">
+                                <th mat-header-cell *matHeaderCellDef mat-sort-header> Mobile </th>
+                                <td mat-cell *matCellDef="let element">{{element.to_Mobile}}</td>
+                              
+                            </ng-container>
+                            <ng-container matColumnDef="subject">
+                                <th mat-header-cell *matHeaderCellDef mat-sort-header> Subject </th>
+                                <td mat-cell *matCellDef="let element"> {{element.subject}}</td>
+                            </ng-container>
+                            <ng-container matColumnDef="notification_Content">
+                                <th mat-header-cell *matHeaderCellDef mat-sort-header> Notification Content </th>
+                                <td mat-cell *matCellDef="let element"><a class="btn btn-info btn-icon btn-sm" style=" margin-left: 34px;"
+                                   (click)="ShowContent(element.notification_Content)" data-target="#m-model" title="" type="button"
+                                   id="btn-trash" data-original-title="Trash"> <i class="i-con i-con-eye"style="margin-top:5px;"><i></i></i></a></td>
+                            </ng-container>
+                            <ng-container matColumnDef="sent_On">
+                                <th mat-header-cell *matHeaderCellDef mat-sort-header>Sent On</th>
+                                <td mat-cell *matCellDef="let element"> {{element.sent_On | date: 'medium'}}
+                                </td>
+                            
+                            </ng-container> 
+                           
+                            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                            <!-- <tr mat-footer-row *matFooterRowDef="columnsToDisplay"></tr> -->
+                            <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+                        </table>
+                        <mat-paginator class="doNotPrint" showFirstLastButtons [pageSizeOptions]="[50,100,150]"></mat-paginator>
+                    </div>
+              
+         
+  
+    </div>
+    
+    <div id="m-model" class="modal" data-backdrop="true" style="display: block; background: #0000008c;" *ngIf="ModalOpen"
+  aria-hidden="true">
+  <div class="modal-dialog modal-lg">
+      <div class="modal-content">
+          <div class="modal-header">
+              <p class="modal-title">Notification Content</p>
+          </div>
+          <div class="modal-body p-xl">
+            <div  [innerHtml]="isNotifications"></div>
+              
+                  <div class="modal-footer">
+                      <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)="cancel()">
+                          Cancel
+                      </button>
+                      
+                  </div>
+        
+          </div>
+      </div>
+  </div>
+</div>
+
+             

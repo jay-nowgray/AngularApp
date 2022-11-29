@@ -1,0 +1,92 @@
+<div class="page-container" id="page-container">
+    <div class="page-title padding pb-0">
+      <h2 class="text-md mb-0"> Employee List</h2>
+    </div>
+    <div class="padding">
+      <div class="mb-5">
+        <div class="d-flex flex" id="content-body">
+          <div class="d-flex flex-column flex" id="mail-list">
+            <div class="p-3 b-b">
+              <div class="toolbar"> <a [routerLink]="['/hrm/edit-employee']" class="btn btn-sm btn-white i-con-h-a add"
+                  data-sort="item-title" data-toggle="tooltip" title="Add New" data-original-title="Sort"><i
+                    class="i-con i-con-plus text-muted"><i></i></i></a>
+  
+                <form class="flex">
+                  <div class="input-group"><input type="text" class="form-control form-control-sm search"
+                      placeholder="Search" required="" autocomplete="off"> <span class="input-group-append"><button
+                        class="btn btn-white no-shadow btn-sm i-con-h-a" type="button"><i
+                          class="i-con i-con-search text-muted"></i></button></span></div>
+                </form><button data-toggle="modal" data-target="#content-aside" data-modal=""
+                  class="btn btn-sm btn-white d-md-none i-con-h-a"><i
+                    class="i-con i-con-nav text-muted"><i></i></i></button>
+              </div>
+            </div>
+            <div class="scroll-y">
+  
+              <div class="p-3">
+                <div class="row">
+                  <div class="col-sm-12">
+  
+                    <div class="col-12">
+                      <div class="table-responsive">
+                        <table class="table table-theme table-row v-middle">
+                          <thead>
+                            <tr>
+                              <th></th>
+                              <th>Name</th>
+                              <th>Department</th>
+                               <th>Designation</th>
+                              <th>Date Of Joining</th>
+                              <th>Employment Type</th>
+                              <th>Location </th>
+                            </tr>
+                          </thead>
+                          <tbody  style="font-size: 10px;">
+                            <tr class="v-middle" data-id="5"
+                              *ngFor="let obj of getAllEmployee | paginate: { itemsPerPage: 25, currentPage: p }">
+                              <td>
+                                <button class="btn btn-sm btn-white i-con-h-a"
+                                  (click)="EditRequestResponse(obj.employee_Id)" title="Edit" id="btn-trash"
+                                  data-original-title="Trash"><i class="i-con i-con-edit text-muted"><i></i></i></button>
+                              </td>
+                              <td>
+                                
+                                  {{obj.users.first_Name}} {{obj.users.last_Name}}
+                                 
+                              </td>
+  
+                              <td class="flex">
+                                 {{obj.department }} 
+                              </td>
+                              <td class="flex">
+                                {{obj.designation}} 
+                             </td>
+                              <td>
+                                {{obj.date_Of_Joining | date }} 
+                              </td>
+                              <td>
+                            {{obj.employment_Type}}
+                          </td>
+                              
+                             <td style="font-size: 10px;">
+  
+                                {{obj.location}}
+                              </td> 
+                            
+                            </tr>
+                          </tbody>
+                        </table>
+  
+                        <pagination-controls (pageChange)="p = $event"></pagination-controls>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+  
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>

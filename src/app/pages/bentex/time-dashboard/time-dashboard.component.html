@@ -1,0 +1,258 @@
+<div class="page-title padding pb-0">
+    <h2 class="text-md mb-0">Dashboard <button *ngIf="IsSuperAdmin()" class="btn btn-sm btn-white i-con-h-a float-right"
+            (click)="addReport()" data-target="#m-model" title="" id="btn-trash" data-original-title="Trash">Add
+            <i class="i-con i-con-plus text-muted"></i>
+        </button></h2>
+</div>
+
+<div class="row row-sm " > <div class="col-md-12">
+
+    <div class=" text-center padding" style="margin-top:-50px ;" *ngIf="!IsSuperAdmin()">
+        <!-- <div class="timer"><span style="color: #000000;font-size: 16px;" *ngIf="isCheckIn">{{checkinTimer}}</span></div> -->
+    <div style="float: right;">
+        <p style="display: inline;" *ngIf="attendanceStatus">Checked-In at <b>{{attendanceObj?.checkin | date:'mediumTime'}}</b></p>
+        <button class="btn w-sm mb-1 btn-sm btn-primary" *ngIf="!attendanceStatus"
+            (click)="checkIn()">Checkin</button>&nbsp;
+        <button class="btn w-sm mb-1 btn-sm btn-primary" *ngIf="attendanceStatus" (click)="checkOut()">Checkout</button></div>
+    </div>
+</div></div>
+<div class="padding">
+    <div class="row row-sm">
+
+        <div class="col-md-12">
+
+            <div class="card">
+                <div class="p-4 b-b">
+                    <div class="row">
+                        <div class="col-md-2">
+                            <strong>Activity</strong>
+                        </div>
+                        <div class="col-md-10 text-right">
+                            <div class="row">
+                                <div *ngIf="IsSuperAdmin() || IsHarita()" class="col-md-1 text-sm text-right">User</div>
+                                <div *ngIf="IsSuperAdmin() || IsHarita()" class="col-md-2">
+
+                                    <select class="form-control form-control-sm form-control-inline"
+                                        [(ngModel)]="userId" #ctrl="ngModel" (change)="LoadData()" id="inputPassword2">
+                                        <option></option>
+                                        <!-- <option value="4">Akshay M</option>
+                                        <option value="16">Harita</option>
+                                        <option value="17">Angela Khan</option>
+                                        <option value="25">Veerangna S</option> -->
+                                        <option *ngFor="let obj of user" value="{{ obj.user_Id }}">
+                                            {{ obj.full_Name }}</option>
+                                    </select>
+                                </div>
+                                <!-- <div class="col-md-2 text-sm text-right">
+                                <select class="form-control" formControlName="Date">
+                                    <option value="">--Select--</option>
+                                    <option value="In"> Weekly </option>
+                                    <option value="In/Out"> Monthly </option>
+                                </select>
+                            </div> -->
+                                <div class="col-md-2 text-sm text-right"><small>Start Date</small></div>
+                                <div class="col-md-3"><input class="form-control form-control-sm form-control-inline"
+                                        type="date" [(ngModel)]="startDate" #ctrl="ngModel" (change)="LoadData()">
+                                </div>
+                                <div class="col-md-1 text-sm text-right"><small>End Date</small></div>
+                                <div class="col-md-3"><input class="form-control form-control-sm form-control-inline"
+                                        type="date" [(ngModel)]="endDate" #ctrl="ngModel" (change)="LoadData()"></div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+                <div class="p-2">
+                    <table class="table table-theme v-middle m-0" *ngIf="dailyAttendance">
+                        <thead class="text-muted">
+                            <tr>
+
+                                <!-- <th>User</th> -->
+                                <th>Date</th>
+                                <th>Checked In</th>
+                                <th>Checked Out</th>
+                                <th>Status</th>
+                                <th>Hours</th>
+                                <th *ngIf="IsSuperAdmin()">Invoiced?</th>
+                                <th *ngIf="IsSuperAdmin()">Paid?</th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let obj of dailyAttendance" class="v-middle" data-id="6">
+
+                                <td class="flex">{{obj.dateData}}</td>
+                                <td>
+                                    <div class="item-except text-muted h-1x">{{obj.checkin}}</div>
+                                </td>
+                                <td><span class="item-except text-muted h-1x">{{obj.checkout}}</span></td>
+                                <td>
+                                    <div class="item-except text-muted h-1x">
+                                        <span *ngIf="obj.status == 'In'" class="badge badge-primary">
+                                            {{obj.status }} </span>
+
+                                        <span *ngIf="obj.status == 'In/Out'" class="badge badge-success">
+                                            {{obj.status }} </span>
+                                    </div>
+                                </td>
+                                <td><span class="item-except text-muted h-1x">{{obj.workingHour}}</span></td>
+                                <td *ngIf="IsSuperAdmin()"> <span *ngIf="obj.isBilled" class="badge badge-success">
+                                        Yes </span>
+                                    <span *ngIf="!obj.isBilled" class="badge badge-warning">
+                                        No </span>
+                                </td>
+                                <td *ngIf="IsSuperAdmin()"> <span *ngIf="obj.isPaid" class="badge badge-success">
+                                        Paid </span>
+                                    <span *ngIf="!obj.isPaid" class="badge badge-warning">
+                                        - </span>
+                                </td>
+                                <td><button *ngIf="IsSuperAdmin()|| IsHarita()" class="btn btn-sm btn-white i-con-h-a"
+                                        title="" data-toggle="modal" (click)="loadAttendance(obj.attendance_Id)"
+                                        id="btn-trash" data-original-title="Trash"><i
+                                            class="i-con i-con-edit text-muted"><i></i></i></button>
+                                    &nbsp;
+                                    &nbsp;
+                                    &nbsp;
+                                    <button *ngIf="IsSuperAdmin()|| IsHarita()" class="btn btn-sm btn-white i-con-h-a"
+                                        title="" data-toggle="modal" (click)="deleteAttendance(obj.attendance_Id)"
+                                        id="btn-trash" data-original-title="Trash"><i
+                                            class="i-con i-con-trash text-muted"><i></i></i></button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td colspan="4" class="text-right text-sm">Total Hours: </td>
+                                <td>{{totalTime}}</td>
+                                <td>
+                                    <a target="_blank" *ngIf="IsSuperAdmin() && userInfo.user_Id ==1"
+                                        [routerLink]="['/btx-invoice']"
+                                        [queryParams]="{UserId:userId,startDate:startDate,endDate:endDate}">
+                                        Get Invoice
+                                    </a>
+
+                                    <button *ngIf="IsSuperAdmin() && userInfo.user_Id ==1"
+                                        class="btn btn-sm btn-white i-con-h-a" title="" data-toggle="modal"
+                                        (click)="SaveInvoice()" id="btn-trash" data-original-title="Trash">Save
+                                        Invoice</button>
+                                    <button *ngIf="IsSuperAdmin() && userInfo.user_Id ==1"
+                                        class="btn btn-sm btn-white i-con-h-a" title="" data-toggle="modal"
+                                        (click)="UpdateSalaryPaid()" id="btn-trash" data-original-title="Trash">Update
+                                        Salary Paid</button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <div class="p-2  text-muted" *ngIf="!dailyAttendance">
+                        <h6>Nothing found!</h6>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- <div class="col-md-12 ">
+            <div class="block px-4 py-3">
+              <div class="row">
+                <div class="col-lg-3 col-6">
+                  <div class="d-flex align-items-center i-con-h-a my-1">
+                    <div><span class="avatar w-40 b-a b-2x"><i
+                          class="i-con i-con-comment b-2x text-primary"><i></i></i></span></div>
+                    <div class="mx-3"><a href="/opportunities" class="d-block ajax"><strong>Akshay</strong></a> <small
+                        class="text-muted">6:30 Hours</small></div>
+                  </div>
+                </div>
+                 
+              </div>
+            </div>
+            
+          </div> -->
+
+    </div>
+</div>
+
+
+<div id="m-model" class="modal" data-backdrop="true" style="display: block; background: #0000008c;" *ngIf="ModalOpen"
+    aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Attendance</h5>
+            </div>
+            <div class="modal-body text-center p-lg">
+                <form class="kt-form kt-form--label-right" [formGroup]="attendanceForm">
+                    <div class="kt-portlet__body" style="padding-left: 40px; padding-right: 40px;">
+                        <div class="form-group row">
+                            <label class="col-2 col-form-label" *ngIf="IsSuperAdmin()">User Name</label>
+                            <div class="col-4" *ngIf="IsSuperAdmin()">
+                                <select class="form-control" formControlName="user_Id">
+                                    <option *ngFor="let obj of user" value="{{ obj.user_Id }}">
+                                        {{ obj?.full_Name }}</option>
+                                </select>
+
+                            </div>
+                            <label class="col-2 col-form-label">Checkin</label>
+                            <div class="col-4">
+                                <input class="form-control" type="datetime-local" value="" formControlName='checkin'>
+
+                            </div>
+
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-2 col-form-label">Checkout</label>
+                            <div class="col-4">
+                                <input class="form-control" type="datetime-local" value="" formControlName='checkout'>
+
+                            </div>
+                            <label class="col-2 col-form-label">Status</label>
+                            <div class="col-4">
+                                <select class="form-control" formControlName="status">
+                                    <option value="">--Select--</option>
+                                    <option value="In"> In </option>
+                                    <option value="In/Out"> Out </option>
+
+                                </select>
+
+                                <!-- <div *ngIf="submitted && f.status.errors" class="invalid-feedback">
+                                    <div *ngIf="f.status.errors.required">Status is required.</div>
+                                </div> -->
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-white" data-dismiss="modal" (click)="cancel()">
+                            Cancel
+                        </button>
+                        <button type="button" class="btn btn-primary" data-dismiss="modal" (click)="saveAttendance()">
+                            Save
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- 
+<div class="container">  
+    <form (ngSubmit)="searchdate()" novalidate>   -->
+        <!-- <div class="col-sm-3 form-group">  
+            <input type="text" #startdate="ngModel" name="startdate" [(ngModel)]="model.startdate"  
+                placeholder="From Date" bsDatepicker bsDatepicker [bsConfig]="{ showWeekNumbers: false }"  
+                [bsConfig]="{ showWeekNumbers: false }" class="form-control" />  
+        </div>   -->
+        <!-- <input type="text" #startdate="ngModel" name="startdate" [(ngModel)]="model.startdate"  
+        placeholder="From Date" class="form-control" >
+        <div class="col-sm-3 form-group">  
+            <button type="submit" class="btn btn-success">Find Date</button>  
+        </div>  
+    </form>  
+</div>  
+<div></div>  
+<div class="container">  
+    <div class="  row" style="margin-top:10px;margin-bottom: 10px;">  
+        <div class="col-sm-6 form-group">  
+            <b> Week Start Day and Date :</b> {{startdateofweek}}  
+        </div>  
+        <div class="col-sm-6 form-group">  
+            <b> Week End Day and Date : </b>{{Enddateofweek}}  
+        </div>  
+    </div>  
+</div>   -->

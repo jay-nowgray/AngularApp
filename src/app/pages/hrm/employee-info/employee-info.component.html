@@ -1,0 +1,83 @@
+<form novalidate="" autocomplete="bandhaibhai" [formGroup]="EditForm">
+ <div class="card">
+    <div class="px-4 py-4">
+        <div class="row mb-2">
+            <div class="col-12">
+                <h5 class="text-muted">Employee Detail</h5>
+            </div>
+        </div>
+        <div class="row mb-2">
+            <div class="col-6">
+                <small class="text-muted">EmpCode</small>
+                <div class="my-2">
+                    <input type="text" class="form-control" 
+                        formControlName="emp_Code">
+                        
+                </div> 
+            </div>
+            <div class="col-6">
+                <small class="text-muted">Date Of Joining</small>
+                <div class="my-2">
+                    <input type="datetime-local" class="form-control" formControlName="date_Of_Joining">
+                    <!-- required="required"
+                        [ngClass]="{ 'is-invalid': submitted && f.date_Of_Joining.errors }" >
+                        <div *ngIf="submitted && f.date_Of_Joining.errors" class="invalid-feedback">
+                          <div *ngIf="f.date_Of_Joining.errors.required">
+                            Date Of Joining is required.
+                          </div>
+                        </div>  -->
+                </div>
+            </div>
+            <div class="col-6">
+                <small class="text-muted">Department</small>
+                <div class="my-2">
+                    <input type="text" class="form-control" formControlName="department"
+                >
+                
+                </div>
+            </div>
+            <div class="col-6">
+                <div class="my-2 ">
+                    <small class="text-muted">Dob</small>
+                    <div class="my-2">
+                        <input type="datetime-local" class="form-control" 
+                        formControlName="dob">
+                        <!-- required="required"
+                    [ngClass]="{ 'is-invalid': submitted && f.dob.errors }" >
+                    <div *ngIf="submitted && f.dob.errors" class="invalid-feedback">
+                      <div *ngIf="f.dob.errors.required">
+                        Dob is required.
+                      </div>
+                    </div> -->
+                    </div>
+                </div>
+            </div>
+            <div class="col-6">
+                <small class="text-muted">Designation</small>
+                <div class="my-2">
+                    <input type="text" class="form-control"
+                        formControlName="designation"
+                    >
+                </div>
+            </div>
+            <div class="col-6">
+                <small class="text-muted">Employee Type</small>
+                <div class="my-2">
+                    <ng-select formControlName='employment_Type'>
+                        <ng-option *ngFor="let obj of employeeType"
+                            [value]="obj.lookup_Value">
+                            {{obj?.lookup_Name}}            
+                        </ng-option>
+                    </ng-select>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="card-footer">
+        <input type="submit" value="Save" (click)="saveEmployee() "
+            class="btn btn-success float-right">
+        &nbsp;
+        &nbsp;
+    </div>
+</div>
+</form>

@@ -1,0 +1,91 @@
+<div class="p-3 doNotPrint b-b">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="row">
+                <div class="col-md-3">
+                    <small>Month</small>
+                   <ng-select
+                    [(ngModel)]="month">
+                    <ng-option value=''>--Select Month--</ng-option>
+                    <ng-option selected value='1'>Janaury</ng-option>
+                    <ng-option value='2'>February</ng-option>
+                    <ng-option value='3'>March</ng-option>
+                    <ng-option value='4'>April</ng-option>
+                    <ng-option value='5'>May</ng-option>
+                    <ng-option value='6'>June</ng-option>
+                    <ng-option value='7'>July</ng-option>
+                    <ng-option value='8'>August</ng-option>
+                    <ng-option value='9'>September</ng-option>
+                    <ng-option value='10'>October</ng-option>
+                    <ng-option value='11'>November</ng-option>
+                    <ng-option value='12'>December</ng-option>
+                    </ng-select>
+      
+                </div>
+                <div class="col-md-3">
+                    <small>Year</small>
+      
+                    <ng-select [(ngModel)]="year">
+                        <ng-option value=''>--Select Year--</ng-option>
+                        <ng-option selected value='2021'>2021</ng-option>
+                        <ng-option value='2022'>2022</ng-option>
+                        <ng-option value='2023'>2023</ng-option>
+                        <ng-option value='2024'>2024</ng-option>
+                 </ng-select>
+                </div>
+                <div class="col-md-3" *ngIf="!hideForUser">
+                    <small>Employee Name</small>
+                    <ng-select [(ngModel)]="userId">
+                        <ng-option *ngFor="let obj of EmployeeList" value="obj.user_Id">
+                            {{ obj.full_Name }}</ng-option>
+                    </ng-select>
+                </div>
+                <div class="col-md-2">
+                    <button class="btn btn-sm btn-success mt-4" (click)="getReport()">Get Report</button>
+                </div>
+                <div class="col-md-1">
+                    <button class="btn btn-sm btn-secondary mt-4" (click)="resetData()">Reset</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="card m-3">
+    <div class="print-css">
+        <div class="mat-elevation-z888">
+            <table class="table" mat-table matSort [dataSource]="dataSource">
+                <ng-container matColumnDef="date">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header>Date</th>
+                    <td mat-cell *matCellDef="let element">{{element.date | date:'d MMM, y'}}</td>
+                    <td mat-footer-cell *matFooterCellDef></td>
+                </ng-container>
+                <ng-container matColumnDef="weekDate">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header>Day </th>
+                    <td mat-cell *matCellDef="let element">{{element.weekDate }}</td>
+                    <td mat-footer-cell *matFooterCellDef></td>
+                </ng-container>
+                <ng-container matColumnDef="status">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header>Status </th>
+                    <td mat-cell *matCellDef="let element"  >{{element.status}}</td>
+
+                    <td mat-footer-cell *matFooterCellDef></td>
+                </ng-container>
+                <ng-container matColumnDef="workingFor">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header>workingFor </th>
+                    <td mat-cell *matCellDef="let element"> {{element.workingFor}}</td>
+                    <td mat-footer-cell *matFooterCellDef></td>
+                </ng-container>
+               
+             
+               
+                <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                <tr mat-footer-row *matFooterRowDef="columnsToDisplay"></tr>
+                <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>>
+            </table>
+            <mat-paginator class="doNotPrint" showFirstLastButtons [pageSizeOptions]="[50,100,150]"></mat-paginator>
+        </div>
+        <div class="p-2">
+            <button style="margin: 0 auto; display: block; cursor: pointer;" (click)="onPrint()">Print</button>
+        </div>
+    </div>
+</div>

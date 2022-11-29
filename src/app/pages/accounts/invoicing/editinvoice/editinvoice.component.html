@@ -1,0 +1,151 @@
+<div class=" p-3">
+  <div class="toolbar">
+      <div style="float: right;
+  ">
+    <button class="btn btn-white btn-icon btn-sm"  style="top: 12px;" (click)="close()" type="button" title="Back To List">
+            <i class="i-con i-con-arrow-left"><i></i></i></button></div>
+     </div>
+</div>
+<div class="card m-3">
+
+<div class="px-2">
+          <div class="d-flex nav-active-border nav-active-text-primary b-primary">
+            <ul class="nav" style="width: 90%;
+            float: left;">
+             
+              <li class="nav-item  ">
+                <a class="nav-link py-3 active" href="#" data-toggle="tab" data-target="#tab_1">Basic
+                  Info</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link py-3" href="#" data-toggle="tab" data-target="#tab_2">Attachments
+                </a>
+
+              </li>
+          
+            </ul>
+           
+          </div>
+        </div>
+      
+      <div class="row">
+
+        <div class="col-sm-12 col-lg-12">
+          <div class="card">
+            <div class="px-4 py-4">
+              <div class="tab-content">
+                <div class="tab-pane show active" id="tab_1">
+                  <form novalidate="" autocomplete="completed" [formGroup]="invoiceForm" (submit)="updateInvoice()">
+                    <div class="row mb-2">
+                      <div class="col-12">
+                        <!-- <h5>Invoices</h5> -->
+                      </div>
+                    </div>
+                    <div class="row mb-2">
+                      <!-- <div class="col-6">
+                            <label><small>Invoice Number</small></label>
+                            <input class="form-control" type="text" formControlName='invoiceNumber'
+                              [ngClass]="{ 'is-invalid': submitted && finvoice.invoiceNumber.errors }">
+                            <div *ngIf="submitted && finvoice.invoiceNumber.errors" class="invalid-feedback">
+                              <div *ngIf="finvoice.invoiceNumber.errors.required">Invoice Number
+                              </div>
+                            </div>
+                          </div> -->
+                      <div class="col-6">
+                        <small>Client Name<span class="text-danger">*</span></small>
+                        <div class="my-2">
+                          <select class="form-control" formControlName="client_Id"
+                            [ngClass]="{ 'is-invalid': submitted && finvoice.client_Id.errors }">
+                            <option *ngFor="let obj of clients" value="{{ obj.client_Id }}">
+                              {{ obj.name}}</option>
+                          </select>
+                          <div *ngIf="submitted && finvoice.client_Id.errors" class="invalid-feedback">
+                            <div *ngIf="finvoice.client_Id.errors.required">Client Name is required.
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="col-6">
+                        <small>Amount<span class="text-danger">*</span></small>
+                        <div class="my-2">
+                          <input class="form-control" type="number" formControlName='totalAmount'
+                            [ngClass]="{ 'is-invalid': submitted && finvoice.totalAmount.errors }">
+                          <div *ngIf="submitted && finvoice.totalAmount.errors" class="invalid-feedback">
+                            <div *ngIf="finvoice.totalAmount.errors.required">Total Amount is required.
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="col-6">
+                        <small>Invoices Date<span class="text-danger">*</span></small>
+                        <div class="my-2">
+                          <input class="form-control" type="datetime-local" formControlName='invoiceDate'
+                            [ngClass]="{ 'is-invalid': submitted && finvoice.invoiceDate.errors }">
+                          <div *ngIf="submitted && finvoice.invoiceDate.errors" class="invalid-feedback">
+                            <div *ngIf="finvoice.invoiceDate.errors.required">Invoices Date is required.
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="col-6">
+                        <small>Currency</small>
+                        <select class="form-control" formControlName='currency'>
+                          <!-- <option value="">--Select--</option> -->
+                          <option *ngFor="let contry of currency" value="{{contry.lookup_Value}}">
+                            {{contry.lookup_Name}}
+                          </option>
+                        </select>
+                      </div>
+                      <div class="col-6">
+                        <small>Conversion Rate</small>
+                        <div class="my-2">
+                          <input class="form-control" type="text" formControlName='conversionRate'
+                            [ngClass]="{ 'is-invalid': submitted && finvoice.conversionRate.errors }">
+                          <div *ngIf="submitted && finvoice.conversionRate.errors" class="invalid-feedback">
+                            <div *ngIf="finvoice.conversionRate.errors.required">Conversion Rate
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+
+
+                      <div class="col-6">
+                        <small>Is Processed</small>
+                        <div class="my-1">
+                          <input type="checkbox" formControlName='isProcessed'>
+                        </div>
+                      </div>
+                      <div class="col-6">
+                        <small>Remark</small>
+                        <div class="my-2">
+                          <textarea class="form-control" formControlName="remarks"></textarea>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="card-footer">
+                      <input type="submit" value="Save" class="btn btn-success float-right">
+                      &nbsp;
+                      &nbsp;
+
+
+                    </div>
+                  </form>
+                </div>
+                <div class="tab-pane fade" id="tab_2">
+                  <app-global-attachment  entityType="Invoice" [entityId]="Id"></app-global-attachment>
+                 
+              </div>
+
+                </div>
+              </div>
+
+
+            </div>
+          </div>
+        </div>
+
+     
+
+    
+ 
+</div>

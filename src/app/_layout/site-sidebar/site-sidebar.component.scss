@@ -1,0 +1,15 @@
+.footer-fixed-ui
+{
+    position: fixed;
+    bottom: 0px;
+    background: #fff;
+}
+
+.nav-caret:after {
+    
+    top: 50%;
+    position: absolute;
+  }
+  a.active-link {
+    background: rgba(19, 126, 255, 0.25) !important;
+}

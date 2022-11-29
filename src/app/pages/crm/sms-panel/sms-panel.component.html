@@ -1,0 +1,69 @@
+<div class="card m-3">
+  <div class="padding">
+    <h2 class="text-md mb-0"> SMS Panel</h2>
+  </div>
+  <div class="padding">
+    <div class="mb-5">
+
+      <div class="row">
+
+        <div class="col-lg-4  col-sm-12">
+          <div class="">
+            <form [formGroup]="smsForm">
+              <div class="form-group">
+                <label>Type <br></label>
+                <ng-select formControlName="msgType">
+                  <ng-option selected value="PA">PA</ng-option>
+                  <ng-option value="TA">TA</ng-option>
+                </ng-select>
+              </div>
+              <div class="form-group">
+                <label>Mobile Numbers <br><small>(separated by comma eg: 9800098000,7800078000)</small></label>
+                <textarea class="form-control" style="height: 80px;" id="exampleFormControlTextarea1"
+                  formControlName="mobileNumbers" rows="3"
+                  placeholder="Mobile Numbers - separated by comma eg: 9800098000,7800078000"></textarea>
+              </div>
+              <div class="form-group">
+                <label for="exampleFormControlTextarea1">Message Text</label>
+                <textarea class="form-control" maxlength="160" style="height: 180px;" id="exampleFormControlTextarea1"
+                  formControlName="messageText" rows="3" placeholder="Message Text, Max 160 character"></textarea>
+                <span class=""><em>{{ 160 - smsForm.value.messageText.length }} characters left</em></span>
+              </div>
+              <div class="form-group form-check">
+                <!-- <input type="checkbox" class="form-check-input" id="exampleCheck1">
+        <label class="form-check-label" for="exampleCheck1">Check me out</label> -->
+              </div>
+              <button type="submit" (click)="sendSMS()" class="btn btn-primary btn-rounded">Send</button>
+            </form>
+          </div>
+        </div>
+        <div class="col-lg-1 col-sm-12">
+
+        </div>
+        <div class="col-lg-7  col-sm-12">
+          <div class="table-responsive">
+            <table class="table table-theme table-row v-middle">
+              <tbody>
+                <tr>
+
+                
+                  <th>Mobile Number</th>
+               
+                  <th>Message</th>
+                   <th>Date </th>
+                
+                </tr>
+                <tr *ngFor="let obj of AllNotifications" class="v-middle">
+                  
+                    <td>{{obj.to_Mobile}}</td>
+                 
+                    <td>{{obj.notification_Content}}</td> 
+                    <td>{{obj.dts |  date:'medium'}}</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>

@@ -1,0 +1,397 @@
+<div class="p-2 mt-2 ml-2 doNotPrint b-b">
+  <div class="toolbar">
+    <button (click)="openTransactionForm()" class="btn btn-primary" data-toggle="modal" data-target="#open-model"
+      title="" id="btn-trash" data-original-title="Trash">
+      <a>Add Transaction</a>
+    </button>
+    <!-- <i class="i-con i-con-plus text-muted"></i> -->
+    <small class="text-muted">Month</small>
+    <ng-select class="col-sm-1" [(ngModel)]="month" #ctrl="ngModel">
+      <ng-option ng-selected [value]='-1'>All</ng-option>
+      <ng-option value='1'>Janaury</ng-option>
+      <ng-option value='2'>February</ng-option>
+      <ng-option value='3'>March</ng-option>
+      <ng-option value='4'>April</ng-option>
+      <ng-option value='5'>May</ng-option>
+      <ng-option value='6'>June</ng-option>
+      <ng-option value='7'>July</ng-option>
+      <ng-option value='8'>August</ng-option>
+      <ng-option value='9'>September</ng-option>
+      <ng-option value='10'>October</ng-option>
+      <ng-option value='11'>November</ng-option>
+      <ng-option value='12'>December</ng-option>
+    </ng-select>
+    <small class="text-muted">Year</small>
+    <ng-select class="col-sm-1" [(ngModel)]="year" #ctrl="ngModel">
+      <ng-option ng-selected [value]=0> All </ng-option>
+      <ng-option value="2016">2016-17</ng-option>
+      <ng-option value="2017">2017-18</ng-option>
+      <ng-option value="2018">2018-19</ng-option>
+      <ng-option value="2019">2019-20</ng-option>
+      <ng-option value="2020">2020-21</ng-option>
+      <ng-option value="2021">2021-22</ng-option>
+      <ng-option value="2022">2022-23</ng-option>
+    </ng-select>
+    <small class="text-muted">Client Name</small>
+    <ng-select class="col-sm-1" [(ngModel)]="clientId" #ctrl="ngModel" placeholder="Client Name">
+      <ng-option ng-selected [value]='0'>--Select Client--</ng-option>
+      <ng-option *ngFor="let obj of clients" [value]="obj.client_Id">
+        {{ obj.contact_Name}}</ng-option>
+    </ng-select>
+    <span style="margin-left:10px">
+      <input type="button" class="btn btn-sm btn-primary" value="Filter" (click)="getTransaction()"></span>
+    <div class="col-sm-2" style=" padding: 5px;height: 39px;
+            margin-top: -6px;">
+
+      <span style="margin-left:10px"> <b>Count</b>: {{ transaction?.length }} </span>
+      <input type="button" class="col-sm-4 btn btn-sm btn-primary" value="Export" (click)="export()">
+
+    </div>
+    <div class="col-sm-1">
+      <button style="margin-top: 4px;" class="btn btn-sm btn-warning d-block" (click)="clearFilter()">Clear
+        Filter</button>
+    </div>
+    <!-- <span class="float-left pt-3" style="position: relative;
+             right: -125px;
+         ">  -->
+    <div class="col-sm-2">
+      <input class="form-control" placeholder="Filter Data" type="text"
+        (keyup)="applyFilter($event.target.value)">
+    </div>
+  </div>
+</div>
+
+
+
+<div class="card m-3 ">
+  <div class="mat-elevation-z888">
+    <table class="table" mat-table matSort [dataSource]="dataSource">
+      <ng-container matColumnDef="invoiceNumber">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>InvoiceNumber</th>
+        <td mat-cell *matCellDef="let element"> {{element.invoiceNumber}}</td>
+        <td mat-footer-cell *matFooterCellDef><b>Total: </b></td>
+      </ng-container>
+      <ng-container matColumnDef="clientName">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>Client Name</th>
+        <td mat-cell *matCellDef="let element"> {{element.clientName}}</td>
+        <td mat-footer-cell *matFooterCellDef></td>
+      </ng-container>
+      <ng-container matColumnDef="transactionDate">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>TransactionDate</th>
+        <td mat-cell *matCellDef="let element"> {{element.transactionDate | date:'MMM d, y, h:mm a'}}</td>
+        <td mat-footer-cell *matFooterCellDef></td>
+      </ng-container>
+      <ng-container matColumnDef="amount">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>Amount </th>
+        <td mat-cell *matCellDef="let element" >{{element.amount | currency:'INR' }}</td>
+        <td mat-footer-cell *matFooterCellDef><b>{{ getSum() | currency: "INR" }}</b></td>
+      </ng-container>
+      <ng-container matColumnDef="action">
+        <th mat-header-cell *matHeaderCellDef> Action</th>
+        <td mat-cell *matCellDef="let element">
+          <span class="action-mat-btn">
+            <button class="btn btn-success btn-icon btn-sm " (click)="loadtransaction(element.transactionId)"
+              rel="tooltip" type="button" data-original-title="" title=""><i class="i-con i-con-Edit"></i></button>
+            &nbsp;
+            <button class="btn btn-danger btn-icon btn-sm " (click)="deleteTransaction(element.transactionId)"
+              rel="tooltip" type="button" data-original-title="" title=""><i
+                class="i-con i-con-trash"><i></i></i></button>
+          </span>
+        </td>
+        <td mat-footer-cell *matFooterCellDef></td>
+      </ng-container>
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-footer-row *matFooterRowDef="columnsToDisplay"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    </table>
+    <mat-paginator [pageSizeOptions]="[30, 50, 100]" showFirstLastButtons></mat-paginator>
+  </div>
+
+
+</div>
+
+
+
+<div id="#open-model" class="modal" data-backdrop="true" style="display: block; ; background:   #0000008c;"
+  *ngIf="ModalOpen" aria-hidden="true">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <!-- <div class="modal-header">
+      <h5 class="modal-title">Add Transaction</h5>
+    </div> -->
+      <form class="kt-form kt-form--label-right" [formGroup]="EditForm">
+        <div class="modal-body text-left p-lg">
+
+          <div class="kt-portlet__body" style="padding-left: 40px; padding-right: 40px;">
+            <div class="row mb-2">
+              <div class="col-12">
+                <h5 class="text-muted">Transaction Detail</h5>
+              </div>
+            </div>
+            <div class="row mb-2">
+              <div class="col-6">
+                <small class="text-muted">Invoice Number</small>
+                <input type="text" class="form-control" formControlName="invoiceNumber">
+
+                <!-- <input type="hidden" formControlName="transactionId" value="0"> -->
+
+              </div>
+              <div class="col-6">
+                <small class="text-muted">Client Name<span class="text-danger">*</span></small>
+                <ng-select formControlName="clientId"
+                  [ngClass]="{ 'is-invalid': submitted && f.clientId.errors }">
+                  <ng-option *ngFor="let obj of clients" value="{{ obj.client_Id }}">
+                    {{ obj.contact_Name }}</ng-option>
+                </ng-select>
+                <div *ngIf="submitted && f.clientId.errors" class="invalid-feedback">
+                  <div *ngIf="f.clientId.errors.required">client name is required.</div>
+                </div>
+              </div>
+              <div class="col-3">
+                <small class="text-muted">Amount</small>
+                <div class="my-2">
+                  <input type="number" class="form-control" formControlName="amount">
+                </div>
+              </div>
+
+
+              <div class="col-3">
+                <small class="text-muted">SGST</small>
+                <div class="my-2">
+                  <input type="number" class="form-control" formControlName="tax_1">
+                </div>
+              </div>
+              <div class="col-3">
+                <small class="text-muted">CGST</small>
+                <div class="my-2">
+                  <input type="number" class="form-control" formControlName="tax_2">
+                </div>
+              </div>
+              <div class="col-3">
+                <small class="text-muted">IGST</small>
+                <div class="my-2">
+                  <input type="number" class="form-control" formControlName="tax_3">
+                </div>
+              </div>
+              <div class="col-6">
+                <small class="text-muted">Transaction Mode</small>
+                <div class="my-2">
+                  <ng-select  formControlName="transactionMode">
+                    <!-- <option *ngFor="let obj of lookupList" value="{{ obj?.lookup_Value }}">
+                  {{ obj?.lookup_Name }}</option> -->
+                 
+                  <ng-option *ngFor="let obj of lookupListType" value="{{ obj?.lookup_Value }}">
+                    {{ obj?.lookup_Name }}</ng-option>
+
+                    
+                    <!-- <option value="">
+                      --Select--</option>
+                    <option value="Bank">
+                      Bank</option>
+                    <option value="cash">
+                      cash</option> -->
+                  </ng-select>
+                  <!-- <input type="text" class="form-control" formControlName="transactionMode"> -->
+                </div>
+              </div>
+              <div class="col-6">
+                <small class="text-muted">Attachment</small>
+                <div class="my-2">
+                  <img src="{{EditForm.value.attachment}}" style="max-height: 30px;">
+                  <!-- <input type="file" id="myFile" name="filename" formControlName="attachment"> -->
+                  <!-- <input type="attachment"> -->
+                  <!-- <input type="text" class="form-control" formControlName="attachment"> -->
+                </div>
+              </div>
+              <div class="col-6">
+                <small class="text-muted">Transaction Date<span class="text-danger">*</span></small>
+                <div class="my-2">
+                  <input type="datetime-local" class="form-control" formControlName="transactionDate" [ngClass]="{
+                      'is-invalid': submitted && f.transactionDate.errors
+                    }">
+                  <div *ngIf="submitted && f.transactionDate.errors" class="invalid-feedback">
+                    <div *ngIf="f.transactionDate.errors.required">Date is required.</div>
+                  </div>
+                </div>
+              </div>
+              <!-- <div class="col-6">
+              <small class="text-muted">DTS</small>
+              <div class="my-2">
+                  <input type="date" class="form-control" formControlName="dts">
+              </div>
+          </div>  -->
+              <div class="col-6">
+                <small class="text-muted">Note</small>
+                <div class="my-2">
+                  <textarea class="form-control" formControlName="note">
+                </textarea>
+                  <!-- <input type="text" class="form-control" formControlName="note"> -->
+                </div>
+              </div>
+
+
+            </div>
+
+          </div>
+          <div class="px-4 py-4">
+          </div>
+
+        </div>
+        <div class="modal-footer">
+          <button type="reset" class="btn btn-secondary" (click)="cancel()">
+            Cancel
+          </button>
+          <input type="submit" (click)="savetransaction()" class="btn btn-success" value="Save" />
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+
+
+<!-- <h3><strong>Invoice</strong></h3>
+<div class="box box-primary">
+        <div class="box-header">
+      
+             <a id="myBtn1" class="btn btn-primary btn-sm ml-2"><span class="fa fa-plus">
+                            Create</span></a>
+                    <a id="myBtn1" class="btn btn-primary btn-sm ml-2"><span class="fa fa-plus">
+                            Setting</span></a>
+        </div>
+<div class="container" style=" padding-bottom: 200px;">
+ 
+        <div class="container">
+            
+                 <h2 class="text-left">To:</h2>
+                <div class="col-md-12 box1">
+                    <div class="row">
+                    <div class="col-md-4" >
+                            Bentex Group Corporation<br>
+                            34 West 33rd Street<br>
+                            New York, NY 10001, USA<br>
+                      </div>
+                      <div class="col-md-4" ></div>
+                      <div class="col-md-4" style="text-align: right;">
+                            Invoice #559 | Inv Date: 06/04/2019<br>
+                           <span style="font-size: 25px;
+                           text-align: right;"> $181.00</span>
+                            </div>
+                        </div>
+                    </div></div> 
+                    <div class="col-md-12" style="height: 65px;"></div>
+                    <div class="container">
+                  <div class="col-md-12">
+                            <div class="row"  style="background-color: #8f9494;">
+                                
+                            <div class="col-md-4">
+                                   Project & description
+                              </div>
+                              <div class="col-md-4"></div>
+                              <div class="col-md-4" style="text-align: right;">
+                                   <div class="row">
+                                        <div class="col-md-2">Hours</div>
+                                        <div class="col-md-2">Rate/H</div>
+                                        <div class="col-md-2">Line Total</div>
+                                    </div>
+                                    </div>
+                                   </div> 
+                                   <div class="row">
+                                        <div class="col-md-4">
+                                             Working with Eli
+                                           </div>
+                                           <div class="col-md-4"></div>
+                                           <div class="col-md-4" style="text-align: right;">
+                                                <div class="row">
+                                                     <div class="col-md-2">"#"</div>
+                                                     <div class="col-md-2">"#"</div>
+                                                     <div class="col-md-2">"#"</div>
+                                                 </div>
+                                                 </div>
+                                      </div>
+                            </div>
+        <div class="col-xs-12" style="height: 85px;"></div>
+        <div class="row">
+                <div class="col-md-4">
+                     
+                   </div>
+                   <div class="col-md-4"></div>
+                   <div class="col-md-4" style="text-align:center;">
+                        <div class="row">
+                             <div class="col-md-3">"Subtotal"</div>
+                             <div class="col-md-3">"Amount"</div>
+                             </div>
+                         </div ></div>
+                         <div class="row">
+                                <div class="col-md-4">
+                                     
+                                   </div>
+                                   <div class="col-md-4"></div>
+                                   <div class="col-md-4" style=" text-align:center;">
+                                        <div class="row">
+                                             <div class="col-md-3">"Total"</div>
+                                             <div class="col-md-3">"Amount"</div>
+                                             </div>
+                                         </div ></div>
+                                       
+                                         <div style= "text-align:center;">
+                                         <table class="table table-bordered">
+                                                <thead style="background-color: #d4d4d4;">
+                                                  <tr>
+                                                    <th scope="col" colspan="2">CGST</th>
+                                                    <th scope="col" colspan="2">SGST</th>
+                                                    <th scope="col" colspan="2">IGST</th>
+                                                    <th scope="col" colspan="2">Ivoice Value</th>
+                                                  </tr>
+                                                </thead>
+                                                <tbody>
+                                                  <tr>
+                                                     <td>Rate</td>
+                                                    <td>Amt</td>
+                                                    <td>Rate</td>
+                                                    <td>Amt</td>
+                                                    <td>Rate</td>
+                                                    <td>Amt</td>
+                                                    <td>Rate</td>
+                                                </tr>
+                                                <tr>
+                                                        <td></td>
+                                                       <td></td>
+                                                       <td></td>
+                                                       <td></td>
+                                                       <td></td>
+                                                       <td></td>
+                                                       <td>Amount</td>
+                                                   </tr>
+                                                   <tr>
+                                                        <td></td>
+                                                       <td>0</td>
+                                                       <td></td>
+                                                       <td>0</td>
+                                                       <td></td>
+                                                       <td>0</td>
+                                                       <td>Amount</td>
+                                                   </tr>
+                                                  </tbody>
+                                              </table>
+                                                 </div>
+                                              </div>
+                     <div class="col-md-12"> 
+                                    <div class="col-md-6">Remaks</div>
+                                <div class="col-md-6">➢ For two weeks (01July to 10 July 2019)</div>
+                                </div>
+                     <div class="container">
+                                <div style="border: 1px solid #e4e4e4; padding-top: 15px">
+                                    GSTIN: 09AAFCN9228H1Z4<br>
+                                    Contact Person: Akshay Mishra | CEO<br>
+                                    Account Name: NOWGRAY IT Services Pvt. Ltd.<br>
+                                    Account Address: PLT 21, Phoolbag Cly, Khursi Rd, Lucknow 226026, UP, India<br>
+                                    Phone Numbers: +91 950 616 8811, +91 778 607 9365<br>
+                                    Bank Name: HDFC Bank Ltd.<br>
+                                    Bank Address: B-1/294, Sector G, Jankipuram, Lucknow, Uttar Pradesh (India) 226021<br>
+                                    Swift Code: HDFCINBB<br>
+                                    IFSC Code: HDFC0001908<br>
+                                    Account Number: 50200029596363<br>
+             </div>
+          </div> 
+        </div>
+      </div>    -->

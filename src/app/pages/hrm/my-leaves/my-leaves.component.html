@@ -1,0 +1,231 @@
+<div class="mx-4 mt-4">
+  <h2>Submitted Leave</h2>
+</div>
+
+<div class="px-4">
+  <div class="row justify-content-between align-items-center">
+    <!-- Employee -->
+    <div class="col-md-3 mb-3" *ngIf="Hideuser" >
+      <p>Select Employee</p>
+      <ng-select  type="text"   (change)="selectEmployee($event)">
+        <ng-option value="0">--Select Employee--</ng-option>
+        <ng-option *ngFor="let obj of EmployeeList" value="{{ obj.user_Id }}">
+          {{ obj?.full_Name }}
+        </ng-option>
+      </ng-select>
+    </div>
+    <!-- // Status -->
+    <div class="col-md-2 mb-2" *ngIf="Hideuser" >
+      <p>Select Status</p>
+      <ng-select  type="text"   (change)="selectStatus($event)">
+        <ng-option value="0">--Select Employee--</ng-option>
+        <ng-option *ngFor="let obj of _LeaveStatus" value="{{ obj?.lookup_Value }}">
+          {{ obj?.lookup_Name }}
+        </ng-option>
+      </ng-select>
+    </div>
+    <div class="col-md-1 mb-1" *ngIf="Hideuser"  >
+                               
+      <input type="button" class="btn btn-info btn-sm " value="Export Data In CSV"
+          (click)="export()">
+  </div>
+    <!-- Filter -->
+    <div class="col-md-3">
+      <span class="float-right pt-2 m-3">
+        <input
+          class="form-control"
+          placeholder="Filter Data"
+          type="text"
+          (keyup)="applyFilter($event)"
+        />
+      </span>
+    </div>
+
+    <!-- row end -->
+  </div>
+
+  <table mat-table [dataSource]="dataSource" matSort>
+    <!-- Leave Type Column -->
+    <ng-container matColumnDef="fullName">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Name</th>
+      <td mat-cell *matCellDef="let row">{{ row.fullName }}</td>
+    </ng-container>
+    <ng-container matColumnDef="leave_Type">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Leave Type</th>
+      <td mat-cell *matCellDef="let row">{{ row.leave_Type }}</td>
+    </ng-container>
+
+    <!-- Leave Status Column -->
+    <ng-container matColumnDef="status">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Leave Status</th>
+      <td mat-cell *matCellDef="let row">{{ row.status }}</td>
+    </ng-container>
+
+    <!-- From Date Column -->
+    <ng-container matColumnDef="from_Date">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>From Date</th>
+      <td mat-cell *matCellDef="let row">{{ row.from_Date | date }}</td>
+    </ng-container>
+
+    <!-- To Date Column -->
+    <ng-container matColumnDef="to_Date">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>To Date</th>
+      <td mat-cell *matCellDef="let row">{{ row.to_Date | date }}</td>
+    </ng-container>
+
+    <!-- Amount Column -->
+    <ng-container matColumnDef="amount">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Pllaned Leave</th>
+      <td mat-cell *matCellDef="let row">{{ row.amount }}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="remark">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Remark</th>
+      <td mat-cell *matCellDef="let row">{{ row.remark }}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="action" >
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Action</th>
+      <td mat-cell *matCellDef="let row">
+        <span class="action-mat-btn" *ngIf="row.status=='Pending'">
+          <button
+            class="btn btn-success btn-icon btn-sm"
+            (click)="getById(row?.id)"
+            rel="tooltip"
+            type="button"
+            data-original-title=""
+            title=""
+          >
+            <i class="fas fa-pen"></i>
+          </button>
+          &nbsp;
+          <button class="btn btn-danger btn-icon btn-sm "  *ngIf="row.status=='Pending'" (click)="delete(row?.id)"
+              rel="tooltip" type="button" data-original-title="" title=""><i
+                  class="i-con i-con-trash"><i></i></i>
+          </button>
+        </span>
+      </td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+  </table>
+
+  <mat-paginator
+    [pageSizeOptions]="[30, 60, 90]"
+    aria-label="Select page of users"
+  ></mat-paginator>
+</div>
+<div id="m-model" class="modal" data-backdrop="true" style="display: block; background: #0000008c"*ngIf="ModalOpen" aria-hidden="true" >
+
+  <div class="modal-dialog modal-xl">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">My Leaves</h5>
+      </div>
+      <div class="modal-body text-left p-xl">
+        <form [formGroup]="timeoffForm">
+          <div class="mb-4 form-floating">
+            <select
+              class="form-control"
+              formControlName="leave_Type"
+              id="floatingSelect"
+              aria-label="Floating label select example"
+            >
+              <option value="">--Select--</option>
+              <option
+                *ngFor="let obj of _LeaveType"
+                value="{{ obj?.lookup_Value }}"
+              >
+                {{ obj?.lookup_Name }}
+              </option>
+            </select>
+            <label for="floatingTextarea">Leave type</label>
+          </div>
+  
+          <div class="mb-4 form-floating" *ngIf="Hideuser">
+            <select
+              class="form-control"
+              formControlName="status"
+              id="floatingSelect"
+              aria-label="Floating label select example"
+            >
+              <option value="">--Select--</option>
+              <option
+                *ngFor="let obj of _LeaveStatus"
+                value="{{ obj?.lookup_Value }}"
+              >
+                {{ obj?.lookup_Name }}
+              </option>
+            </select>
+            <label for="floatingTextarea">Leave Status</label>
+          </div>
+  
+          <div class="form-floating mb-4">
+            <input
+              type="date"
+              (change)="calculateAdavance()"
+              formControlName="from_Date"
+              class="form-control"
+              value="{{dates?.from_Date | date:'yyyy-MM-dd'}}"
+            />
+            <label for="floatingTextarea">From Date</label>
+          </div>
+  
+          <div class="form-floating mb-4">
+            <input
+              type="date"
+              (change)="calculateAdavance()"
+              formControlName="to_Date"
+              class="form-control"
+              id="floatingInput"
+              value="{{dates?.to_Date | date:'yyyy-MM-dd'}}"
+            />
+            <label for="floatingTextarea">To Date</label>
+          </div>
+  
+          <div class="form-floating mb-4">
+            <input
+              type="number"
+              formControlName="amount"
+              class="form-control"
+              id="floatingInput"
+              readonly
+              
+            />
+            <label for="floatingTextarea">Amount of Leave</label>
+          </div>
+  
+          <div class="form-floating mb-4">
+            <textarea
+              formControlName="remark"
+              class="form-control"
+              id="floatingInput"
+              rows="4"
+              cols="50"
+            >
+            </textarea>
+            <label for="floatingTextarea">Remark</label>
+          </div>
+          <div class="modal-footer">
+            <button
+              type="button"
+              class="btn btn-secondary"
+              data-dismiss="modal"
+              (click)="cancel()">
+              Cancel
+            </button>
+            <button
+              type="button"
+              class="btn btn-primary"
+              (click)="addLeave()">
+            <i class="far fa-paper-plane"></i> &nbsp; Update time off
+            </button>
+          </div>
+        </form>
+  
+      </div>
+    </div>
+  </div>
+  </div>
+  

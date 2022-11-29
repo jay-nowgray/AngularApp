@@ -1,0 +1,106 @@
+<div class="p-3 doNotPrint b-b">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="row">
+                <div class="col-md-3">
+                    <small>Start Date</small>
+                    <input type="datetime-local" class="form-control" [(ngModel)]="startDate">
+                </div>
+                <div class="col-md-3">
+                    <small>End Date</small>
+                    <input type="datetime-local" class="form-control" [(ngModel)]="endDate">
+                </div>
+                <div class="col-md-3" *ngIf="!hideForUser">
+                    <small>Employee Name</small>
+                    <!-- <select class="form-control" [(ngModel)]="userId">
+                        <option *ngFor="let obj of user" value="{{ obj.user_Id }}">
+                            {{ obj.full_Name }}</option>
+                    </select> -->
+                    
+                    <ng-select [(ngModel)]="userId">
+                        <ng-option *ngFor="let obj of user" [value]="obj.user_Id">{{obj.full_Name}}</ng-option>
+                     </ng-select>
+                </div>
+                <div class="col-md-2">
+                    <button class="btn btn-sm btn-success mt-4" (click)="getReport()">Get Report</button>
+                </div>
+                <div class="col-md-1">
+                    <button class="btn btn-sm btn-secondary mt-4" (click)="resetData()">Reset</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="card m-3">
+    <div class="print-css">
+        <div class="mat-elevation-z888">
+            <table class="table" mat-table matSort [dataSource]="dataSource">
+                <ng-container matColumnDef="first_Name">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header>Name</th>
+                    <td mat-cell *matCellDef="let element">{{element.first_Name}} {{element.last_Name}}</td>
+                    <td mat-footer-cell *matFooterCellDef>Total:</td>
+                </ng-container>
+                <ng-container matColumnDef="salary_Date">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header>Salary Date </th>
+                    <td mat-cell *matCellDef="let element">{{element.salary_Date | date:'d MMM, y'}}</td>
+                    <td mat-footer-cell *matFooterCellDef></td>
+                </ng-container>
+                <ng-container matColumnDef="salary_Basic">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header>Salary Basic</th>
+                    <td mat-cell *matCellDef="let element">{{element.salary_Basic}}</td>
+                    <td mat-footer-cell *matFooterCellDef></td>
+                </ng-container>
+                <ng-container matColumnDef="incentive">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header>Incentive </th>
+                    <td mat-cell *matCellDef="let element"> {{element.incentive| currency:'INR'}}</td>
+                    <td mat-footer-cell *matFooterCellDef><b>{{totalIncentive | currency:'INR'}} </b></td>
+                </ng-container>
+                <ng-container matColumnDef="deductions">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header>Deductions </th>
+                    <td mat-cell *matCellDef="let element"> {{element.deductions | currency:'INR'}}</td>
+                    <td mat-footer-cell *matFooterCellDef><b>{{totalDeductions | currency:'INR'}}</b></td>
+                </ng-container>
+                <ng-container matColumnDef="advance">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header>Advance</th>
+                    <td mat-cell *matCellDef="let element"> {{element.advance | currency:'INR'}}
+                    </td>
+                    <td mat-footer-cell *matFooterCellDef><b>{{totalAdvance | currency:'INR'}}</b></td>
+                </ng-container>
+                <ng-container matColumnDef="holdings">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header>Holdings</th>
+                    <td mat-cell *matCellDef="let element"> {{element.holdings | currency:'INR'}}
+                    </td>
+                    <td mat-footer-cell *matFooterCellDef><b>{{totalHoldings | currency:'INR'}}</b></td>
+                </ng-container>
+                <ng-container matColumnDef="salary_Payable">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header>Salary Payable</th>
+                    <td mat-cell *matCellDef="let element"> {{element.salary_Payable | currency:'INR'}}
+                    </td>
+                    <td mat-footer-cell *matFooterCellDef><b>{{totalSalaryPayable | currency:'INR'}} </b></td>
+                </ng-container>
+                <ng-container matColumnDef="salary_Paid">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header>Salary Paid</th>
+                    <td mat-cell *matCellDef="let element"> {{element.salary_Paid | currency:'INR'}}
+                    </td>
+                    <td mat-footer-cell *matFooterCellDef><b>{{totalSalaryPaid | currency:'INR'}}</b></td>
+                </ng-container>
+                <ng-container matColumnDef="net_Salary">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header>Net Salary</th>
+                    <td mat-cell *matCellDef="let element">
+                        <span *ngIf="element.net_Salary >= 0">{{element.net_Salary | currency:'INR'}}</span>
+                        <span *ngIf="element.net_Salary < 0"> ₹0.00 </span>
+                    </td>
+                    <td mat-footer-cell *matFooterCellDef><b>
+                            {{totalSalaryNet | currency:'INR'}}</b></td>
+                </ng-container>
+                <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                <tr mat-footer-row *matFooterRowDef="columnsToDisplay"></tr>
+                <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+            </table>
+            <mat-paginator class="doNotPrint" showFirstLastButtons [pageSizeOptions]="[50,100,150]"></mat-paginator>
+        </div>
+        <div class="p-2">
+            <button style="margin: 0 auto; display: block; cursor: pointer;" (click)="onPrint()">Print</button>
+        </div>
+    </div>
+</div>

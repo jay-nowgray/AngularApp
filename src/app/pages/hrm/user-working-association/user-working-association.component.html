@@ -1,0 +1,99 @@
+<div class="p-3 doNotPrint b-b">
+    <div class="row m-3">
+        <button class="btn btn-sm btn-primary"   (click)="addLookup()" data-target="#m-model" title=""
+        id="btn-trash" data-original-title="Trash">Add 
+    </button>
+    </div>
+</div>
+ 
+ 
+    <div class="card m-3 ">
+                <div class="mat-elevation-z888">
+        <table class="table" mat-table matSort [dataSource]="dataSource">
+            <ng-container matColumnDef="name">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header id="th1">Name </th>
+                <td mat-cell *matCellDef="let element"> {{element.name}}</td>
+            </ng-container>
+            <ng-container matColumnDef="company_Name">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header id="th1"> Company Name </th>
+                <td mat-cell *matCellDef="let element">{{element.company_Name}}</td>
+            </ng-container>
+            <ng-container matColumnDef="percentage">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header id="th1"> Percentage </th>
+                <td mat-cell *matCellDef="let element">{{element.percentage}}</td>
+            </ng-container>
+            <ng-container matColumnDef="action">
+                <th mat-header-cell *matHeaderCellDef id="th1"> Action</th>
+                <td mat-cell *matCellDef="let element">
+                    <span class="action-mat-btn">
+                        <button class="btn btn-success btn-icon btn-sm "
+                                  (click)="loadEmployee(element.workingCompany_Id)" rel="tooltip" type="button"
+                                  data-original-title="" title=""><i class="i-con i-con-Edit"><i></i></i></button>
+                                  &nbsp;
+                                  <button class="btn btn-danger btn-icon btn-sm "   (click)="delete(element.workingCompany_Id)" 
+                                  rel="tooltip" type="button" data-original-title="" title=""><i class="i-con i-con-trash"><i></i></i>
+                                  </button>
+                    </span>
+                </td>
+            </ng-container>
+            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+            <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+        </table>
+        <mat-paginator [pageSizeOptions]="[30, 50, 100]" showFirstLastButtons></mat-paginator>
+    </div>
+
+
+
+
+<div id="m-model" class="modal" data-backdrop="true" style="display: block; background: #0000008c;"
+    *ngIf="ModalOpen" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Add </h5>
+            </div>
+            <div class="modal-body p-xl">
+                <form class="kt-form kt-form--label-right" [formGroup]="Form">
+                    <div class="kt-portlet__body" style="padding-left: 40px; padding-right: 40px;">
+                        
+                        
+                        <div class="form-group row">
+
+                            <div class="col-6">
+                                <small class="col-form-label">User Type <span class="text-danger">*</span> </small>
+                                <ng-select formControlName='user_Id'>
+                                        <ng-option *ngFor="let obj of user" [value]="obj.user_Id">{{obj.full_Name}}</ng-option>
+                                </ng-select>
+                            </div>
+                            <div class="col-6">
+                                <small class="col-form-label">Company Type <span class="text-danger">*</span> </small>
+                                <ng-select formControlName='company_Name'>
+                                    <ng-option *ngFor="let obj of companyName" [value]="obj.lookup_Value">
+                                        {{obj?.lookup_Name}}
+                                    </ng-option>
+                                </ng-select>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                          
+                            <div class="col-6">
+                                <small class="col-form-label">Percentage</small>
+                                <input class="form-control" type="percentage" value="" formControlName='percentage'>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)="cancel()">
+                            Cancel
+                        </button>
+                        &nbsp;
+                        &nbsp;
+                        <button type="button" class="btn btn-success" data-dismiss="modal" (click)="saveEmployee()">
+                            Save
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

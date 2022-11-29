@@ -1,0 +1,23 @@
+table {
+    width: 100%;
+  }
+  #th1{
+      color: black;
+     
+  }
+  .mat-sort-header-container {
+    display: flex;
+    cursor: pointer;
+    align-items: center;
+    margin-top: -30px;
+}
+.table th, .table td {
+    padding: 5px;
+        vertical-align: center;
+        line-height: 40px;
+}
+th.mat-header-cell {
+    text-align: left;
+    font-size: 14px;
+    color: black;
+}

@@ -1,0 +1,131 @@
+
+    <div class="p-4 doNotPrint ">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="row">
+                    <div class="col-md-3">
+                        <small>Start Date</small>
+                      
+                        <input type="datetime-local" class="form-control form-control-sm form-control-inline" placeholder="start Date" [(ngModel)]="startDate">
+                    </div>
+                    <div class="col-md-3">
+                        <small>End Date</small>
+                       
+                        <input type="datetime-local" class="form-control form-control-sm form-control-inline" placeholder="End Date" [(ngModel)]="endDate">
+                    </div>
+                    <div class="col-md-2">
+                        <small>Employee Name</small>
+                        <ng-select [(ngModel)]="userId">
+                            <ng-option *ngFor="let obj of user" [value]="obj.user_Id">
+                                {{ obj.full_Name }}</ng-option>
+                        </ng-select>
+                    </div>
+                    <div class="col-md-2">
+                        <button class="btn btn-sm btn-success mt-4" (click)="getReport()">Get Report</button>
+                    </div>
+                    <div class="col-md-1">
+                        <button class="btn btn-sm btn-secondary mt-4" (click)="resetData()">Reset</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="card m-3">
+    
+        <table class="table table-theme m-0">
+            <tr>
+                <td width="50%">
+                    <table width="100%">
+                        <tr>
+                            <th style="text-align: left; width:40%">Account Head</th>
+                            <th style="text-align: center; width:20%">
+                                Type
+                            </th>
+                            <th style="text-align: center; width:20%">
+                                Date
+                            </th>
+                            <th style="text-align: right; width:20%">
+                                AMOUNT
+                            </th>
+                        </tr>
+                        <tr *ngFor="let debit of debitAmount">
+                            <td style="text-align: left; width:40%">{{debit?.account_Head}}<br>
+                                <small>{{debit?.fullName}}</small></td>
+                            <td style="text-align: center; width:20%">
+                                {{debit?.type}}
+                            </td>
+                            <td style="text-align: center; width:30%">
+                                {{debit?.date | date:'d MMM, y'}}
+                            </td>
+                            <td style="text-align: right; width:30%">
+                                {{debit?.total | currency:'INR'}}
+                            </td>
+                        </tr>
+
+                    </table>
+                </td>
+                <td width="50%">
+                    <table width="100%">
+                        <tr>
+                            <th style="text-align: left; width:40%">Account Head</th>
+                            <th style="text-align: center; width:20%">
+                                Type
+                            </th>
+                            <th style="text-align: center; width:20%">
+                                Date
+                            </th>
+                            <th style="text-align: right; width:20%">
+                                AMOUNT
+                            </th>
+                        </tr>
+                        <tr *ngFor="let credit of creditAmount">
+                            <td style="text-align: left; width:40%">{{credit?.account_Head}} <span *ngIf="!credit?.account_Head">Cash/Account</span><br>
+                                <small>{{credit?.fullName}}</small></td>
+                            <td style="text-align: center; width:20%">
+                                {{credit?.type}}
+                            </td>
+                            <td style="text-align: center; width:30%">
+                                {{credit?.date | date:'d MMM, y'}}
+                            </td>
+                            <td style="text-align: right; width:30%">
+                                {{credit?.total | currency:'INR'}}
+                            </td>
+                        </tr>
+                    </table>
+                </td>
+            </tr>
+            <tr>
+                <td width="50%">
+                    <table width="100%">
+                        <tr style="border-top: 1px solid #ddd;">
+                            <td colspan="2" style="text-align: left;">
+                                SUB TOTAL
+                            </td>
+                            <td style="text-align: right;"><b>{{totalDebitedAmount  | currency:'INR'}}</b></td>
+                        </tr>
+                    </table>
+                </td>
+                <td>
+                    <table width="100%">
+                        <tr style="border-top: 1px solid #ddd;">
+                            <td colspan="2" style="text-align: left;">
+                                SUB TOTAL
+                            </td>
+                            <td style="text-align: right;"><b>{{totalCreditedAmount  | currency:'INR'}}</b></td>
+                        </tr>
+                    </table>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2" style="text-align: right;"><b>BALANCE:
+                        {{totalDebitedAmount - totalCreditedAmount  | currency:'INR'}}</b></td>
+            </tr>
+        </table>
+        <div class="p-2  text-muted" *ngIf="!employee">
+            <h6>Nothing found!</h6>
+        </div>
+        <div class="p-2 doNotPrint d-none text-muted" *ngIf="employee">
+            <button style="margin: 0 auto; display: block;" (click)="onPrint()">Print</button>
+        </div>
+    
+</div>

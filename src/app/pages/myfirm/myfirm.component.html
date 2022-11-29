@@ -1,0 +1,121 @@
+<div class="card m-3">
+        <div class="px-2">
+            <div class="d-flex nav-active-border nav-active-text-primary b-primary">
+                <ul class="nav">
+                    <li class="nav-item  ">
+                        <a class="nav-link py-3 active" href="#" data-toggle="tab" data-target="#tab_1">Firm Info
+                        </a>
+                    </li>
+                    <!-- <li class="nav-item">
+                        <a class="nav-link py-3" href="#" data-toggle="tab" data-target="#tab_2">Bank Info
+                        </a>
+
+                    </li> -->
+                    <!-- <li class="nav-item">
+                        <a class="nav-link py-3" href="#" data-toggle="tab" data-target="#tab_3">Patners
+                        </a>
+                    </li> -->
+                    <!-- <li class="nav-item">
+                        <a class="nav-link py-3" href="#" data-toggle="tab" data-target="#tab_4">Attachments
+                        </a>
+                    </li> -->
+
+                </ul>
+            </div>
+        </div>
+
+
+
+
+        <div class="tab-content" id="myTabContent">
+            <div class="tab-pane show active" id="tab_1">
+                <form class="kt-form kt-form--label-right" [formGroup]="clientForm">
+                    <div class="modal-body p-xl">
+                        <div class="kt-portlet__body" style="padding-left: 40px; padding-right: 40px;">
+                            <div class="row mb-2">
+                                <div class="col-3">
+                                    <label class="col-form-label">Name</label>
+                                    <input type="text" class="form-control" formControlName="name">
+                                </div>
+                                <div class="col-3">
+                                    <label class="col-form-label">Pan</label>
+                                    <input type="text" class="form-control" formControlName="pan">
+                                </div>
+
+                                <div class="col-3">
+                                    <label class="col-form-label">DOI</label>
+                                    <input type="text" class="form-control" formControlName="doi">
+
+                                
+                                </div>
+                                <div class="col-3">
+                                    <label class="col-form-label">Mobile</label>
+                                    <input type="text" class="form-control" formControlName="mobile">
+                                </div>
+                            </div>
+                            <div class="row mb-2">
+                                <div class="col-3">
+                                    <label class="col-form-label">city</label>
+                                    <input type="text" class="form-control" formControlName="city">
+                                </div>
+
+                                <div class="col-3">
+                                    <label class="col-form-label">State </label>
+                                    <input type="text" class="form-control" formControlName="state">
+                                </div>
+                                <div class="col-3">
+                                    <label class="col-form-label">Country</label>
+                                    <input type="text" class="form-control" formControlName="country">
+                                </div>
+                                <div class="col-3">
+                                    <label class="col-form-label">Pin Code</label>
+                                    <input type="text" class="form-control" formControlName="pin_Code">
+                                </div>
+                            </div>
+                            <div class="row mb-2">
+                                <div class="col-3">
+                                    <label class="col-form-label">Website </label>
+                                    <input type="text" class="form-control" formControlName="website">
+                                </div>
+                                <div class="col-3">
+                                    <label class="col-form-label">Fb</label>
+                                    <input type="text" class="form-control" formControlName="fb">
+                                </div>
+                                <div class="col-3">
+                                    <label class="col-form-label">Twitter</label>
+                                    <input type="text" class="form-control" formControlName="twitter">
+                                </div>
+
+                                <div class="col-3">
+                                    <label class="col-form-label">Email</label>
+                                    <input type="text" class="form-control" formControlName="email">
+                                </div>
+                            </div>
+                            <div class="row mb-2">
+                                <div class="col-6">
+                                    <label class="col-form-label">Address</label>
+                                    <textarea type="text" class="form-control" formControlName="address"></textarea>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <!-- <button type="reset" class="btn btn-white" (click)="cancel()">
+                            Cancel
+                        </button> -->
+                        <input type="submit" (click)="updateFirm()" class="btn btn-success" value="Save" />
+                    </div>
+                </form>
+            </div>
+            <div class="tab-pane fade" id="tab_2">
+                <app-bank></app-bank>
+            </div>
+            <div class="tab-pane fade" id="tab_3">
+                <app-patner></app-patner>
+            </div>
+            <div class="tab-pane fade" id="tab_4">
+                <app-global-attachment entityType="Company" [entityId]="1"></app-global-attachment>
+            </div>
+        </div>
+    
+</div>

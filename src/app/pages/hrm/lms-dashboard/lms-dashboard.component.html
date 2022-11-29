@@ -1,0 +1,663 @@
+<!-- // new dashbaord  -->
+
+<div class=" m-3">
+  <div class="content-wrapper">
+    <div class="row">
+      <div class="col-sm-12 col-md-6">
+
+        <div class=" d-flex ">
+
+          <h4 class="text-md mb-0" style="font-size: 23px;">Dashboard</h4>
+
+
+
+        </div>
+
+      </div>
+      <div  class="col-sm-12 col-md-6" *ngIf="IsEmployee()">
+        <div  class="float-md-right mb-3 mb-sm-3 mb-md-0">
+          <div  class="d-flex">
+            <button  class="btn btn-outline-primary ml-3" (click)="Openmodel()">
+         Apply Leave
+            </button>
+          </div>
+        </div>
+      </div>
+
+    </div>
+    <br>
+    <!-- admin dashbaord -->
+    <div class="row" *ngIf="IsSuperAdmin()">
+      <div class="col-12 col-lg-8 mb-4 mb-lg-0">
+        <div class="card card-with-shadow border-0 py-primary mb-primary">
+
+          <div class="card-body p-0">
+            <div class="d-flex justify-content-between pl-primary mb-5 mt-4">
+              <div>
+                <h1 class="margin-bottom-8">Hi, John Doe</h1>
+                <h5>
+                  Good evening! </h5>
+              </div>
+              <!-- <div><span
+                  class="badge radius-right-0 radius-left-4 text-size-14 text-white padding-x-14 padding-y-9 badge-danger">
+                  Late
+                </span></div> -->
+            </div>
+
+          </div>
+        </div>
+        <div class="position-relative">
+
+          <div class="row">
+            <div class="col-12 col-md-6">
+              <div class="card card-with-shadow border-0 mb-primary">
+                <div class="card-body d-flex align-items-center justify-content-between">
+                  <div>
+                    <h2 class="mb-0">14</h2>
+                    <h5 class="text-muted text-size-14 mb-0">Total employees</h5>
+                  </div>
+                 
+                </div>
+              </div>
+            </div>
+            <div class="col-12 col-md-6">
+              <div class="card card-with-shadow border-0 mb-primary">
+                <div class="card-body d-flex align-items-center justify-content-between">
+                  <div>
+                    <h2 class="mb-0">6</h2>
+                    <h5 class="text-muted text-size-14 mb-0">Total departments</h5>
+                  </div>
+              
+                </div>
+              </div>
+            </div>
+            <div class="col-12 col-md-6 mb-4 mb-md-0">
+              <div class="card card-with-shadow border-0">
+                <div class="card-body d-flex align-items-center justify-content-between">
+                  <div>
+                    <h2 class="mb-0">0</h2>
+                    <h5 class="text-muted text-size-14 mb-0">Total leave requests</h5>
+                  </div>
+                
+                </div>
+              </div>
+            </div>
+            <div class="col-12 col-md-6">
+              <div class="card card-with-shadow border-0">
+                <div class="card-body d-flex align-items-center justify-content-between">
+                  <div>
+                    <h2 class="mb-0">0</h2>
+                    <h5 class="text-muted text-size-14 mb-0">On leave today</h5>
+                  </div>
+                
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div data-v-0fc13126="" class="col-12 col-lg-4">
+        <div data-v-670eb1ce="" data-v-0fc13126="" class="card card-with-shadow border-0 h-100">
+          <div data-v-670eb1ce="" class="card-header bg-transparent p-3">
+            <h4 data-v-670eb1ce="" class="card-title text-capitalize mb-0">Who is off Today</h4>
+          </div>
+          <div class="card">
+
+
+            <table mat-table [dataSource]="dataSource2" matSort>
+              <ng-container matColumnDef="fullName">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header>Name</th>
+                <td mat-cell *matCellDef="let row">{{ row.fullName }}</td>
+              </ng-container>
+
+              <ng-container matColumnDef="tillDate">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header>Till Date</th>
+                <td mat-cell *matCellDef="let row">{{ row.tillDate }}</td>
+              </ng-container>
+
+              <tr mat-header-row *matHeaderRowDef="displayedColumns2"></tr>
+              <tr mat-row *matRowDef="let row; columns: displayedColumns2"></tr>
+            </table>
+          </div>
+        </div>
+      </div>
+      <div class="col-12 mb-4 mb-lg-0">
+        <div class="card card-with-shadow border-0 h-100 min-height-350 mt-primary" style="top:30px;">
+          <div class="card-header bg-transparent p-primary d-flex justify-content-between align-items-center">
+            <h4 class="card-title text-capitalize mb-0">Announcements</h4>
+          </div>
+          <div class="card-body d-flex flex-column p-0">
+            <div>
+
+              <div class="datatable">
+
+                <div class="table-responsive custom-scrollbar table-view-responsive py-primary">
+                  <table class="table mb-0">
+                    <thead>
+                      <tr>
+
+                        <th track-by="0" class="datatable-th pt-0"><span class="font-size-default"><span>
+                              Title
+                            </span></span></th>
+                        <th track-by="1" class="datatable-th pt-0"><span class="font-size-default"><span>
+                              Start date
+                            </span></span></th>
+                        <th track-by="2" class="datatable-th pt-0"><span class="font-size-default"><span>
+                              End date
+                            </span></span></th>
+                        <th track-by="3" class="datatable-th pt-0"><span class="font-size-default"><span>
+                              Description
+                            </span></span></th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+
+                        <td data-title="Title" class="datatable-td"><span class="">
+                            hfdghfghfgh
+                          </span></td>
+                        <td data-title="Start date" class="datatable-td"><span>08 Nov, 22</span></td>
+                        <td data-title="End date" class="datatable-td"><span>10 Nov, 22</span></td>
+                        <td data-title="Description" class="datatable-td"><span class="">
+                            <div data-v-d2a86e6e="" index="3"><button data-v-1ccf87a4="" data-v-d2a86e6e=""
+                                class="btn btn-primary">
+                                View details
+                              </button>
+
+                            </div>
+                          </span></td>
+                      </tr>
+
+                    </tbody>
+                  </table>
+
+                </div>
+                <div class="p-primary">
+                  <div>
+                    <div class="d-flex flex-column flex-md-row justify-content-between">
+
+                      <nav style="display: none;">
+                        <ul class="pagination justify-content-center justify-content-md-end mb-0">
+                          <li class="page-item disabled"><a href="#" aria-label="Previous"
+                              class="page-link border-0"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                                viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                                stroke-linecap="round" stroke-linejoin="round" class="feather feather-arrow-left">
+                                <line x1="19" y1="12" x2="5" y2="12"></line>
+                                <polyline points="12 19 5 12 12 5"></polyline>
+                              </svg></a></li>
+                          <li class="page-item"><a href="#" class="page-link border-0 active disabled">1</a></li>
+                          <li class="page-item disabled"><a href="#" aria-label="Next"
+                              class="page-link border-0 align-content-center"><svg xmlns="http://www.w3.org/2000/svg"
+                                width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                                class="feather feather-arrow-right menu-arrow">
+                                <line x1="5" y1="12" x2="19" y2="12"></line>
+                                <polyline points="12 5 19 12 12 19"></polyline>
+                              </svg></a></li>
+                        </ul>
+                      </nav>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- Employee dashbaord -->
+    <div *ngIf="IsEmployee()">
+
+  <!-- <div class="row m-3 justify-content-between">
+  
+    <div class="col-md-4 card" *ngIf="IsEmployee()">
+      <div>
+        <div class="row justify-content-between mt-3">
+          <div class="col-md-6">
+            <h4 class="card-title fw-bolder">Book time off</h4>
+          </div>
+          <div class="col-md-6 text-right">
+            <span><i class="fas fa-user-alt" style="color: green"></i></span>
+          </div>
+        </div>
+  
+        <form [formGroup]="timeoffForm">
+          <div class="mb-4 form-floating">
+            <select class="form-control" formControlName="leave_Type" id="floatingSelect"
+              aria-label="Floating label select example">
+              <option value="">--Select--</option>
+              <option *ngFor="let obj of _LeaveType" value="{{ obj?.lookup_Value }}">
+                {{ obj?.lookup_Name }}
+              </option>
+            </select>
+            <label for="floatingTextarea">Leave type</label>
+          </div>
+  
+          <div class="mb-4 form-floating" *ngIf="this.roleid==0">
+            <select class="form-control" formControlName="status" id="floatingSelect"
+              aria-label="Floating label select example">
+              <option value="">--Select--</option>
+              <option *ngFor="let obj of _LeaveStatus" value="{{ obj?.lookup_Value }}">
+                {{ obj?.lookup_Name }}
+              </option>
+            </select>
+            <label for="floatingTextarea">Leave Status</label>
+          </div>
+  
+          <div class="form-floating mb-4">
+            <input type="date" (change)="calculateAdavance()" formControlName="from_Date" class="form-control"
+            />
+            <label for="floatingTextarea">From Date</label>
+          </div>
+  
+          <div class="form-floating mb-4">
+            <input type="date" (change)="calculateAdavance()" formControlName="to_Date" class="form-control"
+              id="floatingInput"     />
+            <label for="floatingTextarea">To Date</label>
+          </div>
+  
+          <div class="form-floating mb-4">
+            <input type="number" formControlName="amount" class="form-control" id="floatingInput" readonly />
+            <label for="floatingTextarea">Planned Leave</label>
+          </div>
+  
+          <div class="form-floating mb-4">
+            <textarea formControlName="remark" class="form-control" id="floatingInput" rows="4" cols="50">
+            </textarea>
+            <label for="floatingTextarea">Remark</label>
+          </div>
+        </form>
+  
+        <button class="btn btn-primary" style="width: 100%" (click)="addLeave()">
+          <i class="far fa-paper-plane"></i> &nbsp; Book time off
+        </button>
+      </div>
+    </div>
+  
+  
+    <div class="col-md-4 card" *ngIf="IsEmployee()">
+      <div class="row justify-content-between mt-3">
+        <div class="col-md-6">
+          <h4 class="card-title fw-bolder">Allowed Leave</h4>
+        </div>
+        <div class="col-md-6 text-right">
+          <span><i class="fas fa-mug-hot" style="font-size: 20px"></i></span>
+        </div>
+      </div>
+      <table mat-table [dataSource]="dataSource" matSort>
+        <ng-container matColumnDef="leave_Type">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header class="test-center">
+            Leave Type
+          </th>
+          <td mat-cell *matCellDef="let row">{{ row.leave_Type }}</td>
+        </ng-container>
+  
+        <ng-container matColumnDef="amount">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header>Amount</th>
+          <td mat-cell *matCellDef="let row">{{ row.amount }}</td>
+        </ng-container>
+  
+        <ng-container matColumnDef="isPaid">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header>Is Paid</th>
+          <td mat-cell *matCellDef="let row">{{ row.isPaid }}</td>
+        </ng-container>
+  
+        <ng-container matColumnDef="remark">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header>Remark</th>
+          <td mat-cell *matCellDef="let row">{{ row.remark }}</td>
+        </ng-container>
+  
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+      </table>
+    </div>
+  
+  
+    <div class="col-md-3 card">
+      <div class="row justify-content-between mt-3">
+        <div class="col-md-6">
+          <h4 class="card-title fw-bolder">Leave Request</h4>
+        </div>
+        <div class="col-md-6 text-right">
+          <span><i class="fas fa-bed" style="color: orange; font-size: 20px"></i></span>
+        </div>
+      </div>
+  
+      <table mat-table [dataSource]="dataSource2" matSort>
+        <ng-container matColumnDef="fullName">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header>Name</th>
+          <td mat-cell *matCellDef="let row">{{ row.fullName }}</td>
+        </ng-container>
+  
+        <ng-container matColumnDef="tillDate">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header>Till Date</th>
+          <td mat-cell *matCellDef="let row">{{ row.tillDate }}</td>
+        </ng-container>
+  
+        <tr mat-header-row *matHeaderRowDef="displayedColumns2"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns2"></tr>
+      </table>
+    </div>
+  
+  
+  </div>   -->
+      <div >
+        <div  class="position-relative">
+          <!---->
+          <div class="position-relative">
+
+            <div class="row">
+              <div class=" col-md-3">
+                <div class="card card-with-shadow border-0 mb-primary">
+                  <div class="card-body d-flex align-items-center justify-content-between">
+                    <div>
+                      <h2 class="mb-0">33</h2>
+                      <h5 class="text-muted text-size-14 mb-0">Total leave allowance</h5>
+                    </div>
+                    <div>
+                      <div class="d-flex align-items-center mb-2">
+                        <div class="width-13 height-13 radius-2 bg-brand-color margin-right-5"></div>
+                        <p class="text-size-13 mb-0">AL- 16</p>
+                      </div>
+                      <div class="d-flex align-items-center">
+                        <div class="width-13 height-13 radius-2 bg-success margin-right-5"></div>
+                        <p class="text-size-13 mb-0">SL- 17</p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class=" col-md-3">
+                <div class="card card-with-shadow border-0 mb-primary">
+                  <div class="card-body d-flex align-items-center justify-content-between">
+                    <div>
+                      <h2 class="mb-0">2</h2>
+                      <h5 class="text-muted text-size-14 mb-0">Total leave taken</h5>
+                    </div>
+                    <div>
+                      <div class="d-flex align-items-center mb-2">
+                        <div class="width-13 height-13 radius-2 bg-brand-color margin-right-5"></div>
+                        <p class="text-size-13 mb-0">AL - 2</p>
+                      </div>
+                      <div class="d-flex align-items-center">
+                        <div class="width-13 height-13 radius-2 bg-success margin-right-5"></div>
+                        <p class="text-size-13 mb-0">SL - 0</p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class=" col-md-3 mb-4 mb-md-0">
+                <div class="card card-with-shadow border-0">
+                  <div class="card-body d-flex align-items-center justify-content-between">
+                    <div>
+                      <h2 class="mb-0">31</h2>
+                      <h5 class="text-muted text-size-14 mb-0">Total leave available</h5>
+                    </div>
+                    <div>
+                      <div class="d-flex align-items-center mb-2">
+                        <div class="width-13 height-13 radius-2 bg-brand-color margin-right-5"></div>
+                        <p class="text-size-13 mb-0">AL - 14</p>
+                      </div>
+                      <div class="d-flex align-items-center">
+                        <div class="width-13 height-13 radius-2 bg-success margin-right-5"></div>
+                        <p class="text-size-13 mb-0">SL - 17</p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class=" col-md-3">
+                <div class="card card-with-shadow border-0">
+                  <div class="card-body d-flex align-items-center justify-content-between">
+                    <div>
+                      <h2 class="mb-0">0</h2>
+                      <h5 class="text-muted text-size-14 mb-0">Leave request pending</h5>
+                    </div>
+                    <div>
+                      <div class="d-flex align-items-center mb-2">
+                        <div class="width-13 height-13 radius-2 bg-brand-color margin-right-5"></div>
+                        <p class="text-size-13 mb-0">Al - 0</p>
+                      </div>
+                      <div class="d-flex align-items-center">
+                        <div class="width-13 height-13 radius-2 bg-success margin-right-5"></div>
+                        <p class="text-size-13 mb-0">SL- 0</p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- <div  class="row mb-primary">
+            <div  class="col-sm-6 col-lg-3 mb-4 mb-lg-0">
+              <div >
+                <div class="card card-with-shadow dashboard-widgets dashboard-icon-widget p-primary border-0">
+                  <div class="icon-wrapper"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                      viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                      stroke-linejoin="round" class="feather feather-user">
+                      <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+                      <circle cx="12" cy="7" r="4"></circle>
+                    </svg></div>
+                  <div class="widget-data">
+                    <h3>14</h3>
+                    <p>Total employees</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-sm-6 col-lg-3 mb-4 mb-lg-0">
+              <div >
+                <div class="card card-with-shadow dashboard-widgets dashboard-icon-widget p-primary border-0">
+                  <div class="icon-wrapper"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                      viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                      stroke-linejoin="round" class="feather feather-home">
+                      <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
+                      <polyline points="9 22 9 12 15 12 15 22"></polyline>
+                    </svg></div>
+                  <div class="widget-data">
+                    <h3>6</h3>
+                    <p>Total departments</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div  class="col-sm-6 col-lg-3 mb-4 mb-sm-0">
+              <div >
+                <div class="card card-with-shadow dashboard-widgets dashboard-icon-widget p-primary border-0">
+                  <div class="icon-wrapper"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                      viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                      stroke-linejoin="round" class="feather feather-edit">
+                      <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"></path>
+                      <path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"></path>
+                    </svg></div>
+                  <div class="widget-data">
+                    <h3>3</h3>
+                    <p>Total leave requests</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div  class="col-sm-6 col-lg-3">
+              <div >
+                <div class="card card-with-shadow dashboard-widgets dashboard-icon-widget p-primary border-0">
+                  <div class="icon-wrapper"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                      viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                      stroke-linejoin="round" class="feather feather-user-x">
+                      <path d="M16 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
+                      <circle cx="8.5" cy="7" r="4"></circle>
+                      <line x1="18" y1="8" x2="23" y2="13"></line>
+                      <line x1="23" y1="8" x2="18" y2="13"></line>
+                    </svg></div>
+                  <div class="widget-data">
+                    <h3>0</h3>
+                    <p>On leave today</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div> -->
+        </div>
+        <div  class="row">
+          <div  class="col-12 col-sm-12 col-md-8 col-lg-8 col-xl-9 mb-4 mb-md-0">
+            <div class="card card-with-shadow border-0 h-100 min-height-350">
+              <div class="card-header bg-transparent p-primary d-flex justify-content-between align-items-center">
+                <h5 class="card-title text-capitalize mb-0">Employee statistics</h5>
+                <!-- <ul class="nav tab-filter-menu justify-content-flex-end">
+                  <li class="nav-item"><a href="#" class="nav-link py-0 active">
+                      By employment status
+                    </a></li>
+                  <li class="nav-item"><a href="#" class="nav-link py-0">
+                      By Designation
+                    </a></li>
+                  <li class="nav-item"><a href="#" class="nav-link py-0">
+                      By Department
+                    </a></li>
+                </ul> -->
+              </div>
+              <div class="card-body position-relative">
+                <div>
+                  <div class="Chart">
+                    <div class="">
+                      <div class="chartjs-size-monitor">
+                        <div class="chartjs-size-monitor-expand">
+                          <div class=""></div>
+                        </div>
+                        <div class="chartjs-size-monitor-shrink">
+                          <div class=""></div>
+                        </div>
+                      </div><canvas id="horizontal-line-chart" width="1114" height="380"
+                        style="display: block; width: 1114px; height: 380px;" class="chartjs-render-monitor"></canvas>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div  class="col-12 col-sm-12 col-md-4 col-lg-4 col-xl-3">
+            <div  class="card card-with-shadow border-0 h-100 min-height-350">
+              <div>
+                <div class="row justify-content-between mt-3">
+                  <div class="col-md-6">
+                    <h4 class="card-title fw-bolder" style="margin: 12px;">Who is off Today</h4>
+                  </div>
+                  <div class="col-md-6 text-right">
+                    <span><i class="fas fa-bed" style="color: orange; font-size: 20px"></i></span>
+                  </div>
+                </div>
+
+                <table mat-table [dataSource]="dataSource2" matSort>
+                  <ng-container matColumnDef="fullName">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header>Name</th>
+                    <td mat-cell *matCellDef="let row">{{ row.fullName }}</td>
+                  </ng-container>
+
+                  <ng-container matColumnDef="tillDate">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header>Till Date</th>
+                    <td mat-cell *matCellDef="let row">{{ row.tillDate }}</td>
+                  </ng-container>
+
+                  <tr mat-header-row *matHeaderRowDef="displayedColumns2"></tr>
+                  <tr mat-row *matRowDef="let row; columns: displayedColumns2"></tr>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- model -->
+<div id="m-model" class="modal" data-backdrop="true" style="display: block; background: #0000008c"*ngIf="ModalOpen" aria-hidden="true" >
+
+  <div class="modal-dialog modal-xl">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Apply Leave</h5>
+      </div>
+      <div class="modal-body text-left p-xl">
+       
+          <div>
+            <div class="row justify-content-between mt-3">
+              <div class="col-md-6">
+                <h4 class="card-title fw-bolder">Book time off</h4>
+              </div>
+              <div class="col-md-6 text-right">
+                <span><i class="fas fa-user-alt" style="color: green"></i></span>
+              </div>
+            </div>
+      
+            <form [formGroup]="timeoffForm">
+              <div class="mb-4 form-floating">
+                <select class="form-control" formControlName="leave_Type" id="floatingSelect"
+                  aria-label="Floating label select example">
+                  <option value="">--Select--</option>
+                  <option *ngFor="let obj of _LeaveType" value="{{ obj?.lookup_Value }}">
+                    {{ obj?.lookup_Name }}
+                  </option>
+                </select>
+                <label for="floatingTextarea">Leave type</label>
+              </div>
+      
+              <div class="mb-4 form-floating" *ngIf="this.roleid==0">
+                <select class="form-control" formControlName="status" id="floatingSelect"
+                  aria-label="Floating label select example">
+                  <option value="">--Select--</option>
+                  <option *ngFor="let obj of _LeaveStatus" value="{{ obj?.lookup_Value }}">
+                    {{ obj?.lookup_Name }}
+                  </option>
+                </select>
+                <label for="floatingTextarea">Leave Status</label>
+              </div>
+      
+              <div class="form-floating mb-4">
+                <input type="date" (change)="calculateAdavance()" formControlName="from_Date" class="form-control"
+                />
+                <label for="floatingTextarea">From Date</label>
+              </div>
+      
+              <div class="form-floating mb-4">
+                <input type="date" (change)="calculateAdavance()" formControlName="to_Date" class="form-control"
+                  id="floatingInput"     />
+                <label for="floatingTextarea">To Date</label>
+              </div>
+      
+              <div class="form-floating mb-4">
+                <input type="number" formControlName="amount" class="form-control" id="floatingInput" readonly />
+                <label for="floatingTextarea">Planned Leave</label>
+              </div>
+      
+              <div class="form-floating mb-4">
+                <textarea formControlName="remark" class="form-control" id="floatingInput" rows="4" cols="50">
+                </textarea>
+                <label for="floatingTextarea">Remark</label>
+              </div>
+            </form>
+      
+            <!-- <button class="btn btn-primary" style="width: 100%" (click)="addLeave()">
+              <i class="far fa-paper-plane"></i> &nbsp; Book time off
+            </button> -->
+            <div class="modal-footer">
+              <button
+                type="button"
+                class="btn btn-secondary"
+                data-dismiss="modal"
+                (click)="cancel()">
+                Cancel
+              </button>
+              <button
+                type="button"
+                class="btn btn-primary"
+                (click)="addLeave()">
+              <i class="far fa-paper-plane"></i> &nbsp; Book time off
+              </button>
+            </div>
+          </div>
+       
+  
+      </div>
+    </div>
+  </div>
+  </div>

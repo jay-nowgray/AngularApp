@@ -1,0 +1,46 @@
+table {
+    width: 100%;
+  }
+ 
+  @media (min-width: 768px){
+    .col-sm-offset-2 {
+        margin-left: 50.666667%;
+    }}
+    .footer{
+        color: #e43d3d;
+        padding-left: 13%;
+        padding-bottom: 30px;
+    }
+    .modal-dialog {
+        
+        background-color: white;
+    }
+    .table td {
+        padding: 0.75rem;
+        vertical-align:middle;
+        border-top: 1px solid rgba(135, 150, 165, 0.1);
+    }
+    .mat-sort-header-container {
+        display: flex;
+        cursor: pointer;
+        align-items: center;
+        margin-top: -30px;
+    }
+   
+    
+    .table th, .table td {
+        padding: 5px;
+        vertical-align: middle;
+        // line-height: 40px;
+    }
+    #th1[_ngcontent-yel-c15] {
+        color: black;
+       
+    }
+    th.mat-header-cell {
+        text-align: left;
+        font-size: 14px;
+        color: black;
+    }
+    
+ 

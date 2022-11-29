@@ -1,0 +1,62 @@
+<div class="p-3 doNotPrint b-b">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="row">
+                <div class="col-md-3">
+                
+                    <small class="text-muted">Type</small>
+                    <div class="my-2">
+                        <ng-select [(ngModel)]='type'>
+                            <ng-option *ngFor="let obj of salarytype" [value]="obj.lookup_Value">
+                                {{obj?.lookup_Name}}
+                            </ng-option>
+                        </ng-select>
+                </div>
+            </div>
+                <div class="col-md-3">
+                        <small class="text-muted">WorkingFor</small>
+                        <div class="my-2">
+                            <ng-select [(ngModel)]='workingForCompany'>
+                                <ng-option *ngFor="let obj of workingFor" [value]="obj?.lookup_Value">
+                                    {{obj?.lookup_Name}}
+                                </ng-option>
+                            </ng-select>
+                    </div>
+                </div>
+                <div class="col-md-2">
+                    <button class="btn btn-sm btn-success mt-4" (click)="getReport()">Get Report</button>
+                </div>
+                <div class="col-md-1">
+                    <button class="btn btn-sm btn-secondary mt-4" (click)="resetData()">Reset</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="card m-3">
+    <div class="print-css">
+        <div class="mat-elevation-z888">
+            <table class="table" mat-table matSort [dataSource]="dataSource">
+                <ng-container matColumnDef="first_Name">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header>Name</th>
+                    <td mat-cell *matCellDef="let element">{{element.first_Name}} {{element.last_Name}}</td>
+                    <td mat-footer-cell *matFooterCellDef>Total: </td>
+                </ng-container>
+                <ng-container matColumnDef="total">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header>Total </th>
+                    <td mat-cell *matCellDef="let element">{{element.total | currency:'INR'}}</td>
+                    <td mat-footer-cell *matFooterCellDef><b>{{totalHoldings | currency:'INR'}}</b></td>
+                </ng-container>
+               
+                <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                <tr mat-footer-row *matFooterRowDef="columnsToDisplay"></tr>
+                <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+            </table>
+            <mat-paginator class="doNotPrint" showFirstLastButtons [pageSizeOptions]="[50,100,150]"></mat-paginator>
+        </div>
+        <div class="p-2">
+            <button style="margin: 0 auto; display: block; cursor: pointer;" (click)="onPrint()">Print</button>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,138 @@
+<div class="p-2 doNotPrint b-b">
+
+    <div class="toolbar">
+        <button class="btn btn-sm btn-primary" (click)="addUser()" style="margin-bottom: 27px;" data-target="#m-model"
+            title="" id="btn-trash" data-original-title="Trash">Add Project
+        </button>
+        <!-- <i class="i-con i-con-plus text-muted"></i> -->
+        <div class="col-sm-6 align-right">
+            <input class="form-control col-6" style="position: absolute; right: -420px; top: -12px;"
+                placeholder="Filter Data" type="text" (keyup)="applyFilter($event.target.value)">
+        </div>
+    </div>
+</div>
+<div class="card m-3">
+    <div class="mat-elevation-z888">
+        <table class="table" mat-table matSort [dataSource]="dataSource">
+            <ng-container matColumnDef="project_Name">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header>Project Name</th>
+                <td mat-cell *matCellDef="let element"> {{element.project_Name}}</td>
+            </ng-container>
+            <ng-container matColumnDef="client_Name">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header>Client Name</th>
+                <td mat-cell *matCellDef="let element"> {{element.client_Name}}</td>
+            </ng-container>
+            <ng-container matColumnDef="Status">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header>Status</th>
+                <td mat-cell *matCellDef="let element">{{element.status}}</td>
+            </ng-container>
+
+            <ng-container matColumnDef="start_Date">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header>Start Date</th>
+                <td mat-cell *matCellDef="let element"> {{element.start_Date | date:'MMM d, y, h:mm a'}}</td>
+            </ng-container>
+            <ng-container matColumnDef="end_Date">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header>End Date</th>
+                <td mat-cell *matCellDef="let element"> {{element.end_Date | date:'MMM d, y, h:mm a'}}</td>
+            </ng-container>
+
+            <ng-container matColumnDef="action">
+                <th mat-header-cell *matHeaderCellDef> Action</th>
+                <td mat-cell *matCellDef="let element">
+                    <span class="action-mat-btn">
+                        <button class="btn btn-success btn-icon btn-sm " (click)="editUser(element.project_Id)"
+                            rel="tooltip" type="button" data-original-title="" title=""><i
+                                class="i-con i-con-Edit"></i></button>
+                        &nbsp;
+
+                    </span>
+                </td>
+            </ng-container>
+            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+            <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+        </table>
+        <mat-paginator [pageSizeOptions]="[30, 50, 100]" showFirstLastButtons></mat-paginator>
+    </div>
+
+</div>
+
+
+
+<div id="m-model" class="modal" data-backdrop="true" style="display: block; background: #0000008c;" *ngIf="ModalOpen"
+    aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Add Project</h5>
+            </div>
+            <div class="modal-body p-xl">
+                <form class="kt-form kt-form--label-right" [formGroup]="projectForm">
+                    <div class="kt-portlet__body" style="padding-left: 40px; padding-right: 40px;">
+                        <div class="form-group row">
+
+                            <div class="col-6">
+                                <small class="col-form-label">Project Name <span class="text-danger">*</span> </small>
+                                <input class="form-control" type="project_Name" value="" formControlName='project_Name'
+                                    required="required"
+                                    [ngClass]="{ 'is-invalid': submitted && f.project_Name.errors }" />
+                                <div *ngIf="submitted && f.project_Name.errors" class="invalid-feedback">
+                                    <div *ngIf="f.project_Name.errors.required">
+                                        project is required.
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- <div class="col-6">
+                                <small class="col-form-label">Client <span class="text-danger">*</span> </small>
+                                <select class="form-control" formControlName='client_Id'
+                                required="required"
+                                [ngClass]="{ 'is-invalid': submitted && f.client_Id.errors }" >
+                               
+                                    <option *ngFor="let obj of clientList" value="{{obj.client_Id}}">
+                                        {{obj?.name}}
+                                    </option>
+                                </select>
+                                <div *ngIf="submitted && f.client_Id.errors" class="invalid-feedback">
+                                    <div *ngIf="f.client_Id.errors.required">
+                                      client Name is required.
+                                    </div>
+                                  </div>
+                            </div> -->
+
+
+                        </div>
+                        <div class="form-group row">
+                            <div class="col-6">
+                                <label class="col-form-label">Start Date</label>
+                                <input class="form-control" type="datetime-local" formControlName='start_Date'>
+                            </div>
+                            <div class="col-6">
+                                <label class="col-form-label">End Date</label>
+                                <input class="form-control" type="datetime-local" formControlName='end_Date'>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <div class="col-6">
+                                <small class="col-form-label">Status</small>
+                                <ng-select formControlName='status'>
+                                    <ng-option *ngFor="let status of projectStatus" value="{{status.lookup_Value}}">
+                                        {{status.lookup_Name}}
+                                    </ng-option>
+                                </ng-select>
+                            </div>
+
+                        </div>
+
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)="cancel()">
+                            Cancel
+                        </button>
+                        <button type="button" class="btn btn-success" data-dismiss="modal" (click)="saveEmployee()">
+                            Save
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

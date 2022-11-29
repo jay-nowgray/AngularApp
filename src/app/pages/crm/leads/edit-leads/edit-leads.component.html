@@ -1,0 +1,169 @@
+
+    <div class=" p-3" *ngIf="ForAdmin">
+        <div class="toolbar" style="float: left;margin-right: 12px;"><a [routerLink]="['/crm/leads']" title="Back to List"
+                class="btn btn-sm btn-white i-con-h-a" data-pjax-state=""><i
+                    class="i-con i-con-arrow-left text-muted"><i></i></i>
+            </a> </div>
+    </div>
+    <div class=" p-3" *ngIf="ForUser">
+        <div class="toolbar" style="float: left;margin-right: 12px;"><a [routerLink]="['/bentex/leads']" title="Back to List"
+                class="btn btn-sm btn-white i-con-h-a" data-pjax-state=""><i
+                    class="i-con i-con-arrow-left text-muted"><i></i></i>
+            </a> </div>
+    </div>
+    <div class="card m-3">
+    <div class="row">
+      <div class="col-sm-12 col-lg-12">
+               <div class="px-4 py-4">
+                <form novalidate="" autocomplete="bandhaibhai" [formGroup]="EditForm">
+                       <div class="row mb-2">
+                         <div class="col-12">
+                          
+                         </div>
+                       </div>
+                       <div class="row mb-2">
+                         <div class="col-6">
+                           <small>Name<span class="text-danger">*</span></small>
+                           <div class="my-2">
+                            <input type="text" class="form-control"
+                            formControlName="name" required="required"
+                            [ngClass]="{ 'is-invalid': submitted && f.name.errors }" />
+                        <div *ngIf="submitted && f.name.errors" class="invalid-feedback">
+                            <div *ngIf="f.name.errors.required">
+                                Name is required.
+                            </div>
+                        </div>
+                        <input type="hidden" formControlName="opportunities_Id" value="0">
+                    </div>
+
+                         </div>
+                         <div class="col-6">
+                           <small>Mobile<span class="text-danger">*</span></small>
+                           <div class="my-2">
+                            <input type="mobile" class="form-control"
+                            formControlName="mobile" minlength=10 maxlength=10 required="required"
+                            [ngClass]="{ 'is-invalid': submitted && f.mobile.errors }" />
+                        <div *ngIf="submitted && f.mobile.errors" class="invalid-feedback">
+                            <div *ngIf="f.mobile.errors.required">
+                                Mobile is required.
+                            </div>
+                        </div>
+
+
+                    </div>
+                         </div>
+                         <div class="col-6">
+                           <small>Source<span class="text-danger">*</span></small>
+                           <div class="my-2">
+                            <input type="text" class="form-control" formControlName="source"
+                            required="required"
+                            [ngClass]="{ 'is-invalid': submitted && f.source.errors }" />
+                        <div *ngIf="submitted && f.source.errors" class="invalid-feedback">
+                            <div *ngIf="f.source.errors.required">
+                                Source is required.
+                            </div>
+                        </div>
+
+                    </div>
+                         </div>
+                         <div class="col-6">
+                           <small>Email</small>
+                           <input type="text" class="form-control" formControlName="email"
+                                                [ngClass]="{ 'is-invalid': submitted && f.email.errors }">
+                         </div>
+                         <div class="col-6">
+                           <small>Remarks</small>
+                           <div class="my-2">
+                            <input type="text" class="form-control" formControlName="remarks">
+                           </div>
+                         </div>
+   
+   
+                         <div class="col-6">
+                           <small>queryFor</small>
+                           <div class="my-1">
+                            <input type="text" class="form-control" formControlName="queryFor">
+
+                           </div>
+                         </div>
+                         <div class="col-6">
+                            <small>status</small>
+                            <ng-select formControlName="status">
+                                <ng-option value="Not Contacted">Not Contacted</ng-option>
+                                <ng-option value="Contacted">Contacted</ng-option>
+                                <ng-option value="Attempted To Call">Attempted to Call</ng-option>
+                                <ng-option value="Contact In Future">Contact in Future</ng-option>
+                                <ng-option value="Lost Lead">Lost Lead</ng-option>
+                                <ng-option value="Pre Qualified">Pre-Qualified</ng-option>
+                            </ng-select>
+
+                        </div>
+                        <div class="col-6">
+                            <small>LastCall</small>
+                            <input type="datetime-local" formControlName="lastCall"
+                                                class="form-control">
+                                            </div>
+                        <div class="col-6">
+                            <div class="my-1">
+                            <small>Reminder Date</small>
+                            <input type="datetime-local" formControlName="reminderDate"
+                            class="form-control">
+</div>
+                    </div>
+                    <div class="col-6">
+                        <div class="my-1">
+                        <small>Opportunity Type</small>
+                        <ng-select formControlName="opportunity_Type">
+                            <ng-option value="Internship">Internship</ng-option>
+                            <ng-option value="JobApplicants">JobApplicants</ng-option>
+                            <ng-option value="Client">Client</ng-option>
+                            <ng-option value="Event">Event</ng-option>
+                            <ng-option value="Seminar">Seminar</ng-option>
+
+                            <ng-option value="Other">Other</ng-option>
+
+                        </ng-select>
+
+</div>
+                    </div>
+                    
+                    <div class="col-12">
+                        <div class="my-1">
+                        <small>Comment</small>
+                        <textarea class="form-control" formControlName="comment"></textarea><br>
+                    </div>
+                    </div>
+                    <div class="footer" style="width: 100%; margin-top: 12px;">
+                        <button type="submit" style="float: right; margin-left: 24px;
+                        margin-right: 15px;" (click)="SaveForm()"
+                            class="btn btn-success ">Submit
+                        </button>
+                       &nbsp;
+                        <button type="submit"  style="float: right;" (click)="SaveRedirectForm()"
+                            class="btn btn-success ">
+                       Save and New
+                        </button>
+
+                    </div>
+                       </div>
+                       <b style="text-decoration: underline;"> Comments</b>
+                       <br>
+                       <div  *ngFor="let obj of comments" class="form-group row">
+                        <div   class="col-12" *ngIf="obj.comment"style="max-height: 50px;">
+                            <div>
+                                <div style="min-height: 10px;"><span
+                                        class="cmt-by">{{obj.comment_By_Name}}</span><span
+                                        class="cmt-time">{{obj.dts | date:'medium'}}</span></div>
+                                <p class="cmt-text" > {{obj.comment}}</p>
+                               </div>
+                            <br>
+                        </div>
+                    </div>
+                     </form>
+                   </div>
+            
+               
+             </div>
+           </div>
+  
+   </div>

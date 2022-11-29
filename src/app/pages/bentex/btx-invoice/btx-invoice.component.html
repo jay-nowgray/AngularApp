@@ -1,0 +1,800 @@
+<div class="page" style="width:8.27in; height: 11.30in; margin: 0 auto;">
+    <div class="subpage"  style="position:relative; width:8.27in; height: 11.30in; margin: 0 auto;">
+      
+
+        <div style="overflow:hidden;position:absolute;left: 0px;">
+            <img style="width:100%" src="../../../../assets/hedder-letterhead.png" />
+        </div>
+        <br>
+        <br>
+        <br>
+        <table style="width: 100%; border-collapse:collapse; margin-top: 25px;">
+            <tbody>
+                <!-- <tr>
+                            <td style="width:60%" class="aln-lt">
+                                <div class="company-logo-section">
+                                    <img style="transform: translate(13px, 65px);" alt="CompanyLogo"
+                                        src="https://nowgray.com/wp-content/uploads/2018/09/nowgray1-1.png" />
+                                </div>
+                            </td>
+                            <td class="aln-lt">
+                                <div class="businfobox" style="    margin-top: 20px;">
+                                    <div>
+
+                                        <b><span> @Model.CompanyInfo.Name</span></b>
+
+                                    </div>
+
+                                    <span> Address_Line1 &nbsp;
+                                        Address_Line2</span> <br />
+                                    <span> City &nbsp; State</span> <br />
+                                    <span> Pincode &nbsp; Country </span><br />
+                                    <span>
+                                        Contact_No1@*Contact_No2*@
+                                    </span>
+
+                                </div>
+                            </td>
+                        </tr> -->
+                <b><span>To:</span></b><br />
+                <tr style="background-color:#4c4c4c; height: 115px;">
+                    <td style="width:60%" class="aln-lt">
+                        <div class="businfobox recipientInfo" id="recipientEmailAddr">
+                            <b><span>Bentex Group Corporation</span></b> <br />
+                            <span>34 West 33rd Street &nbsp;
+                            </span> <br />
+                            <span>New York ,</span> <span>NY 10001</span>, <span>USA</span>
+                            <!-- <span>New York ,</span> <span>NY 10001</span>,  <span>USA</span> <br /> -->
+
+
+                        </div>
+                    </td>
+                    <td class="aln-lt">
+                        <table style="width:100%">
+                            <tr>
+                                <td class="aln-rt"><strong> Invoice #{{unBilledReport?.invoiceNumber}} <br> Invoice Date:
+                                        {{endDate}}</strong><br />
+                                    <h1>${{sum() | number : '0.2'}} &nbsp;
+                                    </h1> <br />
+                                </td>
+                                <!-- <td class="aln-lt"><strong> Invoice_No</strong></td> -->
+                            </tr>
+                            <!-- <tr>
+                                        <td class="aln-rt"><strong> Date :</strong></td>
+                                        <td class="aln-lt"><strong>{{endDate}}</strong></td>
+                                    <tr>
+                                        <td class="aln-rt"><strong> Amount due : </strong></td>
+                                        <td class="aln-lt">
+
+                                            <strong><span>${{unBilledReport?.toBeBilled}}</span></strong>
+
+                                        </td>
+                                    </tr> -->
+                        </table>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+
+
+        <div class="col-xs-12">
+            <div class="" style="padding-right: 0px;">
+                <div class="col-12" style="margin-top: 20px;">
+                    <div class="row" id="itemDetails">
+                        <div class="editor" style="display:none; border:1px solid #eee; padding:5px; background:#eee;">
+
+                        </div>
+                        <style>
+                            .table-edit input {
+                                max-width: 70px;
+                                text-align: right;
+                            }
+
+                            .table-edit textarea {
+                                max-width: 120px;
+                            }
+
+                            .table-edit {
+                                /* max-width: 1200px; */
+                                width: 100%;
+                                text-align: left;
+                            }
+
+                            .aln-ltt {
+                                text-align: end;
+                                font-size: 13px;
+                                font-weight: 100;
+                            }
+
+                            .InvoiceDetails tr {
+                                border: solid 1px grey;
+                            }
+
+                            .InvoiceDetails tr th {
+                                border: solid 1px grey;
+                            }
+
+                            .InvoiceDetails tr td {
+                                border: solid 1px grey;
+                            }
+
+                            .InvoiceDetails tr:first-child {
+                                background-color: #BDC3C7;
+                            }
+
+                            .InvoiceDetails tr:last-child {
+                                background-color: #F2F7FB;
+                            }
+
+                            body,
+                            html {
+                                margin: 0;
+                                padding: 0;
+                                font-family: sans-serif;
+                                
+
+                                width: 8.27in;
+                                height: 11in;
+                            } /* */
+
+                            .container {
+                                padding-bottom: 40px;
+                            }
+
+                            .top-header {
+                                margin-top: 10px;
+                                width: 100%;
+                                /* height: 80px; */
+                            }
+
+                            .Logo {
+                                width: 292px;
+                                height: 80px;
+                                margin-left: 0px;
+                            }
+
+                            .Address {
+                                width: 292px;
+                                height: 80px;
+                                margin-left: 2480px;
+                            }
+
+                            .header {
+                                width: 100%;
+                                height: 100px;
+                                background-color: #978f8f;
+                                color: #ffffff;
+                            }
+
+                            .company-add {
+                                margin-top: 20px;
+                                width: 292px;
+                                height: 100px;
+                                margin-left: 10px;
+                                font-size: 10px;
+                            }
+
+                            .invoice-details {
+                                width: 292px;
+                                height: 100px;
+                                margin-left: 292px;
+                            }
+
+                            .Rate {
+                                margin-top: 40px;
+                                color: #ffffff;
+                                font-size: 20px;
+                            }
+
+                            .create-section {
+                                margin: 0 auto;
+                                width: 400px;
+                                border: 1px solid #848484dd;
+                                border-radius: 3px;
+                                padding-bottom: 30px;
+                            }
+
+                            .detail-section {
+                                margin: 0 auto;
+                                width: 800px;
+                                border: 1px solid #848484dd;
+                                border-radius: 3px;
+                                padding-bottom: 30px;
+                            }
+
+                            .input-box {
+                                width: 220px;
+                                height: 20px;
+                                padding: 5px;
+                                border: 1px solid #e8e8e8;
+                                border-radius: 3px;
+                                box-shadow: 0px 0px 1px 0px #ddd;
+                                color: #6d6d6d;
+                            }
+
+                            .input-textarea {
+                                width: 220px;
+                                height: 80px;
+                                padding: 5px;
+                                border: 1px solid #909090;
+                                border-radius: 3px;
+                            }
+
+                            input.btn.btn-default {
+                                min-width: 70px;
+                                height: 30px;
+                                border-radius: 3px;
+                                float: right;
+                                border: 1px solid;
+                                background-color: #007bff;
+                                border-color: #024550;
+                                color: white;
+                                font-weight: bold;
+                                cursor: pointer;
+                                text-align: center;
+                            }
+
+                            .btn.btn-secondary {
+                                min-width: 70px;
+                                height: 30px;
+                                border-radius: 3px;
+                                float: right;
+                                border: 1px solid;
+                                background-color: #a4a4a4;
+                                border-color: #3e3e3e;
+                                color: white;
+                                font-weight: bold;
+                                cursor: pointer;
+                                text-align: center;
+                            }
+
+                            .tbl-create {
+                                margin: 0 auto;
+                                line-height: 30px;
+                            }
+
+                            .tbl-details {
+                                margin: 0 auto;
+                                line-height: 40px;
+                            }
+
+                            .pdg-btm50 {
+                                padding-bottom: 50px;
+                            }
+
+                            .text-danger {
+                                color: red;
+                            }
+
+                            .input-list {
+                                width: 231px;
+                                height: 30px;
+                                padding: 5px;
+                                border: 1px solid #909090;
+                                border-radius: 3px;
+                            }
+
+                            .aln-rt {
+                                text-align: right;
+                                color: white;
+                            }
+
+                            .aln-rt h1 {
+                                color: white;
+                                font-size: 40px;
+                                margin-top: 11px
+                            }
+
+                            .aln-lt {
+                                text-align: left;
+                            }
+
+                            .aln-ctr {
+                                text-align: center;
+                            }
+
+                            div#myDivInvoice {
+                                width: 100%;
+                                padding-top: 30px;
+                            }
+
+                            .amt-details {
+                                width: 100%;
+                            }
+
+
+
+                            .bold {
+                                font-weight: 600;
+                            }
+
+                            .company-logo {
+                                width: 100%;
+                                height: 100%;
+                            }
+
+                            .company-logo-section {
+                                width: 250px;
+                                height: 200px;
+                                float: left;
+                                margin-left: 13px;
+                            }
+
+                            td.company-info {
+                                float: right;
+                                width: 300px;
+                                text-transform: uppercase;
+                                text-align: right;
+                                margin-right: 10px;
+                            }
+
+                            .invoice-section {
+                                margin: 0 auto;
+                                width: 8.29in;
+                                border: 1px solid #9a9a9a;
+                                border-radius: 3px;
+                                padding-bottom: 30px;
+                                min-height: 10.29in;
+                                padding: 20px;
+                                box-shadow: 1px 1px 1px 1px #eee;
+                            }
+
+                            td.client-info {
+                                width: 200px;
+                                float: left;
+                                margin-left: 10px;
+                                text-align: left;
+                                text-transform: capitalize;
+                            }
+
+                            td.invoice-info {
+                                float: right;
+                                margin-right: 10px;
+                                text-align: right;
+                            }
+
+                            .client-section {
+                                background-color: #adadad;
+                            }
+
+                            .mgn-auto {
+                                margin: 0 auto;
+                            }
+
+                            .form-control {
+                                width: 220px;
+                                height: 20px;
+                                padding: 5px;
+                                border: 1px solid #909090;
+                                border-radius: 3px;
+                            }
+
+                            a.linkcolor {
+                                color: blue;
+                            }
+
+                            .float-right {
+                                display: inline-block;
+                                margin-right: 30px;
+                            }
+
+                            .footer {
+                                width: 100%;
+                                height: 47px;
+                                background: #909090;
+                                display: block;
+                                position: fixed;
+                                bottom: 0px;
+                                left: 0px;
+                                right: 0px;
+                                margin-bottom: 0px;
+                            }
+
+                            .copyright {
+                                text-align: center;
+                                color: white;
+                                font-size: 14px;
+                            }
+
+                            .ui-icon-calendar {
+                                background-position: -32px -112px;
+                            }
+
+                            .fa-calendar-o:before {
+                                content: "\f133";
+                            }
+
+                            .fa-calendar-plus-o:before {
+                                content: "\f271";
+                            }
+
+                            .fa-calendar-minus-o:before {
+                                content: "\f272";
+                            }
+
+                            .fa-calendar-times-o:before {
+                                content: "\f273";
+                            }
+
+                            .fa-calendar-check-o:before {
+                                content: "\f274";
+                            }
+
+                            .fa-calendar:before {
+                                content: "\f073";
+                            }
+
+                            .fa-calendar-o:before {
+                                content: "\f133";
+                            }
+
+                            .fa-calendar:before {
+                                content: "\f073";
+                            }
+
+                            .form-control-select {
+                                width: 220px;
+                                height: 30px;
+                                border: 1px solid #e8e8e8;
+                                border-radius: 3px;
+                                box-shadow: 0px 0px 1px 0px #ddd;
+                                color: #6d6d6d;
+                            }
+
+                            .headline {
+                                padding-left: 10px;
+                            }
+
+                            .clientlist {
+                                padding-left: 10px !important;
+                            }
+
+                            .recipientInfo {
+                                padding-left: 15px;
+                                line-height: 21px;
+                                color: white;
+                                margin-top: -40px;
+                            }
+
+                            #invoiceTotals table {
+                                width: 100%;
+                                margin-top: 20px;
+                                text-align: right;
+                                /* background-color: #f1f1f1;
+                                            border: 1px solid #c3c3c3; */
+                                /* border-radius: 3px; */
+                                /* box-shadow: 1px 1px 1px 1px #ddd; */
+                            }
+
+                            .amt-details tr th {
+                                background-color: #626567;
+                                padding: 3px;
+                                height: 42px;
+                            }
+
+                            .prn-btn {
+                                text-align: center;
+                                margin: 0 auto;
+                                padding: 5px;
+                                width: 176px;
+                                height: 32px;
+                            }
+
+                            .img-logo {
+                                width: 100%;
+                            }
+
+                            .invoiceInfo {
+                                width: 11.29in;
+                                margin: 0 auto;
+                            }
+
+                            .invsummary {
+                                padding: 5px;
+                            }
+
+                            .invoice-print {
+                                width: 8.29in;
+                            }
+
+                            .invoice-details-list {
+                                border-collapse: collapse;
+                                border: 1px solid #c5c5c5;
+                                box-shadow: 1px 1px 1px 1px #ddd;
+                                border-radius: 3px;
+                            }
+
+                            * {
+                                box-sizing: border-box;
+                                -moz-box-sizing: border-box;
+                            }
+
+                            .info-table p {
+                                margin: 5px 0px;
+                            }
+
+                           .page {
+                                
+                              
+                                margin: 1cm auto;
+                                border: 1px #D3D3D3 solid;
+                                border-radius: 5px;
+                                background: white;
+                                box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+                            }
+
+                            .subpage {
+                                padding: 0 1cm;
+                                
+
+                            }  
+
+                            /* @@page {
+                                            size: A4;
+                                            margin: 0;
+                                        } 
+                                        
+*/
+                            @media print {
+                                .page {
+                                    margin: 0;
+                                    zoom: 1.5;
+                                }
+                                .onlyForPrint {
+                                    display: block !important;
+                                    /* margin: 0;
+                                    zoom: 1.5; */
+                                }
+
+                                 .doNotPrint {
+                                     display: none !important;
+                                          }
+                                        }
+                        </style>
+                        <table class="amt-details InvoiceDetail" id="InvoiceDetail">
+                            <tbody>
+                                <tr
+                                    style="border-collapse: collapse;border-bottom: 1px solid #7f7f7f;border-top: 1px solid #7f7f7f; border-left: 1px solid #7f7f7f; border-right: 1px solid #7f7f7f;  background-color: #4c4c4c;">
+
+
+                                    <th class="aln-lt" style="color: white;font-size: 13px;
+                                                font-weight: 100;">Projects&Description</th>
+                                    <th class="aln-rt" style="color: white;font-size: 13px;
+                                                font-weight: 100;">Hours</th>
+
+                                    <th class="aln-rt" style="color: white;font-size: 13px;
+                                                font-weight: 100;">Rate/H</th>
+                                    <th class="aln-rt" style="color: white;font-size: 13px;
+                                                font-weight: 100;">Line Total</th>
+                                </tr>
+
+                                <tr style="line-height: 45px;" *ngFor="let obj of unBilledReportList">
+                                    <td class="aln-lttt">{{obj?.fullName}}</td>
+
+                                    <td class="aln-ltt">{{obj?.workingHour}}</td>
+                                    <td class="aln-ltt">{{obj?.billingRate}}</td>
+                                    <td class="aln-ltt">${{obj?.toBeBilled | number : '0.2'}}</td>
+
+                                </tr>
+
+                                <tr>
+                                    <td colspan="4" style="padding-bottom:10px;"></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="row" id="invoiceTotals">
+                        <table style="width:100%; margin-bottom:20px; text-align:right">
+                            <tbody>
+                                <tr class="text-right">
+                                    <td class="text-right" style="width: 100%; font-family: 'Roboto';"><span> <b> Sub
+                                                Total :</b></span>
+                                        <b><span>&nbsp;${{sum() | number : '0.2'}}</span></b>
+                                    </td>
+                                </tr>
+                                <tr class="invoiceTotal" style="border: 0.5 solid #c3c3c3; height: 43px;">
+                                    <td class="text-right" style="width: 100%; font-family: 'Roboto';"><span> <b>
+                                                TOTAL:</b></span>
+                                        <b><span>&nbsp;${{sum() | number : '0.2'}}</span></b>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+
+
+                </div>
+
+
+            </div>
+        </div>
+
+        <div class="col-xs-12 " id="invoiceTotals">
+            <h4>SAC/HSN: 998314</h4>
+            <table style="width:100%" class="InvoiceDetails" style="border: solid 1px grey;">
+
+                <tr style="text-align: center; font-size: 13px;">
+                    <th colspan="2">CGST</th>
+                    <th colspan="2">SGST</th>
+                    <th colspan="2">IGST</th>
+                    <th rowspan="2" style="width: 103px;">INVOICE VALUE</th>
+                </tr>
+                <tr style=" text-align: center; font-size: 13px;
+                        font-style: italic;">
+                    <th>Rate</th>
+                    <th>Amt.</th>
+                    <th>Rate</th>
+                    <th>Amt.</th>
+                    <th>Rate</th>
+                    <th>Amt.</th>
+
+                </tr>
+                <tr style="text-align: center;">
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td>${{sum() | number : '0.2'}}</td>
+                </tr>
+                <tr style="text-align: center;">
+                    <td></td>
+                    <td>0</td>
+                    <td></td>
+                    <td>0</td>
+                    <td></td>
+                    <td>0</td>
+                    <td>${{sum() | number : '0.2'}}</td>
+                </tr>
+
+
+
+            </table>
+        </div>
+
+
+
+        <div style="position: relative;">
+            <hr>
+            <div>
+                <h3 style="font-size: 15px;
+                        color: currentcolor;
+                        font-style: oblique;">Remark:</h3>
+                <div>
+                    <h4 style="line-height: 1px;
+                        font-size: 13px;"><b>Hours included from {{startDate}} to {{endDate}}</b></h4>
+                </div>
+                <div>
+                    <h4 style="line-height: 1px;
+                        font-size: 13px;"><b>For <span *ngFor="let obj of unBilledReportList">{{obj?.fullName}},</span></b></h4>
+                </div>
+            </div>
+            <div style="position: relative;margin:1cm 0; padding:10px; border-radius:5px; border:1px dashed">
+                <table cellpadding="0" cellspacing="0" width="100%" class="info-table">
+                    <tbody>
+                        <tr>
+                            <td>
+                                <!--[endif]-->
+                                <div>
+                                    <p class="Normal1" style="line-height:normal">
+                                        <b><span style="font-size:10.0pt; font-weight: 800;">GSTIN: </span></b><span
+                                            style="font-size:10.0pt">09AAFCN9228H1Z4</span>
+                                    </p>
+                                    <p class="Normal1">
+                                        <b>
+                                            <span style="font-size:10.0pt;line-height:115%;font-weight: 800;">
+                                                Contact
+                                                Person:
+                                            </span>
+                                        </b><span style="font-size:10.0pt;line-height:
+    115%"> Akshay Mishra | CEO</span>
+                                    </p>
+                                    <p class="Normal1">
+                                        <b>
+                                            <span style="font-size:10.0pt;line-height:115%;font-weight: 800;">
+                                                Account
+                                                Name:
+                                            </span>
+                                        </b><span style="font-size:10.0pt;line-height:115%">
+                                            NOWGRAY IT Services Pvt. Ltd.
+                                        </span>
+                                    </p>
+                                    <p class="Normal1">
+                                        <b>
+                                            <span style="font-size:10.0pt;line-height:115%;font-weight: 800;">
+                                                Account
+                                                Address:
+                                            </span>
+                                        </b><span style="font-size:10.0pt;line-height:
+    115%; ">PLT</span><b><span style="font-size:10.0pt;line-height:115%"> </span></b><span
+                                            style="font-size:10.0pt;line-height:115%">21, <span
+                                                class="SpellE">Phoolbag</span> <span class="SpellE">Cly</span>,
+                                            <span class="SpellE">Khursi</span> Rd, Lucknow 226026, UP, India
+                                        </span>
+                                    </p>
+                                    <p class="Normal1">
+                                        <b>
+                                            <span style="font-size:10.0pt;line-height:115%;font-weight: 800;">
+                                                Phone
+                                                Numbers:
+                                            </span>
+                                        </b><span style="font-size:10.0pt;line-height:
+    115%"> +91 950 616 8811, +91 778 607 9365</span>
+                                    </p>
+                                    <p class="Normal1">
+                                        <b>
+                                            <span style="font-size:10.0pt;line-height:115%;font-weight: 800;">
+                                                Bank
+                                                Name:
+                                            </span>
+                                        </b><span style="font-size:10.0pt;line-height:115%">
+                                            HDFC Bank Ltd.
+                                        </span>
+                                    </p>
+                                    <p class="Normal1">
+                                        <b>
+                                            <span style="font-size:10.0pt;line-height:115%;font-weight: 800;">
+                                                Bank
+                                                Address:
+                                            </span>
+                                        </b><span style="font-size:10.0pt;line-height:    115%"><span>&nbsp;
+                                            </span>B-1/294, Sector G, <span class="SpellE">Jankipuram</span>,
+                                            Lucknow, Uttar Pradesh (India)
+                                            226021</span>
+                                    </p>
+                                    <p class="Normal1">
+                                        <b>
+                                            <span style="font-size:10.0pt;line-height:115%;font-weight: 800;">
+                                                Swift
+                                                Code:
+                                            </span>
+                                        </b><span style="font-size:10.0pt;line-height:115%">
+                                            HDFCINBB
+                                        </span>
+                                    </p>
+                                    <p class="Normal1">
+                                        <b>
+                                            <span style="font-size:10.0pt;line-height:115%;font-weight: 800;">
+                                                IFSC
+                                                Code:
+                                            </span>
+                                        </b><span style="font-size:10.0pt;line-height:115%">
+                                            HDFC0001908
+                                        </span>
+                                    </p>
+                                    <p class="Normal1">
+                                        <b>
+                                            <span style="font-size:10.0pt;line-height:115%;font-weight: 800;">
+                                                Account
+                                                Number:
+                                            </span>
+                                        </b><span style="font-size:10.0pt;line-height:    115%"> 50200029596363
+                                        </span>
+                                    </p>
+                                    <p><span style="font-size:10.0pt">
+
+                                        </span></p>
+                                    <p><span style="font-size:10.0pt">
+
+                                        </span></p>
+                                </div>
+                                <!--[if !mso]-->
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div>
+
+            </div>
+            <div class="onlyForPrint" style="overflow:hidden;position: fixed;left: 0px;bottom: 0px;">
+                <img style="width:100%" src="../../../../assets/letterhead.png" />
+            </div>
+           </div>
+    </div>
+    <div class="doNotPrint"  style="overflow:hidden;position: fixed;left: 0px;bottom: 0px;">
+        <img style="width:100%" src="../../../../assets/letterhead.png" />
+    </div>
+</div>

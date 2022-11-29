@@ -1,0 +1,245 @@
+<div>
+    <div class="page-title padding pb-0">
+        <h2 class="text-md mb-0">Daily Attendance List</h2>
+    </div>
+    <div class="padding">
+        <div class="mb-5">
+            <div class="toolbar">
+                <button class="btn btn-sm btn-white i-con-h-a" (click)="addReport()" data-target="#m-model" title=""
+                    id="btn-trash" data-original-title="Trash">Add New Attendance
+                    <i class="i-con i-con-plus text-muted"></i>
+                </button>
+                User:
+                <ng-select style="width:200px" (change)="getDailyReport($event.target.value)">
+                 <ng-option></ng-option>
+                    <ng-option *ngFor="let obj of user" value="{{ obj.user_Id }}">
+                    {{ obj.full_Name }}</ng-option>
+                </ng-select>
+            </div>
+
+            <div class="table-responsive">
+                <table class="table table-theme table-row v-middle">
+                    <tbody>
+                        <tr style="color: black;">
+                           
+                            <th>User Name</th>
+                             <!-- <th>Task Name</th> -->
+                            <!-- <th>Department</th> -->
+                            <!-- <th>Shift Name</th>
+                            <th>Shift Start</th> -->
+                            <th>Checkin</th>
+                            <th>Checkout</th>
+                            <th>Status</th>
+
+                            <th>
+                                <a><i class="icon-edit"></i> Action</a>
+                            </th>
+                        </tr>
+                        <tr *ngFor="let obj of reportList" role="row" class="v-middle">
+                            
+                            <td>{{ obj.userName }}</td>
+                            <!-- <td>{{ obj.name }}</td> -->
+                            <!-- <td>{{ obj.department }}</td> -->
+                            <!-- <td>{{ obj.shift_Name }}</td>
+                            <td>{{ obj.shift_Start | date: "short"}}</td> -->
+                            <td>{{ obj.checkin | date: "short" }}</td>
+                            <td>{{ obj.checkout | date: "short" }}</td>
+                            <td>{{ obj.status }}</td>
+                            <td style="width: 130px;">
+                                <button class="btn btn-sm btn-white i-con-h-a" data-toggle="tooltip" title=""
+                                    (click)="deleteAttendance(obj.attendance_Id)" id=" btn-trash"
+                                    data-original-title="Trash">
+                                    <i class="i-con i-con-trash text-muted"><i></i></i>
+                                </button>
+                                &nbsp;
+                                <button class="btn btn-sm btn-white i-con-h-a" title="" data-toggle="modal"
+                                    (click)="loadAttendance(obj.attendance_Id)" id="btn-trash"
+                                    data-original-title="Trash"><i
+                                        class="i-con i-con-edit text-muted"><i></i></i></button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="m-model" class="modal" data-backdrop="true" style="display: block; background: #0000008c;" *ngIf="ModalOpen"
+    aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Daily Reports</h5>
+            </div>
+            <div class="modal-body text-center p-lg">
+                <form class="kt-form kt-form--label-right" [formGroup]="attendanceForm">
+                    <div class="kt-portlet__body" style="padding-left: 40px; padding-right: 40px;">
+                        <div class="form-group row">
+                            <label class="col-2 col-form-label">User Name</label>
+                            <div class="col-4">
+                                <ng-select formControlName="user_Id" [ngClass]="{
+                                    'is-invalid': submitted 
+                                  }">
+                                    <ng-option *ngFor="let obj of user" value="{{ obj.user_Id }}">
+                                      {{ obj?.full_Name }}</ng-option>
+                                  </ng-select>
+                                  <!-- <select class="form-control" formControlName="account_Head" [ngClass]="{
+                                    'is-invalid': submitted && f.account_Head.errors
+                                  }">
+                                  <option *ngFor="let obj of lookupList" value="{{ obj?.lookup_Value }}">
+                                    {{ obj?.lookup_Name }}</option> -->
+                                <!-- <input class="form-control" type="text" value="" formControlName='user_Id'
+                                    [ngClass]="{ 'is-invalid': submitted && f.user_Id.errors }"> -->
+                                <!-- <div *ngIf="submitted && f.user_Id.errors" class="invalid-feedback">
+                                    <div *ngIf="f.user_Id.errors.required">User Id is required.</div>
+                                </div> -->
+                            </div>
+                            <label class="col-2 col-form-label">Checkin</label>
+                            <div class="col-4">
+                                <input class="form-control" type="datetime-local" value="" formControlName='checkin'
+                                    [ngClass]="{ 'is-invalid': submitted && f.checkin.errors }">
+                                <!-- <div *ngIf="submitted && f.checkin.errors" class="invalid-feedback">
+                                    <div *ngIf="f.checkin.errors.required">Checkin is required.</div>
+                                </div> -->
+                            </div>
+                        
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-2 col-form-label">Checkout</label>
+                            <div class="col-4">
+                                <input class="form-control" type="datetime-local" value="" formControlName='checkout'
+                                    [ngClass]="{ 'is-invalid': submitted && f.checkout.errors }">
+                                <!-- <div *ngIf="submitted && f.checkout.errors" class="invalid-feedback">
+                                    <div *ngIf="f.checkout.errors.required">checkout name is required.</div>
+                                </div> -->
+                            </div>
+                            <label class="col-2 col-form-label">Status</label>
+                            <div class="col-4">
+                                <ng-select class="form-control" formControlName="status">
+                                    <ng-option value="">--Select--</ng-option>
+                                    <ng-option value="In"> In </ng-option>
+                                    <ng-option value="In/Out"> Out </ng-option>
+                                   
+                                </ng-select>
+                                <!-- <input class="form-control" type="text" value="" formControlName='status'
+                                    [ngClass]="{ 'is-invalid': submitted && f.status.errors }"> -->
+                                <div *ngIf="submitted && f.status.errors" class="invalid-feedback">
+                                    <div *ngIf="f.status.errors.required">Status is required.</div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- <div class="form-group row">
+                            <label class="col-2 col-form-label">Department</label>
+                            <div class="col-4">
+                                <input class="form-control" type="text" value="" formControlName='department'
+                                    [ngClass]="{ 'is-invalid': submitted && f.department.errors }">
+                                <div *ngIf="submitted && f.department.errors" class="invalid-feedback">
+                                    <div *ngIf="f.department.errors.required">Department is required.</div>
+                                </div>
+                            </div>
+                            <label class="col-2 col-form-label">Shift Name</label>
+                            <div class="col-4">
+                                <input class="form-control" type="text" value="" formControlName='shift_Name'
+                                    [ngClass]="{ 'is-invalid': submitted && f.shift_Name.errors }">
+                                <div *ngIf="submitted && f.shift_Name.errors" class="invalid-feedback">
+                                    <div *ngIf="f.shift_Name.errors.required">Sift name is required.</div>
+                                </div>
+                            </div>
+                        </div> -->
+
+                        <!-- <div class="form-group row">
+                            <label class="col-2 col-form-label">Shift Start</label>
+                            <div class="col-4">
+                                <input class="form-control" type="datetime-local" value="" formControlName='shift_Start'
+                                    [ngClass]="{ 'is-invalid': submitted && f.shift_Start.errors }">
+                                <div *ngIf="submitted && f.shift_Start.errors" class="invalid-feedback">
+                                    <div *ngIf="f.shift_Start.errors.required">Shift is required.</div>
+                                </div>
+                            </div>
+                            <label class="col-2 col-form-label">Name</label>
+                            <div class="col-4">
+                                <input class="form-control" type="text" value="" formControlName='name'
+                                    [ngClass]="{ 'is-invalid': submitted && f.name.errors }">
+                                <div *ngIf="submitted && f.name.errors" class="invalid-feedback">
+                                    <div *ngIf="f.name.errors.required"> name is required.</div>
+                                </div>
+                            </div>
+                        </div> -->
+
+                        <!-- <div class="form-group row">
+                            <label class="col-2 col-form-label">Lunch Start</label>
+                            <div class="col-4">
+                                <input class="form-control" type="time" value="" formControlName='lunch_Start'
+                                    [ngClass]="{ 'is-invalid': submitted && f.lunch_Start.errors }">
+                                <div *ngIf="submitted && f.lunch_Start.errors" class="invalid-feedback">
+                                    <div *ngIf="f.lunch_Start.errors.required">Product name is required.</div>
+                                </div>
+                            </div>
+                            <label class="col-2 col-form-label">Lunch End</label>
+                            <div class="col-4">
+                                <input class="form-control" type="time" value="" formControlName='lunch_End'
+                                    [ngClass]="{ 'is-invalid': submitted && f.lunch_End.errors }">
+                                <div *ngIf="submitted && f.lunch_End.errors" class="invalid-feedback">
+                                    <div *ngIf="f.lunch_End.errors.required">Product name is required.</div>
+                                </div>
+                            </div>
+                        </div> -->
+
+
+                     
+
+                        <!-- <div class="form-group row">
+                            <label class="col-2 col-form-label">Shift End</label>
+                            <div class="col-4">
+                                <input class="form-control" type="datetime-local" value="" formControlName='shift_End'
+                                    [ngClass]="{ 'is-invalid': submitted && f.shift_End.errors }">
+                                <div *ngIf="submitted && f.shift_End.errors" class="invalid-feedback">
+                                    <div *ngIf="f.shift_End.errors.required">Product name is required.</div>
+                                </div>
+                            </div>
+                            <label class="col-2 col-form-label">Lat Arrival</label>
+                            <div class="col-4">
+                                <input class="form-control" type="datetime-local" value=""
+                                    formControlName='late_Arrival'
+                                    [ngClass]="{ 'is-invalid': submitted && f.late_Arrival.errors }">
+                                <div *ngIf="submitted && f.late_Arrival.errors" class="invalid-feedback">
+                                    <div *ngIf="f.late_Arrival.errors.required">Product name is required.</div>
+                                </div>
+                            </div>
+                        </div> -->
+
+                        <!-- <div class="form-group row">
+                            <label class="col-2 col-form-label">Early Departure</label>
+                            <div class="col-4">
+                                <input class="form-control" type="datetime-local" value=""
+                                    formControlName='early_Departure'
+                                    [ngClass]="{ 'is-invalid': submitted && f.early_Departure.errors }">
+                                <div *ngIf="submitted && f.early_Departure.errors" class="invalid-feedback">
+                                    <div *ngIf="f.early_Departure.errors.required">Product name is required.</div>
+                                </div>
+                            </div>
+                            <label class="col-2 col-form-label">Status</label>
+                            <div class="col-4">
+                                <input class="form-control" type="text" value="" formControlName='status'
+                                    [ngClass]="{ 'is-invalid': submitted && f.status.errors }">
+                                <div *ngIf="submitted && f.status.errors" class="invalid-feedback">
+                                    <div *ngIf="f.status.errors.required">Status is required.</div>
+                                </div>
+                            </div>
+                        </div> -->
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-white" data-dismiss="modal" (click)="cancel()">
+                            Cancel
+                        </button>
+                        <button type="button" class="btn btn-primary" data-dismiss="modal" (click)="saveAttendance()">
+                            Save
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,102 @@
+<div class="p-3 doNotPrint b-b">
+    <div class="toolbar">
+        <!-- <button class="btn btn-sm btn-primary" (click)="addLookup()" data-target="#m-model" title="" id="btn-trash"
+            data-original-title="Trash">Add Menu
+        </button> -->
+        <div class="serarch_Box" style="width: 100%; ">
+            <span class="pt-2">
+                <input class="form-control col-md-4" placeholder="Filter Data" style="float:right;" type="text"
+                    (keyup)="applyFilter($event.target.value)">
+            </span>
+        </div>
+    </div>
+</div>
+<div class="card m-3">
+    <div class="mat-elevation-z888 ">
+        <table class="table" mat-table matSort [dataSource]="dataSource">
+            <ng-container matColumnDef="full_Name">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header id="th1">Name </th>
+                <td mat-cell *matCellDef="let element"> {{element.full_Name}}</td>
+            </ng-container>
+            <ng-container matColumnDef="email">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header id="th1"> Email </th>
+                <td mat-cell *matCellDef="let element">{{element.email}}</td>
+            </ng-container>
+            <ng-container matColumnDef="action">
+                <th mat-header-cell *matHeaderCellDef id="th1"> Action</th>
+                <td mat-cell *matCellDef="let element">
+                    <span class="action-mat-btn">
+                        <button class="btn btn-success btn-icon btn-sm "
+                            (click)="loadEmployee(element.user_Id, element.full_Name)" rel="tooltip" type="button"
+                            data-original-title="" title=""><i class="i-con i-con-Edit"><i></i></i></button>
+                    </span>
+                </td>
+            </ng-container>
+            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+            <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+        </table>
+        <mat-paginator [pageSizeOptions]="[30, 50, 100]" showFirstLastButtons
+            style="background-color: white; color: black;"></mat-paginator>
+    </div>
+
+    <!-- Modal Start -->
+    <div id="m-model" class="modal" data-backdrop="true" style="display: block; background: #0000008c;"
+        *ngIf="ModalOpen" aria-hidden="true">
+        <div class="modal-dialog modal-xl">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h3 class="modal-title">Accesss for: &nbsp; <label>{{currentUserName}}</label></h3>
+                </div>
+                <div class="modal-body text-left p-xl">
+                    <form class="kt-form kt-form--label-right">
+                        <div class="kt-portlet__body" style="padding-left: 40px; padding-right: 40px;">
+                            <div class="row">
+                                <!-- <div class="checkbox-column" *ngFor="let menu of menuMasters">
+                                    <label><input type="checkbox" [checked]="IsChecked(menu.menu_Id)"
+                                            (change)="selectobj($event, menu.menu_Id)" value="{{menu.menu_Id}}" /><span>
+                                            {{menu.menu_Name}}</span></label>
+                                </div> -->
+                                <ul style="list-style: none;">
+                                <ng-container *ngFor="let menu of menuMastersMain">
+                                    <li style="margin-left: 10px;">
+                                        <label><input type="checkbox" [checked]="IsChecked(menu.menu_Id)"
+                                            (change)="selectobj($event, menu.menu_Id)" value="{{menu.menu_Id}}" /><span>
+                                            {{menu.menu_Name}}</span></label>
+                                    </li>
+                                    <li style="margin-left: 20px;" routerLinkActive="active" *ngFor="let submenu of getSubMenu(menu)">
+            
+                                        <label><input type="checkbox" [checked]="IsChecked(submenu.menu_Id)"
+                                            (change)="selectobj($event, submenu.menu_Id)" value="{{submenu.menu_Id}}" /><span>
+                                            {{submenu.menu_Name}}</span></label>
+                                        <ul style="list-style: none;">
+                                            <li style="margin-left: 30px;" *ngFor="let submenu2 of getSubMenu(submenu)">
+                                                <label><input type="checkbox" [checked]="IsChecked(submenu2.menu_Id)"
+                                                    (change)="selectobj($event, submenu2.menu_Id)" value="{{submenu2.menu_Id}}" /><span>
+                                                    {{submenu2.menu_Name}}</span></label>
+                                                <ul style="list-style: none;">
+                                                    <li style="margin-left: 40px;" *ngFor="let submenu3 of getSubMenu(submenu2)">
+                                                        <label><input type="checkbox" [checked]="IsChecked(submenu3.menu_Id)"
+                                                            (change)="selectobj($event, submenu3.menu_Id)" value="{{submenu3.menu_Id}}" /><span>
+                                                            {{submenu3.menu_Name}}</span></label>
+                                                    </li>
+                                                </ul>
+                                            </li>
+                                        </ul>
+                                    </li>
+                                </ng-container></ul>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)="cancel()">
+                                    Cancel
+                                </button>
+                                <button type="button" class="btn btn-success" (click)="savemenu()">
+                                    Submit
+                                </button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

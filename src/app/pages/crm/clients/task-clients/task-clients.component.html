@@ -1,0 +1,78 @@
+<div class="mat-elevation-z888">
+    <table class="table" mat-table matSort [dataSource]="dataSource">
+        <ng-container matColumnDef="task_Id">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header id="th1">Id# </th>
+            <td mat-cell *matCellDef="let element"> {{element.task_Id}}</td>
+            <td mat-footer-cell *matFooterCellDef></td>
+        </ng-container>
+        <ng-container matColumnDef="createdOn"> 
+            <th mat-header-cell *matHeaderCellDef mat-sort-header id="th1" width="200px"> Date </th>
+            <td mat-cell *matCellDef="let element" width="200px"><small> {{element.createdOn | date:'MMM d, y, h:mm a'}}</small>
+            </td>
+            <td mat-footer-cell *matFooterCellDef width="200px"></td>
+        </ng-container>
+        
+        <ng-container matColumnDef="project_Name">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header id="th1" >Project Name </th>
+            <td mat-cell *matCellDef="let element" >  {{element.project_Name}} 
+            </td>
+            <td mat-footer-cell *matFooterCellDef ></td>
+        </ng-container>
+        <ng-container matColumnDef="taskName">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header id="th1"> Task Name </th>
+            <td mat-cell *matCellDef="let element">{{element.taskName}}</td>
+            <td mat-footer-cell *matFooterCellDef></td>
+        </ng-container>
+        <ng-container matColumnDef="status">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header id="th1"> Status </th>
+            <td mat-cell *matCellDef="let element"> {{element.status}}</td>
+            <td mat-footer-cell *matFooterCellDef></td>
+        </ng-container>
+        <ng-container matColumnDef="assigned_ToName">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header id="th1"> Assigned Person </th>
+            <td mat-cell *matCellDef="let element"> {{element.assigned_ToName}}</td>
+            <td mat-footer-cell *matFooterCellDef></td>
+        </ng-container>
+        <ng-container matColumnDef="start_Date">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header id="th1" > Start Date </th>
+            <td mat-cell *matCellDef="let element" > {{element.start_Date | date:'MMM d, y, h:mm a'}}
+            </td>
+            <td mat-footer-cell *matFooterCellDef ></td>
+        </ng-container>
+        <ng-container matColumnDef="end_Date">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header id="th1"> End Date </th>
+            <td mat-cell *matCellDef="let element" > {{element.end_Date | date:'MMM d, y, h:mm a'}}
+            </td>
+            <td mat-footer-cell *matFooterCellDef ><b></b></td>
+        </ng-container>
+       
+        <ng-container matColumnDef="isCompleted">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header id="th1"> Approved? </th>
+            <td mat-cell *matCellDef="let element" width="20px"><input type="checkbox" disabled
+                    [checked]="element.isCompleted">
+            </td>
+            <td mat-footer-cell *matFooterCellDef></td>
+        </ng-container>
+        <!-- <ng-container matColumnDef="action">
+            <th mat-header-cell *matHeaderCellDef style="width:140px" id="th1" > Action</th>
+            <td mat-cell *matCellDef="let element" style="width:140px" >
+                <span class="action-mat-btn">
+                    <button class="btn btn-success btn-icon btn-sm " 
+                        rel="tooltip" type="button"><i class="i-con i-con-Edit"></i>
+                            </button>
+                    &nbsp;
+                   
+                    <a  href="invoice/{{element.task_Id}}" target="_blank"
+                        class="btn btn-info btn-icon btn-sm " rel="tooltip" type="button"
+                        data-original-title="Invoice" title="Invoice">
+                        <i class="i-con i-con-eye"><i></i></i></a>
+                </span>
+            </td>
+            <td mat-footer-cell *matFooterCellDef></td>
+        </ng-container> -->
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-footer-row *matFooterRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    </table>
+    <mat-paginator [pageSizeOptions]="[30]" showFirstLastButtons></mat-paginator>
+</div>

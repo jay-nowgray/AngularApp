@@ -1,0 +1,220 @@
+
+         <div class="p-3 doNotPrint b-b">
+          <div class="toolbar">
+            <button class="btn btn-sm btn-primary" (click)="AddAsset()" data-target="#m-model" title=""
+              id="btn-trash" data-original-title="Trash">Add New Assets
+             
+            </button>
+            <div class="serarch_Box" style="width: 100%; ">
+                <span class="pt-2">
+                    <input class="form-control col-md-4" 
+                        placeholder="Filter Data" style="float:right;" type="text" (keyup)="applyFilter($event.target.value)">
+
+                </span>
+            </div>
+          </div>
+        </div>
+  
+       
+            
+                <div class="card m-3 ">
+           <div  class="mat-elevation-z888">
+              <table class="table" mat-table matSort [dataSource]="dataSource">
+                <ng-container matColumnDef="serial_Number">
+                  <th mat-header-cell *matHeaderCellDef mat-sort-header> Serial Number </th>
+                  <td mat-cell *matCellDef="let element"> {{element.serial_Number}}</td>
+                </ng-container>
+                <ng-container matColumnDef="product_Name">
+                  <th mat-header-cell *matHeaderCellDef mat-sort-header> Product Name </th>
+                  <td mat-cell *matCellDef="let element"> {{element.product_Name }}</td>
+                </ng-container>
+                <ng-container matColumnDef="product_Type">
+                  <th mat-header-cell *matHeaderCellDef mat-sort-header>Product Type </th>
+                  <td mat-cell *matCellDef="let element"> {{element.product_Type}}
+                  </td>
+                </ng-container>
+                <ng-container matColumnDef="tangible_Type">
+                  <th mat-header-cell *matHeaderCellDef mat-sort-header> Tangible/Intangible </th>
+                  <td mat-cell *matCellDef="let element"> {{element.tangible_Type}}</td>
+                </ng-container>
+             
+                <ng-container matColumnDef="place">
+                  <th mat-header-cell *matHeaderCellDef mat-sort-header> Place </th>
+                  <td mat-cell *matCellDef="let element"> {{element.place}}</td>
+                </ng-container>
+                <ng-container matColumnDef="in_custody_of">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header> Custody </th>
+                    <td mat-cell *matCellDef="let element"> {{element.in_custody_of}}</td>
+                  </ng-container>
+                  <ng-container matColumnDef="purchase_Date">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header> Purchase Date </th>
+                    <td mat-cell *matCellDef="let element"> {{element.purchase_Date | date:'mediumDate'}}</td>
+                  </ng-container>
+                  <ng-container matColumnDef="condition">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header> Condition </th>
+                    <td mat-cell *matCellDef="let element"> {{element.condition}}</td>
+                  </ng-container>
+
+                <ng-container matColumnDef="action">
+                  <th mat-header-cell *matHeaderCellDef > Action</th>
+                  <td mat-cell *matCellDef="let element" style="width: 98px;;">
+                    <span class="action-mat-btn">
+                      <button class="btn btn-success btn-icon btn-sm " (click)="loadAssets(element.asset_ID)" rel="tooltip"
+                        type="button" data-original-title="" title=""><i class="i-con i-con-Edit"></i></button>
+                      &nbsp;
+                      <button class="btn btn-danger btn-icon btn-sm " (click)="delete(element.asset_ID)" rel="tooltip"
+                        type="button" data-original-title="" title=""><i class="i-con i-con-trash"></i></button>
+  
+                     
+  
+                    </span>
+                  </td>
+                </ng-container>
+                <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+              </table>
+              <mat-paginator [pageSizeOptions]="[50,100,150]" showFirstLastButtons></mat-paginator>
+            </div>
+          
+        </div>
+      
+    
+  
+
+
+<!-- <open model addd new assets > -->
+
+
+<div id="m-md" class="modal" data-backdrop="true" style="display: block; background: #0000008c;" *ngIf="ModalOpen"
+    aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Add New Assets</h5>
+
+            </div>
+
+            <div class="modal-body text-center p-lg">
+                <form class="kt-form kt-form--label-right" [formGroup]="assetForm">
+                    <div class="kt-portlet__body" style="padding-left: 40px; padding-right: 40px;">
+
+                        <div class="form-group row">
+                            <label class="col-2 col-form-label">Serial Number</label>
+
+                            <div class="col-4">
+                                <input class="form-control" type="text" value=""  formControlName='serial_Number'
+                                >
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <label class="col-2 col-form-label">Product Name <span class="text-danger">*</span></label>
+                            <div class="col-4">
+                                <input class="form-control" type="text" value="" formControlName='product_Name'
+                                    [ngClass]="{ 'is-invalid': submitted && f.product_Name.errors }">
+                                <div *ngIf="submitted && f.product_Name.errors" class="invalid-feedback">
+                                    <div *ngIf="f.product_Name.errors.required">Product name is required.</div>
+                                </div>
+                            </div>
+                            <label class="col-2 col-form-label">Product Type<span class="text-danger">*</span></label>
+                            <div class="col-4"> 
+                                <ng-select formControlName='product_Type'
+                                    [ngClass]="{ 'is-invalid': submitted && f.product_Type.errors }">
+
+                                    <ng-option *ngFor="let obj of productType" value="{{obj.lookup_Name}}">
+                                        {{obj.lookup_Name}}</ng-option>
+                                </ng-select>
+                                <div *ngIf="submitted && f.product_Type.errors" class="invalid-feedback">
+                                    <div *ngIf="f.product_Type.errors.required">product type  is required.</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-2 col-form-label">Tangible Type</label>
+                            <div class="col-4">
+                                 <ng-select formControlName='tangible_Type'
+                                  >Choose..
+                                    <ng-option>
+                                        Tangible Type</ng-option>
+                                    <ng-option value="obj.business">Intangible Type
+                                    </ng-option>
+                                </ng-select>
+                            </div>
+                            <label class="col-2 col-form-label">Place</label>
+                            <div class="col-4">
+                                <input class="form-control" type="text" value="" formControlName='place'
+                                >
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-2 col-form-label">Custody of</label>
+                            <div class="col-4"> 
+                                <ng-select formControlName='in_custody_of'
+                                    >
+
+                                    <ng-option *ngFor="let obj of employe" value="{{obj.full_Name}}">
+                                        {{obj.full_Name}}</ng-option>
+                                </ng-select>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label for="example-tel-input" class="col-2 col-form-label">purchase Date</label>
+                            <div class="col-4">
+                                <input class="form-control" type="datetime-local" value="" formControlName='purchase_Date'
+                                >
+                            </div>
+                            <label for="example-tel-input" class="col-2 col-form-label">vendor</label>
+                            <div class="col-4">
+                                <input class="form-control" type="text" value="" formControlName='vendor'
+                                >
+                            </div>
+
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-2 col-form-label">Price</label>
+                            <div class="col-4">
+                                <input class="form-control" type="number" value="" formControlName='price'
+                                >
+                            </div>
+
+
+                            <label class="col-2 col-form-label">Expiry Date</label>
+                            <div class="col-4">
+                                <input class="form-control" type="datetime-local" value="" formControlName='expiry_Date'
+                                >
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label for="example-number-input" class="col-2 col-form-label">Condition</label>
+                            <div class="col-4">
+                              <ng-select formControlName='condition'>
+                                <ng-option *ngFor="let obj of conditionType"
+                                    value="{{obj.lookup_Value}}">
+                                    {{obj?.lookup_Name}}
+                                </ng-option>
+                            </ng-select>
+                            </div>
+                            <label class="col-2 col-form-label">Scrap Date</label>
+                            <div class="col-4">
+                                <input class="form-control" type="datetime-local" value="" formControlName='scrap_Date'
+                                >
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-2 col-form-label">Scrap Price</label>
+                            <div class="col-4">
+                                <input class="form-control" type="number" value="" formControlName='scrap_Price'
+                                >
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" (click)="cancel()">Cancel</button>
+                        <input type="submit" (click)="saveAsset()" class="btn btn-success" value="Save">
+                    </div>
+                </form>
+            </div>
+
+        </div>
+    </div>
+</div>

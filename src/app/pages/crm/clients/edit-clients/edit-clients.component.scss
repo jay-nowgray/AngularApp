@@ -1,0 +1,46 @@
+.pointer {
+    cursor: pointer;
+}
+
+.pointer input {
+    position: absolute;
+    top: 11px;
+    margin-left: 4px;
+}
+.widget-link.active {
+    color: #03a7f1;
+    background: red;
+    padding: 11px;
+    cursor: pointer;
+    font-size: 20px;
+    font-weight: bolder;
+ }
+
+
+
+
+.padding {
+    padding: 0;
+}
+body {
+    // font-size: 16px !important;
+    line-height: 20px !important;
+}
+
+@media (min-width: 992px){
+.page-container {
+  max-width: 2000px;
+  margin: 10 53px 16px 57px;
+}
+#content
+{
+  margin-top: -17px;
+}
+
+}
+
+
+  .pl-2, .px-2 {
+    padding-left: 0 !important; 
+}
+ 

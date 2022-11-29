@@ -1,0 +1,137 @@
+<div class="card m-3">
+    <div class="p-4 doNotPrint b-b client-info-action-hide">
+        <div class="row">
+            <div class="col-md-10 text-right">
+                <div class="row">
+                    <div class="col-md-1 text-right"><small>Start Date</small></div>
+                    <div class="col-md-3">
+                        <input class="form-control form-control-sm form-control-inline" [(ngModel)]="startDate"
+                            placeholder="start date" type="date">
+
+                    </div>
+                    <div class="col-md-1 text-right"><small>End Date</small></div>
+                    <div class="col-md-3">
+                        <input class="form-control form-control-sm form-control-inline" [(ngModel)]="endDate"
+                            placeholder="start date" type="date">
+                    </div>
+                    <div class="col-md-2">
+                        <button class="btn btn-sm btn-success" (click)="getBill()">Get Bill</button>
+                    </div>
+                    <div class="col-md-2">
+                    <!-- <button class="btn btn-sm btn-success" (click)= "getClintInvoice(ClientId)" >
+                        Get Invoice
+                    </button> -->
+                    <a target="_blank"    [routerLink]="['/crm/invoice-groupdollr']" [queryParams]="{ClientId:ClientId,startDate:startDate,endDate:endDate}">
+                        Get Invoice
+                    </a>
+                       
+                </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="print css">
+        <p width="50%" class="p-2 onlyForPrint" style="display: none;">
+            <img id="firmLogo" src="../../assets/NgLogo.jpg">
+            <span style="float: right; margin-top: 45px;">29/14 Indira Nagar,<br>
+                Lucknow 226016 <br>
+                info@nowgray.com</span>
+        </p>
+        <p style="text-align: center;
+        margin-top: 25px;">
+
+            <strong colspan="2" style="text-align: center; font-size: 24px;  text-transform: uppercase;">
+                {{clientInfo?.name}}</strong>
+        <p colspan="2" style="text-align: center; font-size: 18px;text-transform: uppercase;">
+            {{clientInfo?.entityName}}</p>
+    </div>
+    <div>
+
+        <br>
+        <table class="table table-theme m-0">
+            <tr>
+                <td width="50%">
+                    <table width="100%">
+                        <tr>
+                            <th style="text-align: left; width:33%">PARTICULARS</th>
+                            <th style="text-align: center; width:33%">
+                                DATE
+                            </th>
+                            <th style="text-align: right;">
+
+                                AMOUNT
+                            </th>
+                        </tr>
+                        <tr *ngFor="let debit of debitAmount">
+                            <td style="text-align: left; width:33%"><a>{{debit?.taskName}}</a></td>
+                            <td style="text-align: center; width:33%">
+                                {{debit?.dts | date:'d MMM, y'}}
+                            </td>
+                            <td style="text-align: right;">
+                                {{debit?.amount | currency:'INR'}}
+                            </td>
+                        </tr>
+
+                    </table>
+                </td>
+                <td width="50%">
+                    <table width="100%">
+                        <tr>
+                            <th style="text-align: left; width:33%">PARTICULARS</th>
+                            <th style="text-align: center; width:33%">
+                                DATE
+                            </th>
+                            <th style="text-align: right;">
+                                AMOUNT
+                            </th>
+                        </tr>
+                        <tr *ngFor="let credit of creditAmount">
+                            <td style="text-align: left; width:33%">{{credit?.taskName}}</td>
+                            <td style="text-align: center; width:33%">
+                                {{credit?.dts | date:'d MMM, y'}}
+                            </td>
+                            <td style="text-align: right;">
+                                {{credit?.amount | currency:'INR'}}
+                            </td>
+                        </tr>
+
+
+                    </table>
+                </td>
+            </tr>
+            <tr>
+                <td width="50%">
+                    <table width="100%">
+                        <tr style="border-top: 1px solid #ddd;">
+                            <td colspan="2" style="text-align: left;">
+                                SUB TOTAL
+                            </td>
+                            <td style="text-align: right;"><b>{{totalDebitedAmount | currency:'INR'}}</b></td>
+                        </tr>
+                    </table>
+                </td>
+                <td>
+                    <table width="100%">
+                        <tr style="border-top: 1px solid #ddd;">
+                            <td colspan="2" style="text-align: left;">
+                                SUB TOTAL
+                            </td>
+                            <td style="text-align: right;"><b>{{totalCreditedAmount | currency:'INR'}}</b></td>
+                        </tr>
+                    </table>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2" style="text-align: right;"><b>BALANCE:
+                        {{totalDebitedAmount - totalCreditedAmount | currency:'INR'}}</b></td>
+            </tr>
+        </table>
+        <div class="p-2  text-muted" *ngIf="!billInfo">
+            <h6>Nothing found!</h6>
+        </div>
+        <div class="p-2 doNotPrint text-muted client-info-action-hide" *ngIf="billInfo">
+            <button style="margin: 0 auto; display: block;" (click)="onPrint()">Print</button>
+        </div>
+       
+    </div>
+</div>

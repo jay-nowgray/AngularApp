@@ -1,0 +1,230 @@
+<div class="card m-3">
+  <div class="page-title padding pb-0">
+    <h2 class="text-md mb-0">Dashboard</h2>
+  </div>
+  <div class="padding">
+    <div class="row">
+      <div class="col-sm-8">
+        <div class="col-md-12">
+          <div class="block px-4 py-3">
+            <div class="row">
+              <div class="col-lg-4 col-6">
+                <div class="d-flex align-items-center i-con-h-a my-1">
+                  <div><span class="avatar w-40 b-a b-2x"><i
+                        class="i-con i-con-trending-down b-2x text-error"><i></i></i></span></div>
+                  <div class="mx-3"><a class="d-block ajax"><strong>₹{{expensesCount | number}}</strong></a>
+                    <a class="d-block ajax"><strong style="font-size: 12px; color:gray;">₹{{lastMonthExpensesCount |
+                        number}}</strong></a> <small class="text-muted">
+                      Expenses</small>
+                  </div>
+                </div>
+              </div>
+              <div class="col-lg-4 col-6">
+                <div class="d-flex align-items-center i-con-h-a my-1">
+                  <div><span class="avatar w-40 b-a b-2x"><i
+                        class="i-con i-con-trending-up b-2x text-success"><i></i></i></span></div>
+                  <div class="mx-3"><a class="d-block ajax"><strong>₹{{incomeCount | number}}</strong></a>
+                    <a class="d-block ajax"><strong style="font-size: 12px; color:gray;">₹{{lastMonthIncomeCount |
+                        number}}</strong></a> <small class="text-muted">Income</small>
+                  </div>
+                </div>
+              </div>
+              <div class="col-lg-4 col-6">
+                <div class="d-flex align-items-center i-con-h-a my-1">
+                  <div><span class="avatar w-40 b-a b-2x"><i
+                        class="i-con i-con-bar-chart b-2x text-success"><i></i></i></span></div>
+                  <div class="mx-3"><a class="d-block ajax"><strong>₹{{incomeCount-expensesCount | number}}</strong></a>
+
+                    <a class="d-block ajax"><strong
+                        style="font-size: 12px; color:gray;">₹{{lastMonthIncomeCount-lastMonthExpensesCount |
+                        number}}</strong></a>
+                    <small class="text-muted">Difference</small>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-12 ">
+          <div class="block px-4 py-3">
+            <div class="row">
+              <div class="col-lg-4 col-6">
+                <div class="d-flex align-items-center i-con-h-a my-1">
+                  <div><span class="avatar w-40 b-a b-2x"><i
+                        class="i-con i-con-comment b-2x text-primary"><i></i></i></span></div>
+                  <div class="mx-3"><a href="/opportunities"
+                      class="d-block ajax"><strong>{{callsMadeToday?.length}}</strong></a> <small
+                      class="text-muted">Calls Made today</small></div>
+                </div>
+              </div>
+              <div class="col-lg-4 col-6">
+                <div class="d-flex align-items-center i-con-h-a my-1">
+                  <div><span class="avatar w-40 b-a b-2x"><i
+                        class="i-con i-con-users b-2x text-warning"><i></i></i></span></div>
+                  <div class="mx-3"><a href="app.user.html" class="d-block ajax"> </a>
+                    <small class="text-muted">Active / Inactive Employees</small>
+                  </div>
+                </div>
+              </div>
+              <div class="col-lg-4 col-6">
+                <div class="d-flex align-items-center i-con-h-a my-1">
+                  <div><span class="avatar w-40 b-a b-2x"><i
+                        class="i-con i-con-mail b-2x text-danger"><i></i></i></span></div>
+                  <div class="mx-3"><a href="app.mail.html"
+                      class="d-block ajax"><strong>{{opportunitiesCount}}</strong></a> <small
+                      class="text-muted">Oportunities</small></div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+        <div class="col-md-12 ">
+          <div class="block px-4 py-3">
+            <div class="row">
+
+              <div class="col-lg-4 col-6">
+                <div class="d-flex align-items-center i-con-h-a my-1">
+                  <div><span class="avatar w-40 b-a b-2x"><i
+                        class="i-con i-con-arrow-up b-2x text-info"><i></i></i></span></div>
+                  <div class="mx-3"><a class="d-block ajax"><strong>${{toBeBilled | number}}</strong></a> <small
+                      class="text-muted">To Be Billed</small></div>
+                </div>
+              </div>
+              <div class="col-lg-4 col-6">
+                <div class="d-flex align-items-center i-con-h-a my-1">
+                  <div><span class="avatar w-40 b-a b-2x"><i
+                        class="i-con i-con-arrow-down b-2x text-warning"><i></i></i></span></div>
+                  <div class="mx-3"><a class="d-block ajax"><strong>${{toBePaid | number}}</strong></a> <small
+                      class="text-muted">To Be Paid</small></div>
+                </div>
+              </div>
+              <div class="col-lg-4 col-6">
+                <div class="d-flex align-items-center i-con-h-a my-1">
+                  <div><span class="avatar w-40 b-a b-2x"><i
+                        class="i-con i-con-trending-up b-2x text-success"><i></i></i></span></div>
+                  <div class="mx-3"><a class="d-block ajax"><strong>${{toBeBilled-toBePaid | number}}</strong></a>
+                    <small class="text-muted">Income</small>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+        <div class="col-md-12">
+
+          <div class="card">
+            <div class="p-4 b-b"><strong>Upcoming Calls</strong> <span *ngIf="callsMadeToday"
+                class="badge text-info badge-outline ml-2">{{callsMadeToday.length}}</span>
+            </div>
+            <table class="table table-theme v-middle m-0">
+              <thead class="text-muted">
+                <tr>
+                  <th>Mobile#</th>
+                  <th>Name</th>
+
+                  <th>Next Call</th>
+                  <td>Status</td>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let obj of callsMadeToday" class="v-middle" data-id="6">
+                  <!-- <td><a href="#" data-toggle-class=""><i
+                        class="i-con i-con-bookmark active-solid text-muted active-primary"><i><i></i></i></i></a></td>
+                  <td><a href="#"><span class="w-28 avatar circle bg-danger-lt"><img src="../assets/img/a6.jpg"
+                          alt="."></span></a></td> -->
+                  <!-- <td></td> -->
+                  <td class="flex"><a (click)="EditRequestResponse(obj.opportunities_Id)"
+                      class="item-title text-color h-1x">{{obj.mobile}}</a></td>
+                  <td>
+                    <div class="item-except text-muted ">{{obj.name}}<div><small>{{obj.remarks}}</small></div>
+                    </div>
+                  </td>
+                  <td><span class="item-amount text-sm">{{obj.reminderDate | date:'medium'}}</span></td>
+                  <td>
+                    <div class="item-except text-muted h-1x">
+                      <span *ngIf="obj.status == 'Not Contacted'" class="badge badge-primary">
+                        {{obj.status }} </span>
+                      <span *ngIf="obj.status == 'Contacted'" class="badge badge-secondary">
+                        {{obj.status }} </span>
+                      <span *ngIf="obj.status == 'Attempted To Call'" class="badge badge-warning">
+                        {{obj.status }} </span>
+                      <span *ngIf="obj.status == 'Contact In Future'" class="badge badge-info">
+                        {{obj.status }} </span>
+                      <span *ngIf="obj.status == 'Lost Lead'" class="badge badge-danger">
+                        {{obj.status }} </span>
+                      <span *ngIf="obj.status == 'Pre Qualified'" class="badge badge-success">
+                        {{obj.status }} </span>
+                    </div>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+      </div>
+      <div class="col-sm-4">
+        <div class="col-md-12" style="height: 636px;
+            overflow-x: scroll;
+        ">
+          <div class="card" *ngFor="let data of list " style="height: 44px;">
+            <div class="row">
+              <div class="col-sm-2">
+                <div class="data-letters" *ngIf="data.logOutMessage !='working...'">
+                  <p style="text-align: center;font-size: medium;font-weight: bold;">{{data.users?.first_Name.slice(0,1)
+                    }}
+                  </p>
+
+                </div>
+                <div class="data-letters" style="background: #92d050;" *ngIf="data.logOutMessage ==='working...'">
+                  <p style="text-align: center;font-size: medium;font-weight: bold;">{{data.users?.first_Name.slice(0,1)
+                    }}
+                  </p>
+
+                </div>
+
+              </div>
+              <div class="col-sm-6">
+                <h5 style="font-weight: bold;">{{data.users?.first_Name}}&nbsp;{{data.users?.last_Name}}
+
+                  <h5 *ngIf="data.logOutMessage ==='working...'">
+                    {{data.daily_Reports?.checkin | date:'shortTime'}}
+                    <span *ngIf="data.users?.workingFor === 'Nowgray'">- India</span>
+                    <span *ngIf="data.users?.workingFor === 'Bentex'">- USA</span>&nbsp;&nbsp;&nbsp;
+                    <span><button style="font-size:7px;" type="button" class="btn btn-secondary  btn-sm"
+                        *ngIf="IsSuperAdmin() && data.logOutMessage ==='working...'"
+                        (click)="checkOut(data.users.user_Id)">Out</button></span>
+                  </h5>
+                  <h5 *ngIf="data.logOutMessage !='working...'">
+                    <small>{{data.logOutMessage}}</small>
+                  </h5>
+                </h5>
+
+              </div>
+              <div class="col-sm-2">
+                <a href='https://wa.me/91{{data.contact?.contact_No1}}'>
+
+                  <span class='material-icons' style="text-align: center;color: #92d050;margin: 9px;"
+                    name="logo-whatsapp">whatsapp</span>
+                </a>
+              </div>
+              <div class="col-sm-2">
+                <a href='mailto:{{data.users?.email}}'>
+                  <span class="material-icons" style="text-align: center;margin:9px" name="" email>email</span>
+                </a>
+              </div>
+
+
+
+            </div>
+
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,320 @@
+<div id="aside" class="page-sidenav no-shrink nav-expand animate fadeInLeft fade bg-white sticky" aria-hidden="true"
+	data-class="bg-white">
+	<div class="sidenav h-100 modal-dialog bg-white box-shadow">
+		<!-- sidenav top -->
+		<!-- Flex nav content -->
+		<div class="flex scrollable hover">
+			<div class="nav-border b-primary" data-nav="">
+				<ul class="nav bg">
+					<!-- <ng-container *ngFor="let menu of mainmenu">
+						<li class="nav-header hidden-folded ">
+							<span>{{menu.menu_Name}}</span>
+						</li>
+						<li routerLinkActive="active" *ngFor="let submenu of getSubMenu(menu)">
+
+							<a href="#" routerLinkActive="active-link" [routerLink]="[''+submenu?.url]" class="i-con-h-a"
+								data-pjax-state="anchor-empty">
+								<span class="nav-icon"><i class="i-con  {{submenu?.icon}}"><i></i></i> </span>
+								 <span >{{submenu?.menu_Name}}</span>
+								<!-- <span class="nav-text">{{submenu?.menu_Name}}</span> <span
+									*ngIf="submenu.parent_Id === submenu2.menu_Id" class="nav-caret"></span> -->
+							<!-- </a>
+							<ul class="nav-sub">
+								<li *ngFor="let submenu2 of getSubMenu(submenu)">
+									<a routerLinkActive="active-link" [routerLink]="[''+submenu2?.url]">
+										<span class="nav-icon"><i class="i-con {{submenu2?.icon}}"><i></i></i> </span>
+										<span> {{submenu2?.menu_Name}}</span>
+									</a>
+									<ul class="nav-sub">
+										<li *ngFor="let submenu3 of getSubMenu(submenu2)">
+											<a routerLinkActive="active-link" [routerLink]="[''+submenu3?.url]">
+												<span class="nav-icon"><i class="i-con {{submenu3?.icon}}"><i></i></i>
+												</span>
+												<span>{{submenu3?.menu_Name}}</span>
+											</a>
+										</li>
+									</ul>
+								</li>
+							</ul>
+						</li> -->
+						
+					<!-- </ng-container> -->
+					<!--<li routerLinkActive="active"  >
+					<a>{{contactType.menu_Name}}</a>
+					</li> -->
+					<li class="nav-header hidden-folded">
+						<span>Main</span>
+					</li>
+					<li><a [routerLink]="['/hrm/lmsdashboard']" class="" routerLinkActive="active-link"
+						data-pjax-state="">
+						<span class="nav-icon"><i class="i-con i-con-users"><i></i></i> </span>
+						<span class="nav-text">LMS Dashboard</span></a>
+				</li>
+					 <!-- <li routerLinkActive="active" ><a href="#" routerLinkActive="active-link"
+							class="i-con-h-a" data-pjax-state="anchor-empty">
+							<span class="nav-icon"><i class="i-con i-con-table"><i></i></i> </span>
+							<span class="nav-text"> HRM</span> 
+						</a> -->
+						<!-- <ul class="nav-sub">
+						
+							<li><a [routerLink]="['/hrm/employees']" class="" routerLinkActive="active-link"
+									data-pjax-state="">
+									<span class="nav-icon"><i class="i-con i-con-users"><i></i></i> </span>
+									<span class="nav-text">Employees</span></a>
+							</li>
+					
+							<!-- <li><a [routerLink]="['/hrm/salaries']" class="" routerLinkActive="active-link"
+									data-pjax-state="">
+									<span class="nav-icon"><i class="i-con i-con-edit"><i></i></i> </span>
+									<span class="nav-text"> Salaries</span></a>
+							</li> -->
+						
+							<!-- <li><a routerLinkActive="deactive-link" class="" data-pjax-state="">
+									<span class="nav-icon"><i class="i-con i-con-table"><i></i></i> </span>
+									<span class="nav-text">Attendance</span></a>
+								<ul class="nav-sub" *ngFor="let working of workingFor">
+									<li><a (click)="navigateToPage(working.working)" routerLinkActive="active-link"
+											class="" data-pjax-state="">
+											<span class="nav-icon"><i class="i-con i-con-time"><i></i></i> </span>
+											<span class="nav-text">{{working.working}}</span></a></li>
+									
+								</ul>
+							</li> -->
+						<!-- </ul> --> 
+				
+					<!-- <li routerLinkActive="active"><a href="#" routerLinkActive="active-link" class="i-con-h-a"
+							data-pjax-state="anchor-empty">
+							<span class="nav-icon"><i class="i-con i-con-table"><i></i></i> </span>
+							<span class="nav-text">Account</span> <span class="nav-caret"></span>
+						</a>
+						<ul class="nav-sub">
+							<li><a [routerLink]="['/accounts/Invoicing']" class="" routerLinkActive="active-link"
+									data-pjax-state="">
+									<span class="nav-icon"><i class="i-con i-con-table"><i></i></i> </span>
+									<span class="nav-text">Invoicing</span></a>
+							</li>
+							<li><a [routerLink]="['/accounts/transactions']" class="" routerLinkActive="active-link"
+									data-pjax-state="">
+									<span class="nav-icon"><i class="i-con i-con-table"><i></i></i> </span>
+									<span class="nav-text"> Transaction</span></a></li>
+							<li><a [routerLink]="['/accounts/expenses']" class="" routerLinkActive="active-link"
+									data-pjax-state="">
+									<span class="nav-icon"><i class="i-con i-con-table"><i></i></i> </span>
+									<span class="nav-text"> Expenses</span></a></li>
+								
+							<li><a [routerLink]="['/accounts/assets-management']" routerLinkActive="active-link"
+									class="" data-pjax-state="">
+									<span class="nav-icon"><i class="i-con i-con-table"><i></i></i> </span>
+									<span class="nav-text"> Assets Management</span></a></li>
+						
+							<li><a [routerLink]="['/billing-rate']" class="" routerLinkActive="active-link"
+									data-pjax-state="">
+									<span class="nav-icon"><i class="i-con i-con-users"><i></i></i> </span>
+									<span class="nav-text">Billing Rate</span></a>
+							</li>
+						</ul>
+					</li>
+					<li class="nav-header hidden-folded">
+						<span>Project Management</span>
+					</li>
+				
+					<li><a [routerLink]="['/project-management/projects']" class="" routerLinkActive="active-link"
+							data-pjax-state="">
+							<span class="nav-icon"><i class="i-con i-con-users"><i></i></i> </span>
+							<span class="nav-text">Projects</span></a>
+					</li>
+					<li routerLinkActive="active">
+						<a [routerLink]="['/project-management/daybook']" routerLinkActive="active-link"
+							class="i-con-h-a" data-pjax-state="">
+							<span class="nav-icon">
+								<i class=" i-con i-con-shuffle"><i></i></i>
+							</span>
+							<span class="nav-text">Daybook</span>
+						</a>
+					</li> 
+				
+					<li routerLinkActive="active">
+						<a [routerLink]="['/project-management/menupermision']" routerLinkActive="active-link"
+							class="i-con-h-a" data-pjax-state="">
+							<span class="nav-icon">
+								<i class=" i-con i-con-shuffle"><i></i></i>
+							</span>
+							<span class="nav-text">MenuPermision</span>
+						</a>
+					</li>  -->
+				
+					
+					<!-- <li><a [routerLink]="['/project-management/software-sales']" class="" routerLinkActive="active-link"
+						data-pjax-state="">
+						<span class="nav-icon"><i class="i-con i-con-users"><i></i></i> </span>
+						<span class="nav-text">Software Sales</span></a>
+				</li> -->
+					
+				<li class="nav-header hidden-folded">
+					<span>HRM</span>
+				</li>
+				<li *ngIf="IsSuperAdmin()"><a [routerLink]="['/hrm/employees']" class="" routerLinkActive="active-link"
+					data-pjax-state="">
+					<span class="nav-icon"><i class="i-con i-con-users"><i></i></i> </span>
+					<span class="nav-text">Employees</span></a>
+			</li>
+			<!-- <li><a [routerLink]="['/time-dashboard/Nowgray']" class="" routerLinkActive="active-link"
+				data-pjax-state="">
+				<span class="nav-icon"><i class="i-con i-con-users"><i></i></i> </span>
+				<span class="nav-text">Attendance</span></a>
+		</li> -->
+	
+	<li><a [routerLink]="['/hrm/MyLeave']" class="" routerLinkActive="active-link"
+		data-pjax-state="">
+		<span class="nav-icon"><i class="i-con i-con-users"><i></i></i> </span>
+		<span class="nav-text">Submitted Leave</span></a>
+</li>
+		
+				<li class="nav-header hidden-folded">
+						<span>Settings</span>
+					</li>
+					<!-- <li routerLinkActive="active">
+						<a [routerLink]="['/reports/pending-invoice']" routerLinkActive="active-link" class="i-con-h-a"
+							data-pjax-state="">
+							<span class="nav-icon">
+								<i class=" i-con i-con-bar-chart"><i></i></i>
+							</span>
+							<span class="nav-text">Pending Invoices</span>
+						</a>
+					</li> -->
+					<!-- <li routerLinkActive="active">
+						<a [routerLink]="['/reports/balance-report']" routerLinkActive="active-link" class="i-con-h-a"
+							data-pjax-state="">
+							<span class="nav-icon">
+								<i class=" i-con i-con-shuffle"><i></i></i>
+							</span>
+							<span class="nav-text">Balance PL</span>
+						</a>
+					</li> -->
+					<!-- <li routerLinkActive="active">
+						<a [routerLink]="['/reports/absent']" routerLinkActive="active-link" class="i-con-h-a"
+							data-pjax-state="">
+							<span class="nav-icon">
+								<i class=" i-con i-con-shuffle"><i></i></i>
+							</span>
+							<span class="nav-text">Absent</span>
+						</a>
+					</li>
+			 -->
+					<!-- <li routerLinkActive="active">
+						<a [routerLink]="['/reports/salay-pl']" routerLinkActive="active-link" class="i-con-h-a"
+							data-pjax-state="">
+							<span class="nav-icon">
+								<i class=" i-con i-con-shuffle"><i></i></i>
+							</span>
+							<span class="nav-text">Salary PL</span>
+						</a>
+					</li>
+					<li><a [routerLink]="['/reports/salart-adjustment']" class="" routerLinkActive="active-link"
+						data-pjax-state="">
+						<span class="nav-icon"><i class="i-con i-con-edit"><i></i></i> </span>
+						<span class="nav-text"> Salaries Adjustment</span></a>
+				</li> -->
+					<!-- <li><a [routerLink]="['/hrm/salary-adjustment']" class="" routerLinkActive="active-link"
+							data-pjax-state="">
+							<span class="nav-icon"><i class="i-con i-con-edit"><i></i></i> </span>
+							<span class="nav-text"> Salary Type Report</span></a>
+					</li> -->
+					<!-- <li routerLinkActive="active">
+						<a [routerLink]="['/reports/notification']" routerLinkActive="active-link" class="i-con-h-a"
+							data-pjax-state="">
+							<span class="nav-icon">
+								<i class=" i-con i-con-shuffle"><i></i></i>
+							</span>
+							<span class="nav-text">Notification</span>
+						</a>
+					</li> -->
+					
+					<!-- <li class="nav-header hidden-folded">
+						<span>Developers Options</span>
+					</li>
+					<li routerLinkActive="active">
+						<a [routerLink]="['/system-error']" routerLinkActive="active-link" class="i-con-h-a"
+							data-pjax-state="">
+							<span class="nav-icon">
+								<i class=" i-con i-con-shuffle"><i></i></i>
+							</span>
+							<span class="nav-text">System Error</span>
+						</a>
+					</li>
+					<li><a [routerLink]="['/accounts/employee-expenses']" class="" routerLinkActive="active-link"
+										data-pjax-state="">
+										<span class="nav-icon"><i class="i-con i-con-table"><i></i></i> </span>
+										<span class="nav-text">Employee Expenses</span></a></li>
+					<li routerLinkActive="active">
+						<a [routerLink]="['/Importantlink']" routerLinkActive="active-link" class="i-con-h-a"
+							data-pjax-state="">
+							<span class="nav-icon">
+								<i class=" i-con i-con-shuffle"><i></i></i>
+							</span>
+							<span class="nav-text">Password Manager</span>
+						</a>
+					</li>
+					
+		
+				
+
+
+
+
+				
+
+				
+
+					<!-- <li routerLinkActive="active">
+						<a [routerLink]="['/project-management/menulist']" routerLinkActive="active-link"
+							class="i-con-h-a" data-pjax-state="">
+							<span class="nav-icon">
+								<i class=" i-con i-con-shuffle"><i></i></i>
+							</span>
+							<span class="nav-text">MenuList</span>
+						</a>
+					</li>  --> 
+					<li routerLinkActive="active" *ngIf="IsSuperAdmin()">
+						<a [routerLink]="['/myfirm']" routerLinkActive="active-link" class="i-con-h-a"
+							data-pjax-state="">
+							<span class="nav-icon">
+								<i class=" i-con i-con-shuffle"><i></i></i>
+							</span>
+							<span class="nav-text">My firm</span>
+						</a>
+					</li>
+					<li routerLinkActive="active" *ngIf="IsSuperAdmin()">
+						<a [routerLink]="['/lookuphead']" routerLinkActive="active-link" class="i-con-h-a"
+							data-pjax-state="">
+							<span class="nav-icon">
+								<i class=" i-con i-con-shuffle"><i></i></i>
+							</span>
+							<span class="nav-text">Lookup Head</span>
+						</a>
+					</li> 
+					<li routerLinkActive="active">
+						<a [routerLink]="['/socialmedia']" routerLinkActive="active-link" class="i-con-h-a"
+							data-pjax-state="">
+							<span class="nav-icon">
+								<i class=" i-con i-con-shuffle"><i></i></i>
+							</span>
+							<span class="nav-text">Holidays</span>
+						</a>
+					</li>
+					<li><a (click)="signOut()" class="" routerLinkActive="active-link" class="i-con-h-a"
+						data-pjax-state="">
+						<span class="nav-icon">
+							<i class=" i-con i-con-shuffle"><i></i></i>
+						</span>
+							<span class="nav-text">Logout </span></a>
+					</li>
+				</ul>
+				<div class="pt-5">
+				</div>
+				<div class="pt-5">
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

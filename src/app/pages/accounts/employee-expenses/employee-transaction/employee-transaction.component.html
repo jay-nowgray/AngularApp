@@ -1,0 +1,112 @@
+<div class="padding">
+    <div class="row row-sm">
+        <div class="col-md-12">
+            <div class="toolbar">
+                <button class="btn btn-sm btn-primary " (click)="AddEmployeeTransation()" data-target="#m-model"
+                    title="" id="btn-trash" data-original-title="Trash">Add Credit Entry
+                    
+                </button>
+                <span class="float-left pt-2">
+                    <input class="form-control" placeholder="Filter Data" type="text"
+                        (keyup)="applyFilter($event.target.value)">
+                </span>
+            </div>
+            <div class="card" style="top: 18px;">
+                <div class="mat-elevation-z888">
+                    <table class="table" mat-table matSort [dataSource]="dataSource">
+                        <ng-container matColumnDef="employee_Name">
+                            <th mat-header-cell *matHeaderCellDef mat-sort-header>Employee Name </th>
+                            <td mat-cell *matCellDef="let element"> {{element.employee_Name}}</td>
+                        </ng-container>
+                        <ng-container matColumnDef="amount">
+                            <th mat-header-cell *matHeaderCellDef mat-sort-header>Amount </th>
+                            <td mat-cell *matCellDef="let element"> {{element.amount}}</td>
+                        </ng-container>
+                        <ng-container matColumnDef="transactionDate">
+                            <th mat-header-cell *matHeaderCellDef mat-sort-header> Transaction Date </th>
+                            <td mat-cell *matCellDef="let element">{{element.transactionDate | date:'mediumDate' }}</td>
+                        </ng-container>
+                        <ng-container matColumnDef="remark">
+                            <th mat-header-cell *matHeaderCellDef mat-sort-header> Remark </th>
+                            <td mat-cell *matCellDef="let element">{{element.remark }}</td>
+                        </ng-container>
+                        <ng-container matColumnDef="action">
+                            <th mat-header-cell *matHeaderCellDef class="client-info-action-hide"> Action</th>
+                            <td mat-cell *matCellDef="let element" class="client-info-action-hide">
+                                <span class="action-mat-btn">
+                                    <button class="btn btn-success btn-icon btn-sm "
+                                        (click)="LoadEmployeeTransation(element.transactionId)" rel="tooltip"
+                                        type="button" data-original-title="" title=""><i class="i-con i-con-Edit"><i></i></i>
+                                        </button>
+                                    &nbsp;
+                                    <button class="btn btn-danger btn-icon btn-sm "
+                                        (click)="delete(element.transactionId)" rel="tooltip" type="button"
+                                        data-original-title="" title=""><i class="i-con i-con-trash"><i></i></i></button>
+                                </span>
+                            </td>
+                        </ng-container>
+                        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+                    </table>
+                    <mat-paginator [pageSizeOptions]="[50,100,150]" showFirstLastButtons></mat-paginator>
+                </div>
+                </div>
+        
+        </div>
+    </div>
+</div>
+
+<div id="#open-model" class="modal" data-backdrop="true" style="display: block; ; background:   #0000008c;"
+    *ngIf="EmployeeModel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Add Credit Entry</h5>
+            </div>
+            <div class="modal-body text-center p-lg">
+                <form class="kt-form kt-form--label-right" [formGroup]="employeeTransactionForm">
+                    <div class="kt-portlet__body" style="padding-left: 40px; padding-right: 40px;">
+
+                        <div class="form-group row">
+                            <label class="col-sm-2 control-label">Employee</label>
+                            <div class="col-sm-4">
+                                <ng-select formControlName="userId" (change)="selectedUser($event)">
+                                    <ng-option *ngFor="let obj of user" value="{{ obj.user_Id }}">
+                                        {{ obj.full_Name }}</ng-option>
+                                </ng-select>
+                            </div>
+                            <label class="col-sm-2 control-label">Transaction Date</label>
+                            <div class="col-sm-4">
+                                <!-- <input class="form-control" type="datetime-local" value="" required="required"
+                                    formControlName="transactionDate" />
+                                    change transactionDate in new formate -->
+                                    <input class="form-control " formControlName="transactionDate" placeholder="transaction date"  type="datetime-local"  >
+                                   
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-sm-2 control-label">Amount</label>
+                            <div class="col-sm-4">
+                                <input class="form-control" type="number" value="" required="required"
+                                    formControlName="amount" />
+                            </div>
+                        </div>
+                        <div class="form-group row " style="padding-top: 20px;">
+                            <label class="col-sm-2 control-label">Remark</label>
+                            <div class="col-sm-10">
+                                <textarea class="form-control" formControlName="remark">
+                </textarea>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="reset" class="btn btn-secondary" (click)="cancel()">
+                            Cancel
+                        </button>
+                        <input type="submit" (click)="saveEmployeeTransaction()" class="btn btn-primary" value="Save" />
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

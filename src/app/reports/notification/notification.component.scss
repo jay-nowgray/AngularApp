@@ -1,0 +1,53 @@
+.card{
+    margin-top: 24px;
+}
+.mat-sort-header-container {
+    display: flex;
+    cursor: pointer;
+    align-items: center;
+    margin-top: -30px;
+  }
+  .table th, .table td {
+    padding: 5px;
+    vertical-align: middle;
+    border-top: 1px solid rgba(135, 150, 165, 0.1);
+  }
+  #th1[_ngcontent-yel-c15] {
+    color: black;
+   
+  }
+  th.mat-header-cell {
+    text-align: left;
+    font-size: 14px;
+    color: black;
+  }
+
+  .toolbar>* {
+    margin: 0;
+}
+.i-con {
+  /* -webkit-transform: translate3d(0, 0, 0);
+  -ms-transform: translate3d(0, 0, 0); */
+  border: 1px solid transparent;
+  border-radius: 2px;
+  display: inline-block;
+  vertical-align: -2px;
+  margin: 4px 0;
+  position: relative;
+  transition: all .3s;
+  width: 16px;
+  height: 16px;
+  background: transparent;
+  box-sizing: content-box;
+  color: white;
+}
+
+
+  @media (min-width: 576px){
+.modal-dialog {
+    max-width: 621px;
+    margin: 1.75rem auto;
+}
+}
+      
+      

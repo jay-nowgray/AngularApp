@@ -1,0 +1,71 @@
+<link rel="stylesheet" type="text/css" href="/assets/css/util.css">
+<link rel="stylesheet" type="text/css" href="/assets/css/main.css">
+
+<div class="container-contact100">
+
+	<div class="wrap-contact100">
+		<span class="contact100-form-title">
+			Status Report - {{myDate | date:'dd MMM, yyyy' }}
+		</span>
+		<span class="contact100-form-title contact100-form-subheading">
+			{{userObj?.userInfo.full_Name}}
+		</span>
+		<div *ngIf="alreadySubmitted"  class="success-box">
+			<h3 style="text-align: center;">{{failedMsg}}</h3>
+		</div>
+		<form *ngIf="!submitted && !alreadySubmitted" [formGroup]="form" (ngSubmit)="submit()" novalidate class="contact100-form validate-form">
+			
+
+			<div class="wrap-input100 validate-input" data-validate="Please enter your summary">
+				<textarea class="input100" name="note" formControlName="note" placeholder="summary"></textarea>
+				<span class="focus-input100"></span>
+			</div>
+			<!-- <label>{{form.value.name}}</label> -->
+			<app-status-task-form (newTaskForm)="addNewTaskForm($event)"></app-status-task-form>
+			<div *ngIf="thereIsAtLeastOneItemInTasksArray">
+				<span class="contact100-form-title contact100-form-subheading">
+					Tasks
+				</span>
+				<div *ngFor="let task of Tasks; let i = index">
+					<div class="wrap-input100 validate-input" data-validate="Please enter your summary">
+					<p class="task-items">{{task.taskName}} <button type="button" class="task-button" (click)="removeTask(i)"  >
+						<span>
+						  <i class="mr-2 i-con i-con-minus"></i>
+						  
+						</span>
+					  </button></p>
+				</div>
+				</div>
+			</div>
+
+
+			 
+
+
+		
+
+
+
+ 
+
+
+			<div class="container-contact100-form-btn">
+				<button class="contact100-form-btn" type="submit" >
+					<span>
+						<i class="mr-2 i-con i-con-upload"><i></i></i>
+					 
+						Submit
+					</span>
+				</button>
+			</div>
+			<!-- {{form.value | json}} -->
+		</form>
+		<div *ngIf="submitted" class="success-box">
+			<h3 style="text-align: center;">Task status submitted successfully.</h3>
+		</div>
+	</div>
+</div>
+
+
+
+<!-- <div id="dropDownSelect1"></div> -->

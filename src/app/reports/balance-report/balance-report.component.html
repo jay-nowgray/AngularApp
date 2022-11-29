@@ -1,0 +1,88 @@
+<div class="p-3 doNotPrint b-b">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="row">
+    <div class="col-sm-3 ">
+        <input class="form-control" placeholder="Filter Data" type="text"
+            (keyup)="applyFilter($event.target.value)">
+    </div>
+    <div class="col-sm-3 ">
+        <input type="button"  class="btn btn-sm btn-primary"   value="Export" style="
+        width: 102px;margin-top: 2px;"
+        (click)="export()"> 
+         </div>
+     </div>
+    </div>
+</div>
+</div>
+<div class="card m-3">
+                <div class="mat-elevation-z888" >
+                  <table class="table" mat-table matSort [dataSource]="dataSource">
+                        <ng-container matColumnDef="name">
+                            <th mat-header-cell *matHeaderCellDef mat-sort-header>Client Name </th>
+                            <td mat-cell *matCellDef="let element">
+                                <a href="/crm/edit-clients/{{element.client_Id}}" rel="tooltip"
+                                    data-original-title="" title="">
+                                    {{element.name}}
+                                </a>
+                                <span>{{element.client_Id}}</span>
+                            </td>
+                            <td mat-footer-cell *matFooterCellDef>Total:</td>
+                        </ng-container>
+                        <ng-container matColumnDef="entityName">
+                            <th mat-header-cell *matHeaderCellDef mat-sort-header> Entity Name </th>
+                            <td mat-cell *matCellDef="let element">{{element.entityName}}</td>
+                            <td mat-footer-cell *matFooterCellDef></td>
+                        </ng-container>
+                        <ng-container matColumnDef="mobile">
+                            <th mat-header-cell *matHeaderCellDef mat-sort-header> Mobile </th>
+                            <td mat-cell *matCellDef="let element">{{element.mobile}}</td>
+                            <td mat-footer-cell *matFooterCellDef></td>
+                        </ng-container>
+                        <ng-container matColumnDef="fees">
+                            <th mat-header-cell *matHeaderCellDef mat-sort-header> Fees </th>
+                            <td mat-cell *matCellDef="let element"> {{element.fees | currency:'INR'}}</td>
+                            <td mat-footer-cell *matFooterCellDef><b>{{totalFees | currency:'INR'}} </b></td>
+                        </ng-container>
+                        <ng-container matColumnDef="paid">
+                            <th mat-header-cell *matHeaderCellDef mat-sort-header> Paid Amount </th>
+                            <td mat-cell *matCellDef="let element"> {{element.paid | currency:'INR'}}</td>
+                            <td mat-footer-cell *matFooterCellDef><b>{{totalPaid | currency:'INR'}} </b></td>
+                        </ng-container>
+                        <ng-container matColumnDef="balance">
+                            <th mat-header-cell *matHeaderCellDef mat-sort-header> Balance Amount</th>
+                            <td mat-cell *matCellDef="let element"> {{element.balance | currency:'INR'}}
+                            </td>
+                            <td mat-footer-cell *matFooterCellDef><b>{{totalBalance | currency:'INR'}} </b></td>
+                        </ng-container>
+                        <ng-container matColumnDef="action">
+                            <th mat-header-cell *matHeaderCellDef style="width:120px" class="doNotPrint"> Bill</th>
+                            <td mat-cell *matCellDef="let element" style="width:120px" class="doNotPrint">
+                                <span class="action-mat-btn">
+                                    <a class="btn btn-info btn-icon btn-sm" target="_blank"
+                                    (click)="loadClient(element.client_Id)" rel="tooltip" type="button"
+                                        data-original-title="" title="Bill"> 
+                                        <i class="i-con i-con-eye"style="margin-top:5px;"><i></i></i>
+                                        
+                                        </a>
+                                    &nbsp;
+                                    <a class="btn btn-success btn-icon btn-sm " target="_blank"
+                                       href="https://wa.me/91{{element.mobile}}?text=" rel="tooltip" type="button"
+                                       data-original-title="" title="whatsapp now">
+                                       <i class='fab fa-whatsapp' style="margin-top:5px;"><i></i></i>
+                                    </a>
+                                </span>
+                            </td>
+                            <td mat-footer-cell *matFooterCellDef class="doNotPrint"></td>
+                        </ng-container>
+                        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                        <tr mat-footer-row *matFooterRowDef="columnsToDisplay"></tr>
+                        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+                    </table>
+                    <mat-paginator class="doNotPrint" showFirstLastButtons [pageSizeOptions]="[50,100,150]"></mat-paginator>
+                </div>
+         
+        
+    
+
+</div>

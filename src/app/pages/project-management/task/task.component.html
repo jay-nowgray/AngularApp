@@ -1,0 +1,93 @@
+ 
+
+<div class="container-fluid pt-3">
+  <h3 class="font-weight-light">Kanban Board</h3>
+   
+  <div class="row flex-row flex-sm-nowrap py-3">
+      <div class="col-sm-6 col-md-4 col-xl-3">
+          <div class="card bg-light">
+              <div class="card-body">
+                  <h6 class="card-title text-uppercase text-truncate py-2">To Do</h6>
+                  <div class="items border border-light" >
+                      <div class="card draggable shadow-sm" *ngFor="let task of tasks" id="cd1" draggable="true" ondragstart="drag(event)">
+                          <div class="card-body p-2">
+                              <div class="card-title">
+                                  
+                                  <a href="" class="lead font-weight-light">TSK#{{task.id}}</a>
+                              </div>
+                              <p>
+                                {{task.taskName}}
+                              </p>
+                              <button class="btn btn-primary btn-sm">View</button>
+                          </div>
+                      </div>
+                      
+                  </div>
+              </div>
+          </div>
+      </div>
+      <div class="col-sm-6 col-md-4 col-xl-3">
+          <div class="card bg-light">
+              <div class="card-body">
+                  <h6 class="card-title text-uppercase text-truncate py-2">In-progess</h6>
+                  <div class="items border border-light">
+                    <div class="card draggable shadow-sm" *ngFor="let task of tasksInProgress" id="cd1" draggable="true" ondragstart="drag(event)">
+                        <div class="card-body p-2">
+                            <div class="card-title">
+                                
+                                <a href="" class="lead font-weight-light">TSK#{{task.id}}</a>
+                            </div>
+                            <p>
+                              {{task.taskName}}
+                            </p>
+                            <button class="btn btn-primary btn-sm">View</button>
+                        </div>
+                    </div>
+                  </div>
+              </div>
+          </div>
+      </div>
+      <div class="col-sm-6 col-md-4 col-xl-3">
+          <div class="card bg-light">
+              <div class="card-body">
+                  <h6 class="card-title text-uppercase text-truncate py-2">In Review</h6>
+                  <div class="items border border-light">
+                    <div class="card draggable shadow-sm" *ngFor="let task of tasksInReview" id="cd1" draggable="true" ondragstart="drag(event)">
+                        <div class="card-body p-2">
+                            <div class="card-title">
+                                
+                                <a href="" class="lead font-weight-light">TSK#{{task.id}}</a>
+                            </div>
+                            <p>
+                              {{task.taskName}}
+                            </p>
+                            <button class="btn btn-primary btn-sm">View</button>
+                        </div>
+                    </div>
+                  </div>
+              </div>
+          </div>
+      </div>
+      <div class="col-sm-6 col-md-4 col-xl-3">
+          <div class="card">
+              <div class="card-body">
+                  <h6 class="card-title text-uppercase text-truncate py-2">Completed</h6>
+                  <div class="items border border-light">
+                    <div class="card draggable shadow-sm" *ngFor="let task of completedTasks" id="cd1" draggable="true" ondragstart="drag(event)">
+                        <div class="card-body p-2">
+                            <div class="card-title">
+                                
+                                <a href="" class="lead font-weight-light">TSK#{{task.id}}</a>
+                            </div>
+                            <p>
+                              {{task.taskName}}
+                            </p>
+                            <button class="btn btn-primary btn-sm">View</button>
+                        </div>
+                    </div>
+                  </div>
+              </div>
+          </div>
+      </div>  
+  </div>
+</div>

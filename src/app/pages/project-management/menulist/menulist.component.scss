@@ -1,0 +1,38 @@
+table {
+    width: 100%;
+  }
+  #th1{
+      color: black;
+     
+  }
+  .table td {
+  
+    vertical-align: center;
+    border-top: 1px solid rgba(135, 150, 165, 0.1);
+}
+// .mat-sort-header-container {
+//     display: flex;
+//     cursor: pointer;
+//     align-items: center;
+//     margin-top: -30px;
+// }
+.table th, .table td {
+    padding: 5px;
+    vertical-align: middle;
+    // line-height: 40px;
+}
+#th1[_ngcontent-yel-c15] {
+    color: black;
+   
+}
+th.mat-header-cell {
+    text-align: left;
+    font-size: 14px;
+    color: black;
+}
+
+.right-side{
+    position: absolute;
+    right: 24px;
+    top: 38px;
+}

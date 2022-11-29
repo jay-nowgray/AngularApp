@@ -1,0 +1,241 @@
+
+<form class="kt-form kt-form--label-right" [formGroup]="taskListForm">
+    <div class="kt-portlet__body" style="padding-left: 40px; padding-right: 40px;">
+        <div class="form-group row" *ngIf="taskListForm.value.task_Id == 0">
+            <div class="col-sm-3">
+                <span class="tbx-btn-parallel">
+                    <span class="col-form-label">Client: <span class="text-danger">*</span></span>
+                    <label *ngIf="hideSearch"style="font-size: 15px; font-weight:bold; text-transform: uppercase;">{{client_Name}}
+                        &nbsp;
+                    </label>
+                  <SearchAutocomplete [attr.disabled]="onlyForAdmin ? '' : null" class="client"
+                        placeholder="search" filterColumn="name" IdColumn="client_Id"
+                        [datasource]="ClientList" #searchInput cssClass="form-control"
+                        (resetDatasource)="resetDatasourceHandlerClients($event)"
+                        (selectedDataEvent)="onClientSelection($event)">
+                    </SearchAutocomplete> &nbsp; &nbsp; &nbsp;
+                   
+                </span>
+            </div>
+            <div class="col-sm-4">
+                <label class="col-form-label">Start Date<span class="text-danger">*</span></label>
+                <input [attr.disabled]="onlyForAdmin ? '' : null" class="form-control"
+                    type="datetime-local" formControlName='start_Date'
+                    [ngClass]="{
+                        'is-invalid': submitted && f.start_Date.errors
+                      }">
+                      <div *ngIf="submitted && f.start_Date.errors" class="invalid-feedback">
+                        <div *ngIf="f.start_Date.errors.required"> Start Date  is required.</div>
+                      </div>
+            </div>
+            <div class="col-sm-4">
+                <label class="col-form-label">End Date<span class="text-danger">*</span></label>
+                <input [attr.disabled]="onlyForAdmin ? '' : null" class="form-control"
+                    type="datetime-local" formControlName='end_Date'
+                    [ngClass]="{
+                        'is-invalid': submitted && f.end_Date.errors
+                      }">
+                      <div *ngIf="submitted && f.end_Date.errors" class="invalid-feedback">
+                        <div *ngIf="f.end_Date.errors.required"> End Date  is required.</div>
+                      </div>
+            </div>
+        </div>
+       
+
+        <div class="row">
+            <div class="col-12">
+                <h4>Add Task List</h4>
+            </div>
+        </div>
+        <div class="row pb-3">
+            <div class="col-10">
+                <div class="form-group row" *ngIf="taskListForm.value.task_Id == 0">
+                   
+                    <div class="col-sm-4">
+                        <label class="col-form-label">Project Name<span class="text-danger">*</span></label>
+                        <ng-select formControlName='project_Id' (change)="onchangeProject($event.target.value)">
+                            <ng-option [value]="0">--Select--</ng-option>
+                            <ng-option *ngFor="let status of projectStatus" [value]="status.project_Id">
+                                {{status?.project_Name}}
+                            </ng-option>
+                        </ng-select>
+                    </div>
+                    <div class="col-sm-4">
+                        <label class="col-form-label">Task Name<span class="text-danger">*</span>
+                        </label>
+                        <input type="text" class="form-control" formControlName='taskName'>
+                        <!-- <select class="form-control" formControlName='taskName'>
+                        <option value="">--Select--</option>
+                        <option *ngFor="let obj of selectedWork" value="{{obj.lookup_Value}}">
+                            {{obj?.lookup_Name}}
+                        </option>
+                    </select> -->
+                    </div>
+                    <div class="col-sm-4">
+                        <form [formGroup]="taskMembersForm">
+                            <label class="col-form-label">Employee<span class="text-danger">*</span></label>
+                          <ng-select [attr.disabled]="onlyForAdmin ? '' : null"
+                                formControlName='assigned_To'>
+                                <ng-option value="">--Select--</ng-option>
+                                <ng-option *ngFor="let obj of EmployeeList" [value]="obj.user_Id">
+                                    {{obj?.full_Name}}
+                                </ng-option>
+                            </ng-select>
+                        </form>
+                    </div>
+                </div>
+                <div class="form-group row" *ngIf="taskListForm.value.task_Id > 0">
+                    <div class="col-sm-6">
+                        <label class="col-form-label">Task Name
+                        </label>
+                        <ng-select formControlName='taskName'>
+                            <ng-option *ngFor="let obj of workflow" [value]="obj.lookup_Value">
+                                {{obj?.lookup_Name}}
+                            </ng-option>
+                        </ng-select>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <div class="col-sm-4">
+                        <label class="col-form-label">Fees</label>
+                        <input class="form-control" (keyup)="calculateAmount()" type="number"
+                            formControlName='totalAmount'>
+                    </div>
+                    <div class="col-sm-4">
+                        <label class="col-form-label">Advance</label>
+                        <input class="form-control" (keyup)="calculateAmount()" type="number"
+                            formControlName='paidAmount'>
+                    </div>
+                    <div class="col-sm-4">
+                        <label class="col-form-label">Balance </label>
+                        <input disabled class="form-control" type="number" formControlName='balanceAmount'>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <div class="col-sm-4">
+                        <label class="col-form-label">Priority </label>
+                        <ng-select formControlName='priority'>
+                            <ng-option value="High">High</ng-option>
+                            <ng-option value="Medium">Medium</ng-option>
+                            <ng-option value="Low">Low</ng-option>
+                        </ng-select>
+                    </div>
+                    <div class="col-sm-8">
+                        <label class="col-form-label">Remark</label>
+                        <textarea class="form-control" type="text" formControlName='remark'>
+                            </textarea>
+                    </div>
+                </div>
+            </div>
+            <div class="col-2">
+                <button style="margin-top: 108px;" class="btn btn-sm btn-success" (click)="addTaskList()">Add
+                    Task</button>
+            </div>
+        </div>
+        <div class="row" *ngIf="taskList.length > 0">
+            <div class="col-12">
+                <table class="table table-theme v-middle m-0">
+                    <tr>
+                        <th>
+                            Task Name
+                        </th>
+                        <th>
+                            Remark
+                        </th>
+                        <th>
+                            Fees Amount
+                        </th>
+                        <th>
+                            Paid Amount
+                        </th>
+                        <th>
+                            Balance Amount
+                        </th>
+                        <th>Action</th>
+                    </tr>
+                    <tr *ngFor="let obj of taskList">
+                        <td>
+                            {{obj?.taskName}}
+                        </td>
+                        <td>
+                            {{obj?.remark}}
+                        </td>
+                        <td>
+                            {{obj?.totalAmount}}
+                        </td>
+                        <td>
+                            {{obj?.paidAmount}}
+                        </td>
+                        <td>
+                            {{obj?.balanceAmount}}
+                        </td>
+                        <td> <button class="btn btn-danger btn-icon btn-sm " (click)="deleteTask(obj.taskName)"
+                                rel="tooltip" type="button" data-original-title="" title=""><i
+                                    class="fa fa-times"></i></button>
+                        </td>
+                    </tr>
+                    <tr style="border-top: 1px solid #ddd;">
+                        <td colspan="2" align="right">
+                            <b>Total: </b>
+                        </td>
+                        <td> <b>{{totalFeesAmount}}</b></td>
+                        <td><b>{{totalPaid}}</b></td>
+                        <td><b>{{totalBalance}}</b></td>
+                        <td></td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-secondary"  data-dismiss="modal" (click)="cancel()">
+                Cancel
+            </button>
+            <button *ngIf="taskList.length > 0" type="button" class="btn btn-success" data-dismiss="modal"
+                (click)="saveMultiTask()">
+                Save
+            </button>
+        </div>
+    </div>
+</form>
+
+
+<div id="m-model" class="modal" data-backdrop="true" style="display: block; background: #0000008c;" *ngIf="newClient"
+    aria-hidden="true">
+    <div class="modal-dialog modal-md">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Add Client</h5>
+            </div>
+            <div class="modal-body p-md">
+                <form [formGroup]="clientForm">
+                    <div class="form-group row">
+                        <div class="col-sm-12">
+                            <label class="col-form-label">Client Type <span class="text-danger">*</span></label>
+                            <ng-select formControlName='type'>
+                                <ng-option value="Client">Client</ng-option>
+                                <ng-option value="Lead"> Lead/Query </ng-option>
+                            </ng-select>
+                        </div>
+                        <div class="col-sm-12">
+                            <label class="col-form-label">Full Name</label>
+                            <input class="form-control" type="text" formControlName='name'>
+                        </div>
+                        <div class="col-sm-12">
+                            <label class="col-form-label">Phone</label>
+                            <input class="form-control" type="text" formControlName='mobile'>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-white" data-dismiss="modal" (click)="cancelClient()">
+                            Cancel
+                        </button>
+                        <button type="button" class="btn btn-primary" data-dismiss="modal"
+                            (click)="saveClient()">
+                            Save
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

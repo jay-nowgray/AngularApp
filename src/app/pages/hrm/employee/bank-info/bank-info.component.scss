@@ -1,0 +1,36 @@
+.card{
+    margin-top: 24px;
+}
+.mat-sort-header-container {
+    display: flex;
+    cursor: pointer;
+    align-items: center;
+    margin-top: -30px;
+  }
+  .table th, .table td {
+    padding: 0.75rem;
+    /* vertical-align: top; */
+    border-top: 1px solid rgba(135, 150, 165, 0.1);
+  }
+  #th1[_ngcontent-yel-c15] {
+    color: black;
+   
+  }
+  th.mat-header-cell {
+    text-align: left;
+    font-size: 14px;
+    color: black;
+  }
+
+  .toolbar>* {
+    margin: 0;
+}
+
+
+  @media (min-width: 576px){
+.modal-dialog {
+    max-width: 621px;
+    margin: 1.75rem auto;
+}
+}
+    

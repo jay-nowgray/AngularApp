@@ -1,0 +1,263 @@
+<div class=" p-3">
+    <div class="toolbar">
+        <div style="float: right;
+    ">
+            <button class="btn btn-white btn-icon btn-sm" style="top: 12px;" (click)="close()" type="button"
+                title="Back To List">
+                <i class="i-con i-con-arrow-left"><i></i></i></button>
+        </div>
+    </div>
+</div>
+<div class="card m-3">
+    <div class="card-header bg-dark bg-img p-0 no-border" data-stellar-background-ratio="0.1"
+        style="background-image: url(&quot;../assets/img/c1.jpg&quot;); background-position: 50% -119.88px;">
+        <div class="bg-dark-overlay r-2x no-r-b">
+            <div class="d-md-flex">
+                <div class="p-3">
+                    <div class="d-flex">
+                        <a href="#">
+                            <span class="avatar w-64">
+                                <img src="/assets/avatar_Dummy.png" alt="">
+                                <i class="on"></i>
+                            </span>
+                        </a>
+                        <div class="mx-3">
+                            <h3 class="mt-2">{{userInfo?.full_Name}}</h3>
+                            <div class="text-muted">
+                                <span class="m-r">UserId {{userInfo?.user_Id}}</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <span class="flex"></span>
+                <div class="align-items-center d-flex p-4">
+
+                    <div class="toolbar">
+
+                        <a href="mailto:{{userInfo?.email}}"
+                            class="btn btn-sm btn-icon bg-dark-overlay btn-rounded i-con-h-a">
+                            <span>
+                                <i class="i-con i-con-mail w-12">
+                                    <i></i>
+                                </i>
+                            </span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="px-2">
+        <div class="d-flex nav-active-border nav-active-text-primary b-primary">
+            <ul class="nav">
+                <li class="nav-item  ">
+                    <a class="nav-link py-3 active" href="#" data-toggle="tab" data-target="#tab_1">Basic
+                        Info</a>
+                </li>
+                <!-- <li class="nav-item">
+                    <a class="nav-link py-3" href="#" data-toggle="tab" data-target="#tab_4">Attachments
+                    </a>
+
+                </li> -->
+                <li class="nav-item">
+                    <a class="nav-link py-3" href="#" data-toggle="tab" data-target="#tab_3">Employee Info
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link py-3" href="#" data-toggle="tab" data-target="#tab_5">Contact
+                    </a>
+                </li>
+                <!-- <li class="nav-item">
+                    <a class="nav-link py-3" href="#" data-toggle="tab" data-target="#tab_6">Bank Info
+                    </a>
+                </li> -->
+                <!-- <li class="nav-item">
+                    <a class="nav-link py-3" href="#" data-toggle="tab" data-target="#tab_7">Salary Setting
+                    </a>
+                </li> -->
+            </ul>
+
+        </div>
+    </div>
+
+
+    <form novalidate="" autocomplete="bandhaibhai" [formGroup]="EditForm">
+        <div class="col-sm-12 col-lg-12">
+            <div class="tab-content">
+                <div class="tab-pane show active" id="tab_1">
+                    <div class="card">
+
+                        <div class="px-4 py-4">
+                            <div class="row mb-2">
+                                <div class="col-12">
+                                    <h5 class="text-muted">User Detail</h5>
+                                </div>
+                            </div>
+                            <div class="row mb-2">
+                                <div class="col-6">
+                                    <small class="text-muted"><span class="text-danger">*</span>First Name</small>
+                                    <div class="my-2">
+                                        <input type="text" class="form-control" formControlName="first_Name"
+                                            required="required"
+                                            [ngClass]="{ 'is-invalid': submitted && f.first_Name.errors }" />
+                                        <div *ngIf="submitted && f.first_Name.errors" class="invalid-feedback">
+                                            <div *ngIf="f.first_Name.errors.required">
+                                                first name is required.
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-6">
+                                    <small class="text-muted">Last Name</small>
+                                    <div class="my-2">
+                                        <input type="text" class="form-control" formControlName="last_Name">
+
+                                    </div>
+
+                                </div>
+                                <div class="col-6">
+                                    <small class="text-muted">Email</small>
+                                    <div class="my-2">
+                                        <input type="text" class="form-control" formControlName="email" />
+                                    </div>
+                                </div>
+                                <div class="col-6">
+                                    <small class="text-muted"><span class="text-danger">*</span>Password</small>
+                                    <div class="my-2 input-icons">
+                                        <i class="i-con i-con-eye" (click)="showpass()"></i>
+                                        <input [attr.type]="isShow ? 'text' : 'password'" autocomplete="off"
+                                            formControlName="password" name="password" class="form-control"
+                                            placeholder="Password" required="required"
+                                            [ngClass]="{ 'is-invalid': submitted && f.password.errors }" />
+                                        <div *ngIf="submitted && f.password.errors" class="invalid-feedback">
+                                            <div *ngIf="f.password.errors.required">
+                                                Password is required.
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>
+                                <div class="col-6">
+                                    <small class="text-muted">Last Login</small>
+                                    <div class="my-2">
+                                        <input type="text" class="form-control" disabled formControlName="last_Login">
+                                    </div>
+                                </div>
+                                <div class="col-6">
+                                    <small class="text-muted">Role Id</small>
+                                    <div class="my-2">
+                                        <select  class="form-control" formControlName='role_Id' required="required"
+                                            [ngClass]="{ 'is-invalid': submitted && f.role_Id.errors }">
+                                            <div *ngIf="submitted && f.role_Id.errors" class="invalid-feedback">
+                                                <div *ngIf="f.role_Id.errors.required">
+                                                </div>
+                                            </div>
+                                            <option *ngFor="let obj of userType" value="{{obj.lookup_Value}}">
+                                                {{obj?.lookup_Name}}
+                                            </option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col-2">
+                                    <small class="text-muted">Is Locked</small>
+                                    <div class="my-2">
+                                        <input type="checkbox" formControlName='is_Locked' />
+                                    </div>
+                                </div>
+                                <!-- <div class="col-2">
+                                    <small class="text-muted">Is Active</small>
+                                    <div class="my-2">
+                                        <input type="checkbox" [value]="" formControlName='is_Active' />
+                                    </div>
+                                </div> -->
+                                <!-- <div class="col-2">
+                                    <small class="text-muted">Is Deleted</small>
+                                    <div class="my-2">
+                                        <input type="checkbox" [value]="" formControlName='is_Deleted' />
+                                    </div>
+                                </div> -->
+                                <div class="col-2">
+                                    <small class="text-muted"> Is DailyStatusRequired</small>
+                                    <div class="my-2">
+                                        <input type="checkbox" [value]="" formControlName='is_DailyStatusRequired' />
+                                    </div>
+                                </div>
+                                <div class="col-2">
+                                    <small class="text-muted"> Is ThirdPartyAdmin</small>
+                                    <div class="my-2">
+                                        <input type="checkbox" [value]="" formControlName='isThirdPartyAdmin' />
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-sm-6">
+                                    <small class="text-muted">Manager</small>
+                                    <div class="my-2">
+                                        <!-- <input type="text" class="form-control"
+                                                        formControlName="workingFor" /> -->
+                                        <ng-select >
+                                            <ng-option *ngFor="let obj of user" value="{{ obj.user_Id }}">
+                                              {{ obj?.full_Name }}
+                                            </ng-option> 
+                                          
+                                            
+                                        </ng-select>
+                                    </div><span style="color: red;
+                                    font-size: 12px;">
+                                        This is dummy functionality
+                                    </span>
+                                </div>
+                                <div class="col-sm-6">
+                                    <small class="text-muted">App Id</small>
+                                    <div class="my-2">
+                                        <input type="text" class="form-control" formControlName="app_Id" />
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card-footer">
+                            <input type="submit" value="Save" (click)="saveEmployee() "
+                                class="btn btn-success float-right">
+                            &nbsp;
+                            &nbsp;
+
+                        </div>
+                    </div>
+                </div>
+                <div class="tab-pane fade" id="tab_4">
+                    <app-global-attachment entityType="User" [entityId]="user_Id"></app-global-attachment>
+
+                </div>
+                <div class="tab-pane fade" id="tab_3">
+                    <app-employee-info user_Id="{{user_Id}}"></app-employee-info>
+                </div>
+                <div class="tab-pane fade" id="tab_5">
+                    <app-employee-contact user_Id="{{user_Id}}"></app-employee-contact>
+                </div>
+                <div class="tab-pane fade" id="tab_6">
+                    <app-bank-info user_Id="{{user_Id}}"></app-bank-info>
+                </div>
+                <div class="tab-pane fade" id="tab_7">
+                    <app-salary-info user_Id="{{user_Id}}"></app-salary-info>
+                </div>
+
+
+                <div class="tab-pane show " id="tab_5">
+                    <div class="card">
+                        <div class="px-4 py-4">
+                            <div class="row mb-2">
+                                <div class="col-12">
+                                    <h5 class="text-muted">Salary Detail</h5>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </form>
+
+
+
+</div>

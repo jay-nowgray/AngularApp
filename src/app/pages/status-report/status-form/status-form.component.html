@@ -1,0 +1,27 @@
+
+<div class="wrap-input100 validate-input" data-validate = "Please enter your summary">
+  <textarea class="input100" name="summary" placeholder="summary"></textarea>
+  <span class="focus-input100"></span>
+</div>
+  <span>Please filll the task details</span>
+  <div class="container">
+
+    <form [formGroup]="form" (ngSubmit)="submit()" novalidate>
+      <label>{{form.value.name}}</label>
+    
+
+    <div *ngIf="thereIsAtLeastOneItemInTasksArray">
+      <h5>Tasks Added:</h5>
+      <div *ngFor="let task of Tasks">
+        <p>TaskForm: {{task.name}}, frequency: {{task.frequency}}</p>
+      </div>
+    </div>
+
+    <app-status-task-form (newTaskForm)="addNewTaskForm($event)"></app-status-task-form>
+
+    <button type="submit" [disabled]="!form.valid">Submit Sub Form</button>
+    </form>
+
+    <pre>Sub Form Value: 
+{{form.value | json }}</pre>
+  </div>

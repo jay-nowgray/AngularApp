@@ -1,0 +1,127 @@
+<div class=" p-3">
+    <div class="toolbar">
+        <div style="float: right;
+    ">
+      <button class="btn btn-white btn-icon btn-sm"  style="top: 12px;" (click)="close()" type="button" title="Back To List">
+              <i class="i-con i-con-arrow-left"><i></i></i></button></div>
+       </div>
+  </div>
+<div class="card m-3">
+
+
+                <div class="px-2">
+                    <div class="d-flex nav-active-border nav-active-text-primary b-primary">
+                        <ul class="nav">
+                            <li class="nav-item  ">
+                                <a class="nav-link py-3 active" href="#" data-toggle="tab" data-target="#tab_1">Project
+                                    Info</a>
+                            </li>
+                            <!-- <li class="nav-item">
+                                <a class="nav-link py-3" href="#" data-toggle="tab" data-target="#tab_4">Attachments
+                                    </a>
+                            </li>
+                            -->
+                        </ul>
+                        
+                    </div>
+                </div>
+            
+            <div class="row">
+            <form novalidate="" autocomplete="completed" [formGroup]="editProjectForm" (submit)="updateProjects()"> 
+                <div class="col-sm-12 col-lg-12">
+                    <div class="tab-content">
+
+                        <div class="tab-pane show active" id="tab_1">
+                            <div class="card" style=" width: 1170px;">
+
+                                <div class="px-4 py-4">
+                                    <!-- <div class="row mb-2">
+                                        <div class="col-12">
+                                            <h5 class="text-muted">User Detail</h5>
+                                        </div>
+                                    </div> -->
+                                    <div class="row mb-2">
+                                        <div class="col-6">
+                                            <small class="text-muted">Project Name</small>
+                                            <div class="my-2">
+                                                <input type="text" class="form-control" formControlName="project_Name"
+                                                required="required"
+                              [ngClass]="{ 'is-invalid': submitted && f.project_Name.errors }" />
+                              <div *ngIf="submitted && f.project_Name.errors" class="invalid-feedback">
+                                <div *ngIf="f.project_Name.errors.required">
+                                 
+                                </div>
+                              </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-6">
+                                            <small class="col-form-label">Client <span class="text-danger">*</span> </small>
+                                            <ng-select formControlName='client_Id'
+                                            required="required"
+                                            [ngClass]="{ 'is-invalid': submitted && f.client_Id.errors }" >
+                                            <div *ngIf="submitted && f.client_Id.errors" class="invalid-feedback">
+                                              <div *ngIf="f.client_Id.errors.required">
+                                              
+                                              </div>
+                                            </div>
+                                                <ng-option *ngFor="let obj of clientList" [value]="obj.client_Id">
+                                                    {{obj?.name}}
+                                                </ng-option>
+                                            </ng-select>
+                                        </div>
+                                     
+                                        <div class="col-6">
+                                            <small class="text-muted">Start Date</small>
+                                            <div class="my-2">
+                                                <input  class="form-control" type="datetime-local" formControlName='start_Date'>
+                                            </div>
+                                        </div>
+                                        <div class="col-6">
+                                            <small class="text-muted">End Date</small>
+                                            <div class="my-2">
+                                                <input  class="form-control" type="datetime-local" formControlName='end_Date'>
+                                            </div>
+                                        </div>
+                                        <div class="col-6">
+                                            <small class="text-muted">Status</small>
+                                            <div class="my-2">
+                                                <ng-select formControlName='status'>
+                                                    <ng-option *ngFor="let status of projectStatus" [value]="status.lookup_Value">
+                                                        {{status.lookup_Name}}
+                                                    </ng-option>
+                                                </ng-select>
+                                            </div>
+                                            
+                                        </div>
+                                      
+                                      
+                                       
+                                       
+                                       
+                                     
+                                    </div>
+                                  
+                                
+                                    
+                                
+                                </div>
+                               
+                                <div class="card-footer">
+                                    <input type="submit" value="Save"   class="btn btn-success float-right">
+                                    &nbsp;
+                                    &nbsp;
+                                  
+                                    
+                                </div>
+
+                            </div>
+                        </div>
+                        </div>
+                        </div>
+                        </form>
+                        </div>
+                        
+
+                      
+                       
+                      

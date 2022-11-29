@@ -1,0 +1,78 @@
+# See http://help.github.com/ignore-files/ for more about ignoring files.
+
+# compiled output
+/dist
+*/dist
+/tmp
+/out-tsc
+# Only exists if Bazel was run
+/bazel-out
+
+# dependencies
+/node_modules
+
+# profiling files
+chrome-profiler-events.json
+speed-measure-plugin.json
+
+# IDEs and editors
+/.idea
+.project
+.classpath
+.c9/
+*.launch
+.settings/
+*.sublime-workspace
+
+# IDE - VSCode
+.vscode/*
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
+!.vscode/extensions.json
+.history/*
+
+# misc
+/.sass-cache
+/connect.lock
+/coverage
+/libpeerconnection.log
+npm-debug.log
+yarn-error.log
+testem.log
+/typings
+
+# System Files
+.DS_Store
+Thumbs.db
+/AngularApp/node_modules
+/src/environments
+.env
+/AngularApp/.vscode
+/API/.vs/TaskAssignerWebAPI/v16/Server/sqlite3
+/API/TaskAPI/node_modules
+/API/TaskAPI/obj
+/API/TaskAPI/System/Data
+/API/hwapp
+/API/TaskAPI/temp
+/API/test
+API/.vs/TaskAssignerWebAPI/v16/.suo
+API/.vs/TaskAssignerWebAPI/config/applicationhost.config
+/API/TaskAPI/bin/Debug/netcoreapp2.1
+/API/.vs/TaskAssignerWebAPI/DesignTimeBuild
+/API/TaskAPI/bin/Release/netcoreapp2.1/publish
+/API/.vs/InhouseApi
+/dist
+/App/NgInHouse
+/App/NgApp
+/API/TaskAPI/bin/Release/netcoreapp2.1/win-x64
+/API/TaskAPI/Migrations
+/API/TaskAPI/bin/Debug/netcoreapp3.1
+/App/XamrinApp/XamrinApp/bin/Debug/netstandard2.0
+/App/XamrinApp/XamrinApp/obj
+/App/XamrinApp/XamrinApp.Android/bin/Debug
+/App/XamrinApp/XamrinApp.Android/obj
+/App/XamrinApp/XamrinApp.iOS/bin/iPhone/Debug
+/App/TaskApp
+/App/XamrinApp/.vs/XamrinApp/DesignTimeBuild
+/API/TaskAPI/bin/Release/netcoreapp3.1

@@ -1,0 +1,76 @@
+.header-title {
+  margin: 2rem;
+  font-size: 1.2rem !important;
+  font-weight: 500 !important;
+}
+.card-title {
+  font-weight: 500 !important ;
+}
+mat-form-field {
+  width: 100%;
+}
+
+table {
+  width: 100%;
+}
+
+.mat-form-field {
+  font-size: 14px;
+  width: 100%;
+}
+.card-height {
+  height: 550px;
+}
+
+th.mat-header-cell {
+  width: 20px;
+}
+.content-wrapper {
+  width: 100%;
+  flex-grow: 1;
+  background: var(--app-background-color);
+  padding: 2rem;
+}
+.pl-primary {
+  padding-left: 2rem!important;
+}
+.mb-5, .my-5 {
+  margin-bottom: 3rem!important;
+}
+.justify-content-between {
+  justify-content: space-between!important;
+}
+.dashboard-widgets.dashboard-icon-widget {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+.card.card-with-shadow {
+  box-shadow: 0 0 10px rgb(0 0 0 / 5%);
+}
+.dashboard-widgets.dashboard-icon-widget .icon-wrapper {
+  width: 50px;
+  height: 50px;
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: .25rem;
+  background-color: #019aff;
+}
+.dashboard-widgets.dashboard-icon-widget .widget-data {
+  margin-left: .75rem;
+}
+
+.icon-wrapper{
+  margin: 39px;
+}
+.text-size-13 {
+  font-size: 13px!important;
+}
+.bg-brand-color {
+  background-color: #019aff!important;
+}
+.bg-brand-color[_ngcontent-kxd-c6] {
+  background-color: #019aff !important;
+}

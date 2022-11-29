@@ -1,0 +1,514 @@
+<div id="content" class="flex">
+    <div class="page-container" id="page-container">
+
+        <div class="padding">
+            <div class="card">
+                <div class="card-header bg-dark bg-img p-0 no-border" data-stellar-background-ratio="0.1"
+                    style="background-image: url(&quot;../assets/img/c1.jpg&quot;); background-position: 50% -119.88px;">
+                    <div class="bg-dark-overlay r-2x no-r-b">
+                        <div class="d-md-flex">
+                            <div class="p-4">
+                                <div class="d-flex">
+                                    <a href="#">
+                                        <span class="avatar w-64">
+                                            <img src="../assets/img/a3.jpg" alt=".">
+                                            <i class="on"></i>
+                                        </span>
+                                    </a>
+                                    <div class="mx-3">
+                                        <h5 class="mt-2">{{employeeObj.employee?.users?.full_Name}}</h5>
+                                        <div class="text-muted">
+                                            <span class="m-r">{{employeeObj.employee?.designation}}</span>
+                                            <small>
+                                                <i class="fa fa-map-marker mr-2"></i>{{employeeObj.employee?.location}}
+
+                                            </small>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <span class="flex"></span>
+                            <div class="align-items-center d-flex p-4">
+                                <div class="toolbar">
+                                    <a href="#" class="btn btn-sm btn-icon bg-dark-overlay btn-rounded i-con-h-a">
+                                        <span>
+                                            <i class="i-con i-con-mail w-12">
+                                                <i></i>
+                                            </i>
+                                        </span>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="px-2">
+                    <div class="d-flex nav-active-border nav-active-text-primary b-primary">
+                        <ul class="nav">
+                            <li class="nav-item  ">
+                                <a class="nav-link py-3 active" href="#" data-toggle="tab" data-target="#tab_1">Basic
+                                    Info</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link py-3" href="#" data-toggle="tab" data-target="#tab_4">Contact & Bank
+                                    Info</a>
+                            </li>
+                            <!-- <li class="nav-item">
+                                <a class="nav-link py-3" href="#" data-toggle="tab" data-target="#tab_2">Leave</a>
+                            </li> -->
+                            <li class="nav-item">
+                                <a class="nav-link py-3" href="#" data-toggle="tab" data-target="#tab_3">Documents</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link py-3" href="#" data-toggle="tab" data-target="#tab_5">Salary &
+                                    Compensation</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <form novalidate="" autocomplete="bandhaibhai" [formGroup]="EditForm" (ngSubmit)="SaveForm()"> 
+                <div class="col-sm-12 col-lg-12">
+                    <div class="tab-content">
+
+                        <div class="tab-pane show active" id="tab_1">
+                            <div class="card">
+
+                                <div class="px-4 py-4" formGroupName="users">
+                                    <div class="row mb-2">
+                                        <div class="col-12">
+                                            <h5 class="text-muted">User Detail</h5>
+                                        </div>
+                                    </div>
+                                    <div class="row mb-2">
+                                        <div class="col-3">
+                                            <small class="text-muted">First Name</small>
+                                            <div class="my-2">
+                                                <input type="text" class="form-control" formControlName="first_Name">
+                                                <input type="hidden" formControlName="user_Id" value="0">
+                                            </div>
+                                        </div>
+                                        <div class="col-3">
+                                            <small class="text-muted">Last Name</small>
+                                            <div class="my-2">
+                                                <input type="text" class="form-control" formControlName="last_Name">
+                                            </div>
+                                        </div>
+                                        <div class="col-3">
+                                            <small class="text-muted">User Type</small>
+                                            <div class="my-2">
+                                                <ng-select formControlName="role_Id">
+
+                                                    <ng-option value="1">Manager</ng-option>
+                                                    <ng-option value="2">Employee</ng-option>
+                                                    <ng-option value="5">account</ng-option>
+                                                    <ng-option value="6">Reception</ng-option>
+
+                                                </ng-select>
+                                            </div>
+                                        </div>
+                                        <div class="col-3">
+                                            <small class="text-muted">Company Email</small>
+                                            <div class="my-2">
+                                                <input type="text" class="form-control" formControlName="email">
+                                            </div>
+                                        </div>
+                                        <div class="col-3">
+                                            <small class="text-muted">Is Active</small>
+                                            <div class="my-2">
+                                                <ng-select formControlName="is_Active">
+                                                    <ng-option value="ture">Active</ng-option>
+                                                    <ng-option value="false">InActive</ng-option>
+
+                                                </ng-select>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!-- <div class="row mb-2">
+                                            <div class="col-3">
+                                                <small class="text-muted">Profile</small>
+                                                <div class="my-2">
+                                                    <input type="file" class="form-control"
+                                                        formControlName="profilepath">
+                                                </div>
+                                            </div>
+                                        </div> -->
+                                </div>
+                                <div class="px-4 py-4">
+                                    <div class="row  mb-2">
+                                        <div class="col-12">
+                                            <h5 class="text-muted">Employment Detail</h5>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-sm-4">
+                                            <div class="form-row">
+                                                <div class="form-group col-sm-12">
+                                                    <small class="text-muted">Emp Code</small>
+                                                    <div class="my-2">
+                                                        <input type="text" class="form-control "
+                                                            formControlName="emp_Code">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-sm-4">
+                                            <div class="form-row">
+                                                <div class="form-group col-sm-12">
+                                                    <small class="text-muted">Designation</small>
+                                                    <div class="my-2">
+                                                        <input type="text" class="form-control "
+                                                            formControlName="designation">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-4">
+                                            <div class="form-row">
+                                                <div class="form-group col-sm-12">
+                                                    <small class="text-muted">Department</small>
+                                                    <div class="my-2">
+                                                        <input type="text" class="form-control "
+                                                            formControlName="department">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-4">
+                                            <div class="form-row">
+                                                <div class="form-group col-sm-12">
+                                                    <small class="text-muted">Location</small>
+                                                    <div class="my-2">
+                                                        <input type="text" class="form-control "
+                                                            formControlName="location">
+                                                        <input type="hidden" formControlName="employee_Id" value="0">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-sm-4">
+                                            <div class="form-row">
+                                                <div class="form-group col-sm-12">
+                                                    <small class="text-muted">Date Of
+                                                        Joining</small>
+                                                    <div class="my-2">
+                                                        <input type="date" class="form-control "
+                                                            formControlName="date_Of_Joining">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-4">
+                                            <div class="form-row">
+                                                <div class="form-group col-sm-12">
+                                                    <small class="text-muted">DOB</small>
+                                                    <div class="my-2">
+                                                        <input type="date" class="form-control " formControlName="dob">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-4">
+                                            <div class="form-row">
+                                                <div class="form-group col-sm-12">
+                                                    <small class="text-muted">Employment Type</small>
+                                                    <div class="my-2">
+                                                        <ng-select formControlName="employment_Type">
+                                                            <ng-option>Full-Time</ng-option>
+                                                            <ng-option>Part-Time</ng-option>
+                                                            <ng-option>Freelancer</ng-option>
+                                                        </ng-select>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="card-footer">
+                                    <input type="submit" value="Save" class="btn btn-primary float-right">
+                                </div>
+
+                            </div>
+                        </div>
+                        <div class="tab-pane fade" id="tab_4">
+                            <div class="card">
+
+                                <div class="px-4 py-4" formGroupName="contact">
+                                    <div class="row mb-2">
+                                        <div class="col-12">
+                                            <h5 class="text-muted">Contact Detail</h5>
+                                        </div>
+                                        <div class="col-6">
+                                            <small class="text-muted">Address Line1</small>
+                                            <div class="my-2">
+                                                <input type="text" class="form-control" formControlName="address_Line1">
+                                                <input type="hidden" formControlName="address_Id" value="0">
+                                            </div>
+                                        </div>
+                                        <div class="col-6">
+                                            <small class="text-muted">Address Line2</small>
+                                            <div class="my-2">
+                                                <input type="text" class="form-control" formControlName="address_Line2">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row mb-2">
+                                        <div class="col-3">
+                                            <small class="text-muted">Country</small>
+                                            <div class="my-2">
+                                                <input type="text" value="India" class="form-control" disabled
+                                                    formControlName="country">
+                                            </div>
+                                        </div>
+                                        <div class="col-3">
+                                            <small class="text-muted">State</small>
+                                            <div class="my-2">
+                                                <input type="text" value="UP" class="form-control"
+                                                    formControlName="state">
+                                            </div>
+                                        </div>
+                                        <div class="col-3">
+                                            <small class="text-muted">City</small>
+                                            <div class="my-2">
+                                                <input type="text" value="Lucknow" class="form-control"
+                                                    formControlName="city">
+                                            </div>
+                                        </div>
+                                        <div class="col-3">
+                                            <small class="text-muted">Pin Code</small>
+                                            <div class="my-2">
+                                                <input type="text" class="form-control" formControlName="pincode">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row mb-2">
+                                        <div class="col-3">
+                                            <small class="text-muted">Contact No1</small>
+                                            <div class="my-2">
+                                                <input type="text" class="form-control" formControlName="contact_No1">
+                                            </div>
+                                        </div>
+                                        <div class="col-3">
+                                            <small class="text-muted">Contact No2</small>
+                                            <div class="my-2">
+                                                <input type="text" class="form-control" formControlName="contact_No2">
+                                            </div>
+                                        </div>
+                                        <div class="col-3">
+                                            <small class="text-muted">Website</small>
+                                            <div class="my-2">
+                                                <input type="text" class="form-control" formControlName="website">
+                                            </div>
+                                        </div>
+                                        <div class="col-3">
+                                            <small class="text-muted">Personal Email</small>
+                                            <div class="my-2">
+                                                <input type="text" class="form-control"
+                                                    formControlName="personal_Email">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div>
+                                        <small class="text-muted">Comment</small>
+                                        <div class="my-2">
+                                            <textarea class="form-control" formControlName="comment"></textarea>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="px-4 py-4" formGroupName="bankInfo">
+                                    <div class="row mb-2">
+                                        <div class="col-12">
+                                            <h5 class="text-muted">Bank Detail</h5>
+                                        </div>
+                                    </div>
+                                    <div class="row mb-2">
+                                        <div class="col-3">
+                                            <small class="text-muted">Bank Name</small>
+                                            <div class="my-2">
+                                                <input type="text" class="form-control" formControlName="bank_Name">
+                                            </div>
+                                        </div>
+                                        <div class="col-3">
+                                            <small class="text-muted">Account No</small>
+                                            <div class="my-2">
+                                                <input type="text" class="form-control" formControlName="account_No">
+                                            </div>
+                                        </div>
+                                        <div class="col-3">
+                                            <small class="text-muted">IFSC</small>
+                                            <div class="my-2">
+                                                <input type="text" class="form-control" formControlName="ifsc">
+                                            </div>
+                                        </div>
+                                        <div class="col-3">
+                                            <small class="text-muted">SwiftCode</small>
+                                            <div class="my-2">
+                                                <input type="text" class="form-control" formControlName="swiftCode">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row mb-2">
+                                        <div class="col-3">
+                                            <small class="text-muted">Paypal</small>
+                                            <div class="my-2">
+                                                <input type="text" class="form-control" formControlName="payPal">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="card-footer">
+                                    <input type="submit" value="Save" class="btn btn-primary float-right">
+                                </div>
+                            </div>
+                        </div>
+                        <!-- <div class="tab-pane fade" id="tab_2">
+                            <div class="card p-4">
+                                <div class="timeline animates animates-fadeInUp">
+                                    <div class="tl-item active">
+                                        <div class="tl-dot"></div>
+                                        <div class="tl-content">
+                                            <div class="">Prepare the documentation for the
+
+                                                <a href="#">Fitness app</a>
+                                            </div>
+                                            <div class="tl-date text-muted mt-1">20 minutes ago</div>
+                                        </div>
+                                    </div>
+                                    <div class="tl-item">
+                                        <div class="tl-dot"></div>
+                                        <div class="tl-content">
+                                            <div class="">
+                                                <a href="#">@Mike</a> Send you a message
+
+                                            </div>
+                                            <div class="tl-date text-muted mt-1">20 minutes ago</div>
+                                        </div>
+                                    </div>
+                                    <div class="tl-item">
+                                        <div class="tl-dot"></div>
+                                        <div class="tl-content">
+                                            <div class="">
+                                                <a href="#">Mike</a> upload last week lessons summary
+
+                                            </div>
+                                            <div class="tl-date text-muted mt-1">5 hours ago</div>
+                                        </div>
+                                    </div>
+                                    <div class="tl-item">
+                                        <div class="tl-dot"></div>
+                                        <div class="tl-content">
+                                            <div class="">We attempted to charge your
+
+                                                <a href="#">Pro plan</a>
+                                            </div>
+                                            <div class="tl-date text-muted mt-1">03/12 18</div>
+                                        </div>
+                                    </div>
+                                    <div class="tl-item">
+                                        <div class="tl-dot"></div>
+                                        <div class="tl-content">
+                                            <div class="">Mike Added you to
+
+                                                <a href="#">repo</a>
+                                            </div>
+                                            <div class="tl-date text-muted mt-1">02/11 18</div>
+                                        </div>
+                                    </div>
+                                    <div class="tl-item">
+                                        <div class="tl-dot"></div>
+                                        <div class="tl-content">
+                                            <div class="">Homepage mockup design</div>
+                                            <div class="tl-date text-muted mt-1">1 Week ago</div>
+                                        </div>
+                                    </div>
+                                    <div class="tl-item">
+                                        <div class="tl-dot"></div>
+                                        <div class="tl-content">
+                                            <div class="">
+                                                <a href="#">Grantt</a> Send you a invitation to SWO
+
+                                            </div>
+                                            <div class="tl-date text-muted mt-1">21 July</div>
+                                        </div>
+                                    </div>
+                                    <div class="tl-item">
+                                        <div class="tl-dot"></div>
+                                        <div class="tl-content">
+                                            <div class="">@Eddel Competitive gaming
+
+                                                <a href="#">ladders</a>
+                                            </div>
+                                            <div class="tl-date text-muted mt-1">3 days ago</div>
+                                        </div>
+                                    </div>
+                                    <div class="tl-item">
+                                        <div class="tl-dot"></div>
+                                        <div class="tl-content">
+                                            <div class="">
+                                                <a href="#">@James</a> submit a support ticket
+
+                                            </div>
+                                            <div class="tl-date text-muted mt-1">1 hour ago</div>
+                                        </div>
+                                    </div>
+                                    <div class="tl-item">
+                                        <div class="tl-dot"></div>
+                                        <div class="tl-content">
+                                            <div class="">Welcome to new ui dashboard, you are almost there</div>
+                                            <div class="tl-date text-muted mt-1">1 day ago</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div> -->
+                        <div class="tab-pane fade" id="tab_3">
+                            <div class="card">
+                                <div class="px-4 py-4">
+                                    <div class="row mb-2">
+                                        <div class="col-12">
+                                            <h5 class="text-muted">Documents</h5>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="timeline animates animates-fadeInUp">
+
+                                    <div  *ngFor="let obj of employee_Attachments" class="tl-item active">
+                                        <div class="tl-dot"></div>
+                                        <div class="tl-content">
+                                            <div class="">Prepare the documentation for the
+
+                                                <a href="#">Fitness app</a>
+                                            </div>
+                                            <div class="tl-date text-muted mt-1">20 minutes ago</div>
+                                        </div>
+                                    </div>
+                                     
+                                     
+                                </div>
+                            </div>
+                        </div>
+                        <div class="tab-pane show " id="tab_5">
+                            <div class="card">
+                                <div class="px-4 py-4">
+                                    <div class="row mb-2">
+                                        <div class="col-12">
+                                            <h5 class="text-muted">Salary Detail</h5>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                                </div>
+
+                    </div>
+                </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

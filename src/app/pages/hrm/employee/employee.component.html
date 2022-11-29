@@ -1,0 +1,145 @@
+<div class="p-3 doNotPrint b-b">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="row">
+                    <div class="col-md-3" style="margin-top: -21px;">
+                        <button class="btn btn-sm btn-primary mt-4 " (click)="addUser()" data-target="#m-model"
+                            title="" id="btn-trash" data-original-title="Trash">Add Employee
+                           
+                        </button>
+                    </div>
+
+                    <!-- <div class="col-md-4">
+
+                        <ng-select type="text" [(ngModel)]="IsActive">
+                            <ng-option value="true">
+                                Active</ng-option>
+                            <ng-option value="false">
+                                InActive</ng-option>
+                        </ng-select>
+                    </div> -->
+
+                    <!-- <div class="col-md-0" style="margin-top: -21px;">
+                        <button class="btn btn-sm btn-success mt-4" style="margin: 4px;
+                    " (click)="getEmployeeList()">Search</button>
+                    </div>
+                    <div class="col-md-0" style="margin-top: -21px;">
+                        <button class="btn btn-sm btn-secondary mt-4" style="float: left;"
+                            (click)="resetData()">Reset</button>
+                    </div> -->
+                    <div class="col-md-3" style="margin-top: 4px;">
+                        <input class="form-control form-control-sm form-control-inline" placeholder="Filter Data"
+                            type="text" (keyup)="applyFilter($event.target.value)">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+     
+        <div class="card m-3 ">
+                    <div class="mat-elevation-z888">
+            <table class="table" mat-table matSort [dataSource]="dataSource">
+                <ng-container matColumnDef="full_Name">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header id="th1">Name </th>
+                    <td mat-cell *matCellDef="let element"> {{element.full_Name}}</td>
+                </ng-container>
+                <ng-container matColumnDef="email">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header id="th1"> Email </th>
+                    <td mat-cell *matCellDef="let element">{{element.email}}</td>
+                </ng-container>
+                <ng-container matColumnDef="lookupName">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header id="th1"> Role </th>
+                    <td mat-cell *matCellDef="let element"> {{element.lookupName}}</td>
+                </ng-container>
+              
+                <!-- <ng-container matColumnDef="is_Active">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header id="th1"> isActive </th>
+                    <td mat-cell *matCellDef="let element"> {{element.is_Active}}</td>
+                </ng-container> -->
+                <!-- <ng-container matColumnDef="is_Deleted">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header id="th1"> isDeleted </th>
+                    <td mat-cell *matCellDef="let element"> {{element.is_Deleted}}</td>
+                </ng-container> -->
+                <ng-container matColumnDef="action">
+                    <th mat-header-cell *matHeaderCellDef id="th1"> Action</th>
+                    <td mat-cell *matCellDef="let element">
+                        <span class="action-mat-btn">
+                            <button class="btn btn-success btn-icon btn-sm "
+                                      (click)="loadEmployee(element.user_Id)" rel="tooltip" type="button"
+                                      data-original-title="" title=""><i class="i-con i-con-Edit"><i></i></i></button>
+                            <!-- <a class="btn btn-success btn-icon btn-sm "
+                              href="/hrm/edit-employees/{{element.user_Id}}" *ngIf="!userDisabled"><i
+                                    class="i-con i-con-Edit" style="margin-top: 4px;"></i></a> -->
+                        </span>
+                    </td>
+                </ng-container>
+                <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+            </table>
+            <mat-paginator [pageSizeOptions]="[30, 50, 100]" showFirstLastButtons></mat-paginator>
+        </div>
+    
+
+
+
+    <div id="m-model" class="modal" data-backdrop="true" style="display: block; background: #0000008c;"
+        *ngIf="ModalOpen" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Add Employee</h5>
+                </div>
+                <div class="modal-body p-xl">
+                    <form class="kt-form kt-form--label-right" [formGroup]="EmployeeForm">
+                        <div class="kt-portlet__body" style="padding-left: 40px; padding-right: 40px;">
+                            <div class="form-group row">
+
+                                <div class="col-6">
+                                    <small class="col-form-label">First Name <span class="text-danger">*</span> </small>
+                                    <input class="form-control" type="first_Name" value="" formControlName='first_Name'>
+                                </div>
+                                <div class="col-6">
+                                    <small class="col-form-label">Last Name</small>
+                                    <input class="form-control" type="last_Name" value="" formControlName='last_Name'>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                               
+                                <div class="col-6">
+                                    <small class="col-form-label">Email</small>
+                                    <input class="form-control" type="email" value="" formControlName='email'>
+                                </div>
+                                <div class="col-6">
+                                    <small class="col-form-label">Password <span class="text-danger">*</span></small>
+                                    <input class="form-control" type="password" value="" formControlName='password'>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+
+                                <div class="col-6">
+                                    <small class="col-form-label">User Type <span class="text-danger">*</span> </small>
+                                    <ng-select formControlName='role_Id'>
+                                        <ng-option *ngFor="let obj of userType" [value]="obj.lookup_Value">
+                                            {{obj?.lookup_Name}}
+                                        </ng-option>
+                                    </ng-select>
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)="cancel()">
+                                Cancel
+                            </button>
+                            &nbsp;
+                            &nbsp;
+                            <button type="button" class="btn btn-success" data-dismiss="modal" (click)="saveEmployee()">
+                                Save
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>

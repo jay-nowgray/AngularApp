@@ -1,0 +1,39 @@
+table {
+    width: 100%;
+  }
+  #th1{
+      color: black;
+     
+  }
+  .mat-sort-header-container {
+    display: flex;
+    cursor: pointer;
+    align-items: center;
+    margin-top: -30px;
+  }
+  .table th, .table td {
+        padding: 5px;
+      vertical-align: middle;
+      // line-height: 40px;
+  }
+  #th1[_ngcontent-yel-c15] {
+    color: black;
+   
+  }
+  th.mat-header-cell {
+    text-align: left;
+    font-size: 14px;
+    color: black;
+  }
+  
+  
+  .filtrBtn input{
+        height: 25px;
+        padding-top: 2px;
+        margin-top: 2px;
+      }
+      .modal-dialog {
+        color: #3a3a3a;
+        font-size: 12px;
+      }
+      

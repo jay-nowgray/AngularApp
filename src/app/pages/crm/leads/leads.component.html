@@ -1,0 +1,170 @@
+<div class="p-3 doNotPrint b-b">
+    <div class="toolbar">
+        <span *ngIf="ForAdmin">
+            <a [routerLink]="['/crm/edit-leads']" class="btn btn-sm btn-primary i-con-h-a add" data-sort="item-title"
+                data-toggle="tooltip" title="Add New" data-original-title="Sort">Add Leads
+            </a>
+        </span>
+        <span *ngIf="ForUser">
+            <a [routerLink]="['/bentex/edit-leads']" class="btn btn-sm btn-primary i-con-h-a add" data-sort="item-title"
+                data-toggle="tooltip" title="Add New" data-original-title="Sort">Add Leads
+            </a>
+        </span>
+        <form class="flex">
+            <div class="row pb-1">
+                <div class="col-sm-3 align-right" *ngIf="IsSuperAdmin()">
+                    <ng-select (change)="LeadsFilterChange($event.target.value)">
+                        <ng-option>None</ng-option>
+                        <ng-option>Mobile</ng-option>
+                        <ng-option>Name</ng-option>
+                        <ng-option>Type</ng-option>
+                        <ng-option>Status</ng-option>
+                        <ng-option>LastCall</ng-option>
+                    </ng-select>
+                </div>
+                <div class="col-sm-3" *ngIf="IsSuperAdmin()">
+                    <div class="flex">
+                        <div [style.display]="showMobileNoTextbox ? 'block' : 'none'" style="display: none">
+                            <div class="input-group">
+                                <input type="text" #Mobile class="form-control form-control-sm search"
+                                    placeholder="Search by Mobile No"> <span class="input-group-append"><button
+                                        class="btn btn-primary no-shadow btn-sm " type="button"
+                                        (click)="filterByMobileNo(Mobile.value)">search</button></span>
+                            </div>
+                        </div>
+                        <div [style.display]="showNameTextbox ? 'block' : 'none'" style="display: none">
+                            <div class="input-group">
+                                <input type="text" #Name class="form-control form-control-sm search"
+                                    placeholder="Search by Name"> <span class="input-group-append"><button
+                                        class="btn btn-primary no-shadow btn-sm " type="button"
+                                        (click)="filterByName(Name.value)">search</button></span>
+                            </div>
+                        </div>
+                        <div [style.display]="showTypeTextbox ? 'block' : 'none'" style="display: none">
+                            <div class="input-group">
+                                <ng-select [(ngModel)]="LeadTypeForSearch">
+                                    <ng-option value="Internship">Internship</ng-option>
+                                    <ng-option value="JobApplicants">JobApplicants</ng-option>
+                                    <ng-option value="Client">Client</ng-option>
+                                    <ng-option value="Event">Event</ng-option>
+                                    <ng-option value="Seminar">Seminar</ng-option>
+                                    <ng-option value="Other">Other</ng-option>
+                                </ng-select>
+                                <span class="input-group-append"><button
+                                        class="btn btn-primary no-shadow btn-sm i-con-h-a" type="button"
+                                        (click)="filterByType()">search</button></span>
+                            </div>
+                        </div>
+                        <div [style.display]="showStatusTextbox ? 'block' : 'none'" style="display: none">
+                            <div class="input-group">
+                                <ng-select [(ngModel)]="LeadStatusForSearch">
+                                    <ng-option value="Not Contacted">Not Contacted</ng-option>
+                                    <ng-option value="Contacted">Contacted</ng-option>
+                                    <ng-option value="Attempted To Call">Attempted to Call</ng-option>
+                                    <ng-option value="Contact In Future">Contact in Future</ng-option>
+                                    <ng-option value="Lost Lead">Lost Lead</ng-option>
+                                    <ng-option value="Pre Qualified">Pre-Qualified</ng-option>
+                                </ng-select>
+                                <span class="input-group-append"><button
+                                        class="btn btn-primary no-shadow btn-sm i-con-h-a" type="button"
+                                        (click)="filterByStatus()">search</button></span>
+                            </div>
+                        </div>
+                        <div [style.display]="showLastCallTextbox ? 'block' : 'none'" style="display: none">
+                            <div class="input-group">
+                                <input type="date" #LastCall class="form-control form-control-sm search"
+                                    placeholder="Search by Last Call"> <span class="input-group-append"><button
+                                        class="btn btn-primary no-shadow btn-sm i-con-h-a" type="button"
+                                        (click)="filterByLastCall(LastCall.value)">search</button></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-2" *ngIf="IsSuperAdmin()">
+                    <button class="btn btn-sm btn-warning d-block" (click)="clearFilter()">Clear
+                        Filter</button>
+                </div>
+                <div class="col-sm-3">
+                    <input class="form-control col-6" style="position: absolute; right: 33px;" placeholder="Filter Data"
+                        type="text" (keyup)="applyFilter($event.target.value)">
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
+<div class="card m-3 ">
+    <div class="mat-elevation-z888">
+        <table class="table" mat-table matSort [dataSource]="dataSource">
+            <ng-container matColumnDef="mobile">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header>Mobile</th>
+                <td mat-cell *matCellDef="let element"> {{element.mobile}}</td>
+            </ng-container>
+            <ng-container matColumnDef="name">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header>Name</th>
+                <td mat-cell *matCellDef="let element">{{element.name}}</td>
+            </ng-container>
+
+            <ng-container matColumnDef="status">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header>Status</th>
+                <td mat-cell *matCellDef="let element">
+                    <div class="item-except text-muted h-1x">
+                        <span *ngIf="element.status == 'Not Contacted'" class="badge badge-primary">
+                            {{element.status }} </span>
+                        <span *ngIf="element.status == 'Contacted'" class="badge badge-secondary">
+                            {{element.status }} </span>
+                        <span *ngIf="element.status == 'Attempted To Call'" class="badge badge-warning">
+                            {{element.status }} </span>
+                        <span *ngIf="element.status == 'Contact In Future'" class="badge badge-info">
+                            {{element.status }} </span>
+                        <span *ngIf="element.status == 'Lost Lead'" class="badge badge-danger">
+                            {{element.status }} </span>
+                        <span *ngIf="element.status == 'Pre Qualified'" class="badge badge-success">
+                            {{element.status }} </span>
+                    </div>
+                </td>
+            </ng-container>
+            <ng-container matColumnDef="remarks">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header>Remark</th>
+                <td mat-cell *matCellDef="let element"> {{element.remarks}}</td>
+            </ng-container>
+            <ng-container matColumnDef="queryFor">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header>Quary For</th>
+                <td mat-cell *matCellDef="let element"> {{element.queryFor}}</td>
+            </ng-container>
+            <ng-container matColumnDef="lastCall">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header>Last call</th>
+                <td mat-cell *matCellDef="let element"> {{element.lastCall | date: 'medium'}}</td>
+            </ng-container>
+            <ng-container matColumnDef="reminderDate">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header>Next call</th>
+                <td mat-cell *matCellDef="let element"> {{element.reminderDate | date: 'medium'}}</td>
+            </ng-container>
+
+            <ng-container matColumnDef="action">
+                <th mat-header-cell *matHeaderCellDef> Action</th>
+                <td mat-cell *matCellDef="let element">
+                    <!-- > -->
+                    <span class="action-mat-btn" *ngIf="ForAdmin">
+                        <button class="btn btn-success btn-icon btn-sm "
+                            (click)="EditRequestResponse(element.opportunities_Id)" rel="tooltip" type="button"
+                            data-original-title="" title=""><i class="i-con i-con-Edit"></i></button>
+                        &nbsp;
+
+                    </span>
+                    <span class="action-mat-btn" *ngIf="ForUser">
+                        <button class="btn btn-success btn-icon btn-sm "
+                            (click)="UserEditRequestResponse(element.opportunities_Id)" rel="tooltip" type="button"
+                            data-original-title="" title=""><i class="i-con i-con-Edit"></i></button>
+                        &nbsp;
+
+                    </span>
+                    <a target="_blank" href="https://wa.me/91{{element.mobile}}?text=Hi {{element.name}}">Whatsapp</a>
+                </td>
+            </ng-container>
+            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+            <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+        </table>
+        <mat-paginator [pageSizeOptions]="[30, 50, 100]" showFirstLastButtons></mat-paginator>
+    </div>
+</div>

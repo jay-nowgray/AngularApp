@@ -1,0 +1,185 @@
+<div class=" p-3">
+  <div class="toolbar "class="p-4 doNotPrint b-b client-info-action-hide">
+    <div style="float: left;">
+      <button class="btn btn-white btn-icon btn-sm" (click)="close()" type="button" title="Back To List">
+        <i class="i-con i-con-arrow-left text-muted"><i></i></i></button>
+    </div>
+  </div>
+</div>
+<div id="content" class="flex">
+  <div class="p-3" id="page-container">
+    <div class="padding  ">
+      <div class="card ">
+        <div class="px-1">
+          <div class="d-flex nav-active-border nav-active-text-primary b-primary">
+            <ul class="nav">
+              <li class="nav-item  "class=" doNotPrint b-b client-info-action-hide">
+                <a class="nav-link py-3 active" style="cursor: pointer;" data-target="#tab_1" data-toggle="tab"
+                  role="tab" aria-controls="home" aria-selected="true">Client Info</a>
+
+              </li>
+              <li class="nav-item" class=" doNotPrint b-b client-info-action-hide">
+                <a class="nav-link py-3 " style="cursor: pointer;" data-target="#tab_2" data-toggle="tab" role="tab"
+                  aria-controls="home" aria-selected="true">Project</a>
+
+
+              </li>
+              <li class="nav-item" class=" doNotPrint b-b client-info-action-hide">
+                <a class="nav-link py-3 " style="cursor: pointer;" data-target="#tab_3" data-toggle="tab" role="tab"
+                  aria-controls="home" aria-selected="true">Task</a>
+
+              </li>
+              <li class="nav-item" class=" doNotPrint b-b client-info-action-hide">
+                <a class="nav-link py-3 " style="cursor: pointer;" data-target="#tab_4" data-toggle="tab" role="tab"
+                  aria-controls="home" aria-selected="true">Attachments</a>
+
+              </li>
+              <li class="nav-item" class=" doNotPrint b-b client-info-action-hide">
+                <a class="nav-link py-3 " style="cursor: pointer;" data-target="#tab_5" data-toggle="tab" role="tab"
+                  aria-controls="home" aria-selected="true">Bill</a>
+
+              </li>
+              <li>
+                <!-- <div class="col-md-12 bg-light text-right">
+                                <button class="btn btn-info btn-sm" type="button"
+                                title="Back To List">Back To List</button>
+                            </div> -->
+              </li>
+              <!-- <li>
+                            <button class="btn btn-info btn-sm" type="button"
+                            title="Back To List">Back To List</button>
+                        </li> -->
+            </ul>
+
+          </div>
+        </div>
+
+
+        <form novalidate="" autocomplete="bandhaibhai" [formGroup]="EditForm">
+          <div class="col-sm-12 col-lg-12">
+            <div class="tab-content">
+              <div class="tab-pane show active" id="tab_1">
+                <div class="px-4 py-4">
+                  <div class="row mb-2">
+                    <div class="col-12">
+                      <h5 class="text-muted">Client Details</h5>
+                    </div>
+                  </div>
+
+                  <div class="row mb-2">
+                    <div class="col-4">
+                      <label class="col-form-label">Name <span class="text-danger"></span></label>
+                      <input class="form-control" formControlName="name" value="0">
+                    </div>
+                    <div class="col-4">
+                      <label class="col-form-label">Entity Name</label>
+                      <input class="form-control" formControlName="entityName">
+                    </div>
+                    <div class="col-4">
+                      <label class="col-form-label">contact Name</label>
+                      <input type="text" class="form-control" formControlName="contact_Name">
+                    </div>
+                  </div>
+
+                  <div class="row mb-2">
+                    <div class="col-4">
+                      <label class="col-form-label">MobileExt<span class="text-danger"></span></label>
+                      <ng-select formControlName='mobileExt'>
+                        <ng-option value="+91">India +91</ng-option>
+                        <ng-option value="+1">Canada +1</ng-option>
+                        <ng-option value="+61">Australiya +61</ng-option>
+                        <ng-option value="+86">China +86</ng-option>
+                        <ng-option value="+44">UK +44</ng-option>
+                        <ng-option value="+1">USA +1</ng-option>
+                        <ng-option value="+971">Dubai +971</ng-option>
+                        <ng-option value="+92">Pakistan +92</ng-option>
+                        <ng-option value="+94">srilanka +94</ng-option>
+                        <ng-option value="+52">mexico +52</ng-option>
+                        <ng-option value="+63">philipimes +63</ng-option>
+                        <ng-option value="+52">Mexico +52</ng-option>
+                        <ng-option value="+65">Singapore +65</ng-option>
+                        <ng-option value="+66">Thailand +66</ng-option>
+
+
+                      </ng-select>
+                    </div>
+                    <div class="col-4">
+                      <label class="col-form-label">Mobile <span class="text-danger"></span></label>
+                      <input type="text" class="form-control" formControlName="mobile">
+                    </div>
+                    <div class="col-4">
+                      <label class="col-form-label">Email</label>
+                      <input type="text" class="form-control" formControlName="email">
+                    </div>
+                    <!-- <div class="row mb-2"> -->
+                    <!-- <div class="col-4">
+                                                  <label class="col-form-label">Description</label>
+                                                  <textarea type="text" class="form-control" formControlName="description"></textarea>
+                                                </div> -->
+
+                    <div class="col-4">
+                      <label class="col-form-label">Client Type</label>
+                      <ng-select formControlName="client_Type">
+                        <ng-option *ngFor="let obj of clientsType" value="{{ obj.lookup_Name}}">
+                          {{ obj.lookup_Name}}</ng-option>
+                      </ng-select>
+                    </div>
+
+                    <div class="col-12">
+                      <label class="col-form-label">Address</label>
+                      <textarea type="text" class="form-control" formControlName="address_Type"></textarea>
+                    </div>
+
+                    <div class="col-12">
+                      <label class="col-form-label">Description</label>
+                      <textarea type="text" class="form-control" formControlName="description"></textarea>
+                    </div>
+
+                  </div>
+                </div>
+                <div class="card-footer">
+
+                  <button type="button" class="btn btn-success float-right" (click)="saveexpense()">
+                    Save
+                  </button> &nbsp; &nbsp;
+                  <!-- <button type="button" class="btn btn-secondary float-right" (click)="cancel()" style="margin: 0 8px;">
+                    Cancel
+                  </button> -->
+                  <!-- <input type="submit" value="Save" (click)="saveexpense()"
+                                            class="btn btn-success float-right">
+                                        &nbsp;
+                                        &nbsp; -->
+
+                </div>
+
+              </div>
+              <div class="tab-pane fade" id="tab_2">
+                <app-project-clients [entityId]="ClientId"></app-project-clients>
+              </div>
+              <div class="tab-pane fade" id="tab_3">
+                <app-task-clients [entityId]="ClientId"></app-task-clients>
+              </div>
+              <div class="tab-pane fade" id="tab_4">
+                <app-global-attachment entityType="Clients" [entityId]="ClientId"></app-global-attachment>
+              </div>
+              <div class="tab-pane fade" id="tab_5">
+                <app-clients-bill clientName="{{EditForm.value.name}}"></app-clients-bill>
+              </div>
+              <div class="tab-pane show " id="tab_5">
+                <div class="card">
+                  <div class="px-4 py-4">
+                    <div class="row mb-2">
+                      <div class="col-12">
+                        <h5 class="text-muted">Salary Detail</h5>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,157 @@
+<div class="p-3 doNotPrint b-b">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="row">
+                <div class="col-md-3" style="margin-top: -21px;">
+                    <button class="btn btn-sm btn-primary mt-4 " (click)="add()" data-target="#m-model"
+                        title="" id="btn-trash" data-original-title="Trash">Add 
+                       
+                    </button>
+                </div>
+
+                <div class="col-md-3" style="margin-top: 4px;">
+                    <input class="form-control form-control-sm form-control-inline" placeholder="Filter Data"
+                        type="text" (keyup)="applyFilter($event.target.value)">
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+ 
+    <div class="card m-3 ">
+                <div class="mat-elevation-z888">
+        <table class="table" mat-table matSort [dataSource]="dataSource">
+            <ng-container matColumnDef="name">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header id="th1">Name </th>
+                <td mat-cell *matCellDef="let element"> {{element.name}}</td>
+            </ng-container> 
+            <ng-container matColumnDef="city">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header id="th1"> City </th>
+                <td mat-cell *matCellDef="let element">{{element.city}}</td>
+            </ng-container>
+            <ng-container matColumnDef="send_Date">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header id="th1"> Send Date </th>
+                <td mat-cell *matCellDef="let element"> {{element.send_Date | date}}</td>
+            </ng-container>
+            <ng-container matColumnDef="joning_Date">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header id="th1"> Joning Date </th>
+                <td mat-cell *matCellDef="let element"> {{element.joning_Date| date}}</td>
+            </ng-container>
+            <ng-container matColumnDef="expire_Date">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header id="th1"> Expire Date </th>
+                <td mat-cell *matCellDef="let element"> {{element.expire_Date|date}}</td>
+            </ng-container>
+            <ng-container matColumnDef="action">
+                <th mat-header-cell *matHeaderCellDef id="th1"> Action</th>
+                <td mat-cell *matCellDef="let element">
+                    <span class="action-mat-btn">
+                        <a class="btn btn-icon btn-sm " target="_blank"
+                        href="/hrm/offerletter/{{element.id}}"><i
+                              class="i-con i-con-eye" style="margin-top: 4px;"></i></a>
+                            
+                              <a class="btn btn-icon btn-sm " target="_blank"
+                              href="/hrm/appointmentletter/{{element.id}}"><i
+                                    class="i-con i-con-eye" style="margin-top: 4px;"></i></a>
+
+                                  <button class="btn btn-success btn-icon btn-sm " (click)="getDetail(element.id)" rel="tooltip"
+                                  type="button" data-original-title="" title=""><i class="i-con i-con-Edit"></i></button>
+                    </span>
+                </td>
+            </ng-container>
+            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+            <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+        </table>
+        <mat-paginator [pageSizeOptions]="[30, 50, 100]" showFirstLastButtons></mat-paginator>
+    </div>
+ <div id="m-model" class="modal" data-backdrop="true" style="display: block; background: #0000008c;"
+    *ngIf="ModalOpen" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Add </h5>
+            </div>
+            <div class="modal-body p-xl">
+                <form class="kt-form kt-form--label-right" [formGroup]="OfferLetterForm">
+                    <div class="kt-portlet__body" style="padding-left: 40px; padding-right: 40px;">
+                        <div class="form-group row">
+
+                            <div class="col-6">
+                                <small class="col-form-label"><span class="text-danger">*</span> Name  </small>
+                                <input class="form-control"  type="name" value="" formControlName='name'required="required" [ngClass]="{ 'is-invalid': submitted && f.name.errors }" >
+                                <!-- <div *ngIf="submitted && f.name.errors" class="invalid-feedback">
+                                    <div *ngIf="f.name.errors.required">
+                                         name is required.
+                                    </div> </div> -->
+                                    </div>
+                            <div class="col-6">
+                                <small class="col-form-label"><span class="text-danger">*</span>Address</small>
+                                <input class="form-control" required="required" type="address" value="" formControlName='address'required="required" [ngClass]="{ 'is-invalid': submitted && f.address.errors }" >
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <div class="col-6">
+                                <small class="col-form-label"><span class="text-danger">*</span>City</small>
+                                <input class="form-control" required="required" type="city" value="" formControlName='city' [ngClass]="{ 'is-invalid': submitted && f.city.errors }">
+                            </div>
+                            <div class="col-6">
+                                <small class="col-form-label"><span class="text-danger">*</span>State</small>
+                                <input class="form-control" required="required" type="sate" value="" formControlName='state' [ngClass]="{ 'is-invalid': submitted && f.state.errors }">
+                            </div> 
+                        </div>
+                        <div class="form-group row">
+                            <div class="col-6">
+                                <small class="col-form-label"><span class="text-danger">*</span>Joning Date </small>
+                                <input class="form-control" required="required" type=date value="" formControlName='joning_Date' [ngClass]="{ 'is-invalid': submitted && f.joning_Date.errors }">
+                            </div>
+                            <div class="col-6">
+                                <small class="col-form-label"><span class="text-danger">*</span>Expire Date</small>
+                                <input class="form-control" required="required" type=date value="" formControlName='expire_Date' [ngClass]="{ 'is-invalid': submitted && f.expire_Date.errors }">
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <div class="col-6">
+                                <small class="col-form-label"><span class="text-danger">*</span>Position </small>
+                                <input class="form-control" required="required" type="position" value="" formControlName='position' [ngClass]="{ 'is-invalid': submitted && f.position.errors }">
+                            </div>
+                            <div class="col-6">
+                                <small class="col-form-label"><span class="text-danger">*</span>Compensetion</small>
+                                <input class="form-control" required="required" type=number value="" formControlName='compensetion' [ngClass]="{ 'is-invalid': submitted && f.compensetion.errors }">
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <div class="col-6">
+                                <small class="col-form-label"><span class="text-danger">*</span>Send Date </small>
+                                <input class="form-control" required="required" type=date value="" formControlName='send_Date' [ngClass]="{ 'is-invalid': submitted && f.send_Date.errors }">
+                            </div>
+                            <div class="col-6">
+                                <small class="col-form-label"><span class="text-danger">*</span>Serial Code</small>
+                                <input class="form-control" required="required" type="serial_Code" value="" formControlName='serial_Code' [ngClass]="{ 'is-invalid': submitted && f.serial_Code.errors }">
+                            </div>
+                        </div> 
+                        <div class="form-group row">
+                            <div class="col-6">
+                                <small class="col-form-label"><span class="text-danger">*</span>Company Name </small>
+                                <input class="form-control" required="required" type=text value="" formControlName='company_Name' [ngClass]="{ 'is-invalid': submitted && f.company_Name.errors }">
+                            </div>
+                            <div class="col-6">
+                                <small class="col-form-label"><span class="text-danger">*</span>Dob</small>
+                                <input class="form-control" required="required" type=date value="" formControlName='dOB' [ngClass]="{ 'is-invalid': submitted && f.dob.errors }">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)="cancel()">
+                            Cancel
+                        </button>
+                        &nbsp;
+                        &nbsp;
+                        <button type="button" class="btn btn-success" data-dismiss="modal" (click)="save()">
+                            Save
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div> 
